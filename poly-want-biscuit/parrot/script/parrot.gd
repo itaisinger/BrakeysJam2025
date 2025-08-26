@@ -95,19 +95,20 @@ func _process(delta):
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.is_in_group("platforms"):
-		grounded=true
-		xspd=0
 	if area.is_in_group("enemies"):
 		Death()
-		
-		
-		
-		
+		pass
+
 
 func Death():
 	dead=true
 	$AnimatedSprite2D.scale=Vector2(2,2)
 	$Hud.death_screan()
 	$AnimatedSprite2D.play("Death")
+	print("rip")
 	
+
+func _on_land_detection_area_entered(area: Area2D) -> void:
+	if area.is_in_group("platforms"):
+		grounded=true
+		xspd=0
