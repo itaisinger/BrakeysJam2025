@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://besq32tbr5rgo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i5scg"]
+
+[node name="Pirate" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_i5scg")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+target_position = Vector2(17, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+target_position = Vector2(-17, 0)
