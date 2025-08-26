@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://besq32tbr5rgo"]
+[gd_scene load_steps=30 format=3 uid="uid://besq32tbr5rgo"]
 
 [ext_resource type="Script" uid="uid://b3d1yu85n6k3r" path="res://Pirate/scripts/pirate.gd" id="1_enqx7"]
 [ext_resource type="Texture2D" uid="uid://dsorj1cx0e50s" path="res://Pirate/Idle-5frm.png" id="2_gkcui"]
@@ -8,6 +8,18 @@
 [ext_resource type="AudioStream" uid="uid://cxetil5mkb2fp" path="res://Pirate/Audio/bad pirate/comes torward you/bad pirate coming (get back here).wav" id="5_ktpxw"]
 [ext_resource type="AudioStream" uid="uid://jmvic7fp215j" path="res://Pirate/Audio/bad pirate/comes torward you/bad pirate coming (get in me hands).wav" id="6_a8lky"]
 [ext_resource type="AudioStream" uid="uid://dpkbwvojpwss6" path="res://Pirate/Audio/bad pirate/comes torward you/bad pirate coming (worth more them me gold).wav" id="7_koqec"]
+[ext_resource type="AudioStream" uid="uid://4ilpodjkol04" path="res://Pirate/Audio/bad pirate/hears cat (goes away)/bad pirate hears cat (cursed feline).wav" id="8_0rgn1"]
+[ext_resource type="AudioStream" uid="uid://dsop6bgvmqv18" path="res://Pirate/Audio/bad pirate/hears cat (goes away)/bad pirate hears cat (not today wiskers).wav" id="9_fr3bg"]
+[ext_resource type="AudioStream" uid="uid://c82opbqds0kcp" path="res://Pirate/Audio/bad pirate/hears cat (goes away)/bad pirate hears cat (screw you bird).wav" id="10_m6i7n"]
+[ext_resource type="AudioStream" uid="uid://na4caulsu4c7" path="res://Pirate/Audio/bad pirate/hears cat (goes away)/nice pirate hears cat (shiver me timber).wav" id="11_bmg7c"]
+[ext_resource type="AudioStream" uid="uid://dqpsrc2ryco5u" path="res://Pirate/Audio/nice pirate/comes torward you/nice pirate sees parrot (featherd thief).wav" id="12_4amm8"]
+[ext_resource type="AudioStream" uid="uid://br7nlqoa27u7x" path="res://Pirate/Audio/nice pirate/hears cat (comes torward)/nice pirate hears cat (blast the parrot).wav" id="13_e5hdw"]
+[ext_resource type="AudioStream" uid="uid://byccuav6ihalu" path="res://Pirate/Audio/nice pirate/hears cat (comes torward)/nice pirate hears cat (cat goes first).wav" id="14_s3r0f"]
+[ext_resource type="AudioStream" uid="uid://dp078l5najh57" path="res://Pirate/Audio/nice pirate/hears cat (comes torward)/nice pirate hears cat (don't scare the kitty).wav" id="15_hjq7i"]
+[ext_resource type="AudioStream" uid="uid://b6fawpsxlggwl" path="res://Pirate/Audio/nice pirate/hears cat (comes torward)/nice pirate hears cat (makes me happy).wav" id="16_rbe3j"]
+[ext_resource type="AudioStream" uid="uid://dtpkd5uhj68tb" path="res://Pirate/Audio/nice pirate/hears cat (comes torward)/nice pirate hears cat (pet you good).wav" id="17_h8jmc"]
+[ext_resource type="AudioStream" uid="uid://dk6isjksvjdjx" path="res://Pirate/Audio/nice pirate/hears cat (comes torward)/nice pirate hears cat (shiver me timbers).wav" id="18_no64l"]
+[ext_resource type="AudioStream" uid="uid://63vuhifjnve7" path="res://Pirate/Audio/nice pirate/hears cat (comes torward)/nice pirate hears cat (treasure enough).wav" id="19_pdjh8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gkcui"]
 radius = 15.0
@@ -74,6 +86,9 @@ collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_enqx7")
 bad_pirate_voice = Array[AudioStream]([ExtResource("2_hg1is"), ExtResource("3_3xyjm"), ExtResource("4_f24xa"), ExtResource("5_ktpxw"), ExtResource("6_a8lky"), ExtResource("7_koqec")])
+bad_pirate_react = Array[AudioStream]([ExtResource("8_0rgn1"), ExtResource("9_fr3bg"), ExtResource("10_m6i7n"), ExtResource("11_bmg7c")])
+good_pirate_voice = Array[AudioStream]([ExtResource("12_4amm8"), ExtResource("2_hg1is"), ExtResource("3_3xyjm"), ExtResource("4_f24xa"), ExtResource("5_ktpxw"), ExtResource("6_a8lky"), ExtResource("7_koqec")])
+good_pirate_react = Array[AudioStream]([ExtResource("13_e5hdw"), ExtResource("14_s3r0f"), ExtResource("15_hjq7i"), ExtResource("16_rbe3j"), ExtResource("17_h8jmc"), ExtResource("18_no64l"), ExtResource("19_pdjh8")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(4, 12)
@@ -106,6 +121,8 @@ frame_progress = 0.160284
 position = Vector2(2, 11)
 shape = SubResource("CapsuleShape2D_ligwx")
 debug_color = Color(0.952941, 0.176471, 0.0823529, 0.419608)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="area_entered" from="Follow area" to="." method="_on_follow_area_area_entered"]
 [connection signal="body_entered" from="Follow area" to="." method="_on_follow_area_body_entered"]
