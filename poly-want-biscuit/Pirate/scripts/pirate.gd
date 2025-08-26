@@ -14,11 +14,16 @@ enum _States {
 }
 
 @export var bad_pirate_voice: Array[AudioStream] = []
+@export var bad_pirate_react: Array[AudioStream] = []
+@export var good_pirate_voice: Array[AudioStream] = []
+@export var good_pirate_react: Array[AudioStream] = []
 
 
 var _pirate_type = _Pirate_Type.Cat_hater
 var _current_state = null
 var _timer := 0.5
+var voice_cooldown := 0.0
+const VOICE_COOLDOWN_TIME := 3.0
 var _direction = 1
 const SPEED := 60
 
@@ -48,6 +53,8 @@ const SPEED := 60
 
 func _process(delta: float) -> void:
 	_timer -= delta
+	if voice_cooldown > 0.0:
+		voice_cooldown -= delta
 	match _current_state:
 		_States.Idle:
 			_IdleState(delta)
@@ -116,8 +123,18 @@ func _on_follow_area_area_entered(area: Area2D) -> void:
 		play_random_voice()
 		
 func play_random_voice():
-	if _pirate_type == _Pirate_Type.Cat_hater:  
-		if bad_pirate_voice.size() > 0:
-			var random_sfx = bad_pirate_voice[randi() % bad_pirate_voice.size()]
-			sfx_player.stream = random_sfx
-			sfx_player.play()
+	if voice_cooldown > 0.0:
+		return  # Still cooling down, skip playback
+
+	if _pirate_type == _Pirate_Type.Cat_hater and bad_pirate_voice.size() > 0:  
+		var random_sfx = bad_pirate_voice[randi() % bad_pirate_voice.size()]
+		sfx_player.stream = random_sfx
+		sfx_player.play()
+		voice_cooldown = VOICE_COOLDOWN_TIME  # Reset cooldown
+	
+	if _pirate_type == _Pirate_Type.Cat_lover and good_pirate_voice.size() > 0:  
+		var random_sfx = good_pirate_voice[randi() % good_pirate_voice.size()]
+		sfx_player.stream = random_sfx
+		sfx_player.play()
+		voice_cooldown = VOICE_COOLDOWN_TIME  # Reset cooldown
+			
