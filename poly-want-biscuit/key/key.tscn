@@ -22,6 +22,7 @@ animations = [{
 height = 59.661
 
 [node name="Key" type="Area2D"]
+collision_mask = 3
 script = ExtResource("1_17rgd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -33,3 +34,5 @@ sprite_frames = SubResource("SpriteFrames_juadu")
 position = Vector2(0.25, -2.5)
 scale = Vector2(1.02381, 0.921875)
 shape = SubResource("CapsuleShape2D_6jvpb")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
