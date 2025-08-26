@@ -76,8 +76,10 @@ func _process(delta):
 			"RIGHT":
 				xspd=-xfric
 	
-	if Input.is_action_just_pressed("Screech"):
-		emit_signal("parrot_screech",Globals.VOICES.meow)
+	if Input.is_action_just_pressed("Curse") or Input.is_action_just_pressed("Meow") :
+		if Input.is_action_just_pressed("Meow"):
+			emit_signal("parrot_screech",Globals.VOICES.meow)
+		else: emit_signal("parrot_screech",Globals.VOICES.curse)
 		$Sprite2D.visible=true
 		for i in range(11):
 			await get_tree().create_timer(0.1).timeout

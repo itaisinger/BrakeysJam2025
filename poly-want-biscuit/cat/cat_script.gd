@@ -90,21 +90,19 @@ func jump() -> void:
 	yspd -= jumpforce*2
 	state = CAT_STATES.jump
 	moving_left=position.x>player_pos.x
-	print(moving_left)
 	
 func hear_sound(voice) -> void:
-	print("hearing sounds")
 	grav=0.2
 	dir = -sign(position.x - player_pos.x) 
 	if(voice == Globals.VOICES.meow):
 		#play happy meow sound
 		state = CAT_STATES.walk
-
 		#dir = towards pos
 		return
 	if(voice == Globals.VOICES.curse):
 		#play angry meow sound
 		state = CAT_STATES.walk
+		dir = -dir
 		#dir = away from pos
 
 
