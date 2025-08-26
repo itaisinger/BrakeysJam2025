@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://csyv0bpp1wt77"
+path="res://.godot/imported/waking up 1.wav-932cff4b14ea99c4100b33e11eceeafd.sample"
+
+[deps]
+
+source_file="res://cat/Audio/waking up 1.wav"
+dest_files=["res://.godot/imported/waking up 1.wav-932cff4b14ea99c4100b33e11eceeafd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
