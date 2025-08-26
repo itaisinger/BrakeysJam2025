@@ -9,13 +9,15 @@ enum _Pirate_Type {
 enum _States {
 	Idle,
 	Roam,
-	React
+	React,
+	Chase
 }
 var _current_state = null
-var _timer := 0.0
-var _delay := 4.0
+var _timer := 3.0
 var _direction = 1
 const SPEED := 60
+var player: CharacterBody2D
+@onready var parent: CharacterBody2D = get_parent()
 @onready var ray_cast_right = $RayCastRight
 @onready var ray_cast_left = $RayCastLeft
 @onready var sprite = $Sprite2D
@@ -39,7 +41,7 @@ const SPEED := 60
 
 
 func _process(delta: float) -> void:
-	_timer += delta
+	_timer -= delta
 	match _current_state:
 		_States.Idle:
 			_IdleState(delta)
@@ -47,14 +49,15 @@ func _process(delta: float) -> void:
 			_RoamState(delta)
 		_States.React:
 			_ReactState(delta)
+		_States.Chase:
+			_ChaseState(delta)
 
 
 
 func _IdleState(delta):
 	#animation/spirte change
-	if _timer >= _delay :
-		_timer = 0.0
-		_delay = randi_range(3,5)
+	if _timer <= 0.0 :
+		_timer = randi_range(3,5)
 		_direction = [1, -1][randi() % 2]
 		if _direction < 0 :
 			sprite.flip_h = true
@@ -70,12 +73,27 @@ func _RoamState(delta):
 		_direction = 1
 		sprite.flip_h = false
 	position.x += _direction* SPEED * delta
-	if _timer > _delay: 
-		_timer = 0.0
-		_delay = randi_range(3,5)
+	if _timer <= 0.0: 
+		_timer = randi_range(3,5)
 		_current_state = _States.Idle
 
 
 func _ReactState(delta):
 	pass #not yet implemented
 	
+func _ChaseState(delta):
+	if !player: return
+	
+	var direction_x = player.global_position.x - parent.global_position.x
+	var new_velocity = Vector2(direction_x, 0).normalized() * SPEED * delta
+	parent.velocity = new_velocity
+	if _timer <= 0.0: 
+		_timer = randi_range(3,5)
+		_current_state = _States.Idle
+
+func _on_follow_area_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D:
+		player = body
+		_timer = 5
+		_current_state = _States.Chase
+		
