@@ -1,7 +1,7 @@
 extends CharacterBody2D
 enum State { IDLE, LEFT, RIGHT }
 enum Status {JUMPING,FLYING}
-var current_state=State.IDLE
+var current_state=State.LEFT
 var current_status=Status.FLYING
 var grounded=false
 var yspd=0
@@ -12,14 +12,14 @@ var xacc = 8
 var x_spd_min = 2.5
 var x_spd_max = 10
 var xfric = 1.8
+var screech_visible=false
+
 
 
 func _ready() -> void:
 	print("I'm ready!")
 
 func _physics_process(delta: float) -> void:
-	print(xspd)
-	grounded = position.y > 200
 	if(!grounded):
 		yspd+=grav
 	else:
@@ -49,23 +49,46 @@ func _physics_process(delta: float) -> void:
 		xspd = 0
 	position.x += xspd
 	position.y+=yspd
+	move_and_slide()
 
 func _process(delta):
 	if Input.is_action_pressed("Look_Left") and Input.is_action_pressed("Look_Right"):
 		current_state=State.IDLE
 	elif Input.is_action_pressed("Look_Left"):
 		current_state=State.LEFT
+		$Sprite2D.position=Vector2(-100,0)
+		$Sprite2D.flip_v=false
 	elif  Input.is_action_pressed("Look_Right"):
 		current_state=State.RIGHT
+		$Sprite2D.position=Vector2(100,0)
+		$Sprite2D.flip_v=true
 	
 	if Input.is_action_just_pressed("Jump"):
 		current_status=Status.JUMPING
 		grounded=false
+		match current_state:
+			"LEFT":
+				xspd=xfric
+			"RIGHT":
+				xspd=-xfric
 		print("jumpinh")
 	
+	if Input.is_action_just_pressed("Screech"):
+		$Sprite2D.visible=true
+		for i in range(11):
+			await get_tree().create_timer(0.1).timeout
+			$Sprite2D.visible=screech_visible
+			screech_visible=!screech_visible
+			print(screech_visible)
+		$Sprite2D.visible=false
+		
+			
+		
 	
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.is_in_group("ground"):
+	if area.is_in_group("platforms"):
 		grounded=true
+		xspd=0
+		print("grounded")
