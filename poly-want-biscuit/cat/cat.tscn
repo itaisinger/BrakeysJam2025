@@ -13,14 +13,14 @@ script = ExtResource("1_vgj48")
 texture_filter = 1
 texture = ExtResource("1_n236n")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["enemies"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["enemies"]]
 position = Vector2(-13.75, 17)
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_vgj48")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemies"]]
 position = Vector2(1, 3)
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_vgj48")

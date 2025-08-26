@@ -93,3 +93,15 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("platforms"):
 		grounded=true
 		xspd=0
+	if area.is_in_group("enemies"):
+		Death()
+		
+		
+		
+		
+
+func Death():
+	$AnimatedSprite2D.scale=Vector2(2,2)
+	$AnimatedSprite2D.play("Death")
+	await $AnimatedSprite2D.animation_finished
+	queue_free()
