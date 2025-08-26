@@ -44,6 +44,7 @@ position = Vector2(1021, 39)
 [node name="Pirate" parent="." instance=ExtResource("5_l7hcl")]
 position = Vector2(283, 379)
 scale = Vector2(2, 2)
+bad_pirate_voice = Array[AudioStream]([])
 
 [node name="platform6" parent="." instance=ExtResource("3_51rdu")]
 position = Vector2(171, 368)
