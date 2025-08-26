@@ -1,7 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://besq32tbr5rgo"]
+[gd_scene load_steps=18 format=3 uid="uid://besq32tbr5rgo"]
 
 [ext_resource type="Script" uid="uid://b3d1yu85n6k3r" path="res://Pirate/scripts/pirate.gd" id="1_enqx7"]
 [ext_resource type="Texture2D" uid="uid://dsorj1cx0e50s" path="res://Pirate/Idle-5frm.png" id="2_gkcui"]
+[ext_resource type="AudioStream" uid="uid://cy5yneet78m3d" path="res://Pirate/Audio/bad pirate/comes torward you/bad pirate (make you stew).wav" id="2_hg1is"]
+[ext_resource type="AudioStream" uid="uid://cwxrpfx7tk3fd" path="res://Pirate/Audio/bad pirate/comes torward you/bad pirate (pluck you clean).wav" id="3_3xyjm"]
+[ext_resource type="AudioStream" uid="uid://u2ew6yvpq3ix" path="res://Pirate/Audio/bad pirate/comes torward you/bad pirate (shitbucket).wav" id="4_f24xa"]
+[ext_resource type="AudioStream" uid="uid://cxetil5mkb2fp" path="res://Pirate/Audio/bad pirate/comes torward you/bad pirate coming (get back here).wav" id="5_ktpxw"]
+[ext_resource type="AudioStream" uid="uid://jmvic7fp215j" path="res://Pirate/Audio/bad pirate/comes torward you/bad pirate coming (get in me hands).wav" id="6_a8lky"]
+[ext_resource type="AudioStream" uid="uid://dpkbwvojpwss6" path="res://Pirate/Audio/bad pirate/comes torward you/bad pirate coming (worth more them me gold).wav" id="7_koqec"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gkcui"]
 radius = 15.0
@@ -67,6 +73,7 @@ visibility_layer = 2
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_enqx7")
+bad_pirate_voice = Array[AudioStream]([ExtResource("2_hg1is"), ExtResource("3_3xyjm"), ExtResource("4_f24xa"), ExtResource("5_ktpxw"), ExtResource("6_a8lky"), ExtResource("7_koqec")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(4, 12)
