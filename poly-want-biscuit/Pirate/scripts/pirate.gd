@@ -119,6 +119,9 @@ func play_random_voice():
 			#sfx_player.stream = random_sfx
 			#sfx_player.play()
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
