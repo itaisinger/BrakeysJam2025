@@ -116,7 +116,7 @@ func _on_follow_area_area_entered(area: Area2D) -> void:
 		play_random_voice()
 		
 func play_random_voice():
-	if _pirate_type == _Pirate_Type.Cat_hater:  
+	if _pirate_type == _Pirate_Type.Cat_hater:
 		if bad_pirate_voice.size() > 0:
 			var random_sfx = bad_pirate_voice[randi() % bad_pirate_voice.size()]
 			sfx_player.stream = random_sfx
