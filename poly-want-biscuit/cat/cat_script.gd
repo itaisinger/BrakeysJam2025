@@ -20,12 +20,22 @@ var awake_dis = 200;
 var jumpforce = 5
 var spd = 3
 var moving_left=false
+var voice_cooldown := 0.0
+const VOICE_COOLDOWN_TIME := 6.0
 signal parrot_flap
 signal parrot_screech(word)
+
+@onready var sfx_player = $AudioStreamPlayer
+
+@export var cat_wakeup_voice: Array[AudioStream] = []
+@export var cat_cought_react: Array[AudioStream] = []
+@export var cat_jump_voice: Array[AudioStream] = []
+@export var cat_sleep_voice: Array[AudioStream] = []
 
 	
 func _ready() -> void:
 	state = CAT_STATES.sleep
+	$AnimatedSprite2D.play("sleep")
 	var root = get_tree().root.get_child(1)
 	root.connect("parrot_screech",hear_sound)
 	root.connect("parrot_flap",_parrot_flap)
@@ -40,7 +50,8 @@ func _parrot_screech(word):
 func _parrot_flap():
 	print("cat parrot flap")
 func _physics_process(delta: float) -> void:
-	#grounded = standing_on_wall	#insert smt here !!!!
+	if voice_cooldown > 0.0:
+		voice_cooldown -= delta
 	player_pos = player_data.player_position
 	if(state == CAT_STATES.sleep):
 		state_sleep()
@@ -57,11 +68,22 @@ func _physics_process(delta: float) -> void:
 	
 
 func state_sleep() -> void:
+	if voice_cooldown <= 0.0: 
+		var random_sfx = cat_sleep_voice[0]
+		sfx_player.stream = random_sfx
+		sfx_player.play()
+		voice_cooldown = VOICE_COOLDOWN_TIME  # Reset cooldown
+
 	if(player_pos.distance_to(position) < awake_dis):
 		dir = -sign(position.x - player_pos.x) 
 		jump()
 	
 func state_walk() -> void:
+	if voice_cooldown <= 0.0: 
+		var random_sfx = cat_jump_voice[2]
+		sfx_player.stream = random_sfx
+		sfx_player.play()
+		voice_cooldown = VOICE_COOLDOWN_TIME 
 	#walk
 	position.x += dir * spd
 	yspd = 0
@@ -89,27 +111,51 @@ func state_dead() -> void:
 func jump() -> void:
 	yspd -= jumpforce*2
 	state = CAT_STATES.jump
+	$AnimatedSprite2D.play("jump")
+	var random_sfx = cat_jump_voice[randi() % cat_jump_voice.size()]
+	sfx_player.stream = random_sfx
+	sfx_player.play()
+	voice_cooldown = VOICE_COOLDOWN_TIME 
 	moving_left=position.x>player_pos.x
+	if moving_left:
+		$AnimatedSprite2D.flip_h=false
+	else:
+		$AnimatedSprite2D.flip_h=true
+		
 	
 func hear_sound(voice) -> void:
 	grav=0.2
-	dir = -sign(position.x - player_pos.x) 
+	dir = -sign(position.x - player_pos.x)
+	var random_sfx = cat_wakeup_voice[randi() % cat_wakeup_voice.size()]
+	sfx_player.stream = random_sfx
+	sfx_player.play()
+	voice_cooldown = VOICE_COOLDOWN_TIME 
 	if(voice == Globals.VOICES.meow):
 		#play happy meow sound
 		state = CAT_STATES.walk
+		$AnimatedSprite2D.play("walk")
 		#dir = towards pos
-		return
 	if(voice == Globals.VOICES.curse):
 		#play angry meow sound
 		state = CAT_STATES.walk
+		$AnimatedSprite2D.play("walk")
 		dir = -dir
-		#dir = away from pos
+	if dir<0:
+		$AnimatedSprite2D.flip_h=false
+	else:
+		$AnimatedSprite2D.flip_h=true
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("platforms"):
 		grav=0
 		grounded=true
+	if area.is_in_group("parrot"):
+		var random_sfx = cat_cought_react[randi() % cat_cought_react.size()]
+		sfx_player.stream = random_sfx
+		sfx_player.play()
+		voice_cooldown = VOICE_COOLDOWN_TIME 
+		
 
 
 func _on_area_2d_area_exited(area: Area2D) -> void:

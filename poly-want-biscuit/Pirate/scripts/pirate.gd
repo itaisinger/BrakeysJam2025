@@ -12,12 +12,18 @@ enum _States {
 	React,
 	Chase
 }
+
+@export var bad_pirate_voice: Array[AudioStream] = []
+
+
+var _pirate_type = _Pirate_Type.Cat_hater
 var _current_state = null
 var _timer := 0.5
 var _direction = 1
 const SPEED := 60
 
 #@onready var parent: CharacterBody2D = get_parent()
+@onready var sfx_player = $AudioStreamPlayer
 @onready var ray_cast_right = $RayCastRight
 @onready var ray_cast_left = $RayCastLeft
 @onready var sprite = $AnimatedSprite2D
@@ -107,4 +113,11 @@ func _on_follow_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("parrot"):
 		_timer = 5
 		_current_state = _States.Chase
-		print("found YErr lazy parot")
+		play_random_voice()
+		
+func play_random_voice():
+	if _pirate_type == _Pirate_Type.Cat_hater:
+		if bad_pirate_voice.size() > 0:
+			var random_sfx = bad_pirate_voice[randi() % bad_pirate_voice.size()]
+			sfx_player.stream = random_sfx
+			sfx_player.play()
