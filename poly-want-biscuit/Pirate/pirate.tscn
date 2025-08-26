@@ -1,33 +1,105 @@
-[gd_scene load_steps=4 format=3 uid="uid://besq32tbr5rgo"]
+[gd_scene load_steps=12 format=3 uid="uid://besq32tbr5rgo"]
 
 [ext_resource type="Script" uid="uid://b3d1yu85n6k3r" path="res://Pirate/scripts/pirate.gd" id="1_enqx7"]
+[ext_resource type="Texture2D" uid="uid://dsorj1cx0e50s" path="res://Pirate/Idle-5frm.png" id="2_gkcui"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_i5scg"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gkcui"]
+radius = 15.0
+height = 50.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gkcui"]
-size = Vector2(87.5, 33)
+size = Vector2(81, 179)
 
-[node name="Pirate" type="CharacterBody2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ligwx"]
+atlas = ExtResource("2_gkcui")
+region = Rect2(0, 0, 244, 186)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3j57"]
+atlas = ExtResource("2_gkcui")
+region = Rect2(244, 0, 244, 186)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fddp"]
+atlas = ExtResource("2_gkcui")
+region = Rect2(488, 0, 244, 186)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0sf31"]
+atlas = ExtResource("2_gkcui")
+region = Rect2(732, 0, 244, 186)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_004gm"]
+atlas = ExtResource("2_gkcui")
+region = Rect2(976, 0, 244, 186)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hg1is"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ligwx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3j57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6fddp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0sf31")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_004gm")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ligwx"]
+radius = 22.0
+height = 54.0
+
+[node name="Pirate" type="CharacterBody2D" groups=["enemies"]]
+visibility_layer = 2
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_enqx7")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_i5scg")
+position = Vector2(4, 12)
+shape = SubResource("CapsuleShape2D_gkcui")
 
 [node name="Follow area" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Follow area"]
-position = Vector2(0, -5)
+position = Vector2(2.5, -0.5)
 shape = SubResource("RectangleShape2D_gkcui")
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
-target_position = Vector2(17, 0)
+target_position = Vector2(15, 0)
 
 [node name="RayCastLeft" type="RayCast2D" parent="."]
-target_position = Vector2(-17, 0)
+target_position = Vector2(-15, 0)
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["enemies"]]
+position = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_hg1is")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.160284
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="hurtbox" type="Area2D" parent="." groups=["enemies"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(2, 11)
+shape = SubResource("CapsuleShape2D_ligwx")
+debug_color = Color(0.952941, 0.176471, 0.0823529, 0.419608)
+
+[connection signal="area_entered" from="Follow area" to="." method="_on_follow_area_area_entered"]
 [connection signal="body_entered" from="Follow area" to="." method="_on_follow_area_body_entered"]
 [connection signal="body_exited" from="Follow area" to="." method="_on_follow_area_body_exited"]
