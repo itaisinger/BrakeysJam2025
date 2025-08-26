@@ -161,7 +161,6 @@ animations = [{
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
-position = Vector2(218, 158)
 script = ExtResource("1_ne668")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -177,7 +176,7 @@ position = Vector2(4, -7.00001)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_lym6n")
 animation = &"flying"
-frame_progress = 0.444921
+frame_progress = 0.063508
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimatedSprite2D")
