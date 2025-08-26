@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cyge0jk4epjq2"]
+[gd_scene load_steps=5 format=3 uid="uid://cyge0jk4epjq2"]
 
-[ext_resource type="PackedScene" uid="uid://o0wiu6jx5stv" path="res://parrot/scene/character_body_2d.tscn" id="1_l7u1a"]
+[ext_resource type="PackedScene" uid="uid://o0wiu6jx5stv" path="res://parrot/scene/parrot.tscn" id="1_l7u1a"]
+[ext_resource type="Script" uid="uid://7y8aie06dfud" path="res://parrot/level.gd" id="1_v6rrj"]
 [ext_resource type="PackedScene" uid="uid://dter24rn13aa5" path="res://platform/platform.tscn" id="3_51rdu"]
+[ext_resource type="PackedScene" uid="uid://cd3m75bil8uly" path="res://cat/cat.tscn" id="3_v6rrj"]
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_v6rrj")
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_l7u1a")]
+[node name="parrot" parent="." instance=ExtResource("1_l7u1a")]
 position = Vector2(421, 27)
 
 [node name="platform" parent="." instance=ExtResource("3_51rdu")]
@@ -27,3 +30,12 @@ scale = Vector2(3.92, 1)
 [node name="platform5" parent="." instance=ExtResource("3_51rdu")]
 position = Vector2(1016, 149)
 scale = Vector2(3.92, 1)
+
+[node name="cat" parent="." instance=ExtResource("3_v6rrj")]
+position = Vector2(119, 28)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_v6rrj")]
+position = Vector2(634, 290)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("3_v6rrj")]
+position = Vector2(1021, 39)

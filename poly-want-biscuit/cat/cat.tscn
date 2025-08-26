@@ -3,7 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://cex4xfeq4ipkl" path="res://cat/textures/sleep.png" id="1_n236n"]
 [ext_resource type="Script" uid="uid://b0v6vrf46aoxl" path="res://cat/cat_script.gd" id="1_vgj48"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_n236n"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vgj48"]
+size = Vector2(12.5, 4.66667)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_vgj48")
@@ -15,5 +16,14 @@ texture = ExtResource("1_n236n")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-13.75, 17)
 scale = Vector2(3, 3)
-shape = SubResource("CircleShape2D_n236n")
+shape = SubResource("RectangleShape2D_vgj48")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 3)
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_vgj48")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

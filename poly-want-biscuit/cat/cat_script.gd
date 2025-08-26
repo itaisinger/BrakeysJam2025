@@ -10,28 +10,38 @@ enum CAT_STATES{
 var state
 var player_pos
 var dir = 1
-
 #physics
 var yspd = 0
 var grounded = true
 var grav = 0.2
-
 #bhvr vars
 var hear_distance = 60
-var awake_dis = 20;
+var awake_dis = 200;
 var jumpforce = 5
 var spd = 3
+var moving_left=false
+signal parrot_flap
+signal parrot_screech(word)
 
 	
 func _ready() -> void:
-	var state = CAT_STATES.sleep
-	level.connect("emit_sound",hear_sound)
+	state = CAT_STATES.sleep
+	var root = get_tree().root.get_child(1)
+	root.connect("parrot_screech",hear_sound)
+	root.connect("parrot_flap",_parrot_flap)
 	
+	print(root.get_child(1))
+	#level.connect("emit_sound",hear_sound)
+
+
+func _parrot_screech(word):
+	print("cat recognise screech")
+	
+func _parrot_flap():
+	print("cat parrot flap")
 func _physics_process(delta: float) -> void:
-	
-	grounded = standing_on_wall	#insert smt here !!!!
-	player_pos = player position
-	
+	#grounded = standing_on_wall	#insert smt here !!!!
+	player_pos = player_data.player_position
 	if(state == CAT_STATES.sleep):
 		state_sleep()
 	if(state == CAT_STATES.walk):
@@ -40,7 +50,12 @@ func _physics_process(delta: float) -> void:
 		state_jump()
 	if(state == CAT_STATES.dead):
 		state_dead()
-		
+		queue_free()
+	yspd+=grav
+	position.y+=yspd
+	move_and_slide()
+	
+
 func state_sleep() -> void:
 	if(player_pos.distance_to(position) < awake_dis):
 		dir = -sign(position.x - player_pos.x) 
@@ -50,7 +65,8 @@ func state_walk() -> void:
 	#walk
 	position.x += dir * spd
 	yspd = 0
-	
+	grav=0.2
+	position.y += grav*4
 	#jump
 	if(!grounded):
 		jump()
@@ -58,10 +74,11 @@ func state_walk() -> void:
 	
 func state_jump() -> void:
 	#fall
+	position.x += dir * spd*5
+	grav=0.2
+	grounded=false
 	yspd += grav
 	position.y += yspd
-	position.x += dir * spd
-	
 	if(grounded): state = CAT_STATES.dead
 	
 func state_dead() -> void:
@@ -70,20 +87,33 @@ func state_dead() -> void:
 	
 
 func jump() -> void:
-	yspd -= jumpforce
+	yspd -= jumpforce*2
 	state = CAT_STATES.jump
+	moving_left=position.x>player_pos.x
+	print(moving_left)
 	
-func hear_sound(voice, pos) -> void:
-	if(position.distance_to(pos) > hear_distance):
-		return
-		
+func hear_sound(voice) -> void:
+	print("hearing sounds")
+	grav=0.2
 	dir = -sign(position.x - player_pos.x) 
 	if(voice == Globals.VOICES.meow):
-		play happy meow sound
+		#play happy meow sound
 		state = CAT_STATES.walk
-		dir = towards pos
+
+		#dir = towards pos
 		return
 	if(voice == Globals.VOICES.curse):
-		play angry meow sound
+		#play angry meow sound
 		state = CAT_STATES.walk
-		dir = away from pos
+		#dir = away from pos
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.is_in_group("platforms"):
+		grav=0
+		grounded=true
+
+
+func _on_area_2d_area_exited(area: Area2D) -> void:
+	if area.is_in_group("platforms"):
+		grounded=false

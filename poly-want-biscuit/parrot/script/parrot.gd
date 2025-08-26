@@ -13,6 +13,8 @@ var x_spd_min = 2.5
 var x_spd_max = 10
 var xfric = 1.8
 var screech_visible=false
+signal parrot_flap
+signal parrot_screech(word)
 
 
 
@@ -50,6 +52,7 @@ func _physics_process(delta: float) -> void:
 	position.x += xspd
 	position.y+=yspd
 	move_and_slide()
+	player_data.player_position = global_position
 
 func _process(delta):
 	if Input.is_action_pressed("Look_Left") and Input.is_action_pressed("Look_Right"):
@@ -64,6 +67,7 @@ func _process(delta):
 		$Sprite2D.flip_v=true
 	
 	if Input.is_action_just_pressed("Jump"):
+		emit_signal("parrot_flap")
 		current_status=Status.JUMPING
 		grounded=false
 		match current_state:
@@ -71,24 +75,19 @@ func _process(delta):
 				xspd=xfric
 			"RIGHT":
 				xspd=-xfric
-		print("jumpinh")
 	
 	if Input.is_action_just_pressed("Screech"):
+		emit_signal("parrot_screech",Globals.VOICES.meow)
 		$Sprite2D.visible=true
 		for i in range(11):
 			await get_tree().create_timer(0.1).timeout
 			$Sprite2D.visible=screech_visible
 			screech_visible=!screech_visible
-			print(screech_visible)
 		$Sprite2D.visible=false
-		
-			
-		
-	
+
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("platforms"):
 		grounded=true
 		xspd=0
-		print("grounded")
