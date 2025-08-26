@@ -107,4 +107,15 @@ func _on_follow_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("parrot"):
 		_timer = 5
 		_current_state = _States.Chase
+<<<<<<< Updated upstream
 		print("found YErr lazy parot")
+=======
+		play_random_voice()
+		
+func play_random_voice():
+	if _pirate_type == _Pirate_Type.Cat_hater:  
+		if bad_pirate_voice.size() > 0:
+			var random_sfx = bad_pirate_voice[randi() % bad_pirate_voice.size()]
+			#sfx_player.stream = random_sfx
+			#sfx_player.play()
+>>>>>>> Stashed changes

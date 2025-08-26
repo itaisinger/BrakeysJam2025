@@ -26,6 +26,7 @@ signal parrot_screech(word)
 	
 func _ready() -> void:
 	state = CAT_STATES.sleep
+	$AnimatedSprite2D.play("sleep")
 	var root = get_tree().root.get_child(1)
 	root.connect("parrot_screech",hear_sound)
 	root.connect("parrot_flap",_parrot_flap)
@@ -40,7 +41,6 @@ func _parrot_screech(word):
 func _parrot_flap():
 	print("cat parrot flap")
 func _physics_process(delta: float) -> void:
-	#grounded = standing_on_wall	#insert smt here !!!!
 	player_pos = player_data.player_position
 	if(state == CAT_STATES.sleep):
 		state_sleep()
@@ -89,7 +89,13 @@ func state_dead() -> void:
 func jump() -> void:
 	yspd -= jumpforce*2
 	state = CAT_STATES.jump
+	$AnimatedSprite2D.play("jump")
 	moving_left=position.x>player_pos.x
+	if moving_left:
+		$AnimatedSprite2D.flip_h=false
+	else:
+		$AnimatedSprite2D.flip_h=true
+		
 	
 func hear_sound(voice) -> void:
 	grav=0.2
@@ -97,13 +103,17 @@ func hear_sound(voice) -> void:
 	if(voice == Globals.VOICES.meow):
 		#play happy meow sound
 		state = CAT_STATES.walk
+		$AnimatedSprite2D.play("walk")
 		#dir = towards pos
-		return
 	if(voice == Globals.VOICES.curse):
 		#play angry meow sound
 		state = CAT_STATES.walk
+		$AnimatedSprite2D.play("walk")
 		dir = -dir
-		#dir = away from pos
+	if dir<0:
+		$AnimatedSprite2D.flip_h=false
+	else:
+		$AnimatedSprite2D.flip_h=true
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
