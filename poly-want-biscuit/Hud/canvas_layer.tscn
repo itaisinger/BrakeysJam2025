@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnsw1vitrtw8y"]
+
+[ext_resource type="Texture2D" uid="uid://dtjmwhdo4xc01" path="res://key/Skeleton Key - 2.png" id="1_tjwmm"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(70, 60)
+scale = Vector2(1.19609, 1.0125)
+texture = ExtResource("1_tjwmm")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(140, 60)
+scale = Vector2(1.19609, 1.0125)
+texture = ExtResource("1_tjwmm")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(210, 60)
+scale = Vector2(1.19609, 1.0125)
+texture = ExtResource("1_tjwmm")
