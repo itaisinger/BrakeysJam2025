@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnsw1vitrtw8y"]
+
+[ext_resource type="Script" uid="uid://nkb8vymujgtd" path="res://Hud/canvas_layer.gd" id="1_2jd6a"]
+[ext_resource type="Texture2D" uid="uid://dtjmwhdo4xc01" path="res://key/Skeleton Key - 2.png" id="1_tjwmm"]
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_2jd6a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(70, 60)
+scale = Vector2(1.19609, 1.0125)
+texture = ExtResource("1_tjwmm")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 97.0
+offset_top = 45.0
+offset_right = 382.0
+offset_bottom = 727.0
+scale = Vector2(0.05, 0.05)
+theme_override_font_sizes/font_size = 500
+text = "0"
