@@ -1,18 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://besq32tbr5rgo"]
+[gd_scene load_steps=4 format=3 uid="uid://besq32tbr5rgo"]
+
+[ext_resource type="Script" uid="uid://b3d1yu85n6k3r" path="res://Pirate/scripts/pirate.gd" id="1_enqx7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i5scg"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gkcui"]
+size = Vector2(87.5, 33)
+
 [node name="Pirate" type="CharacterBody2D"]
+script = ExtResource("1_enqx7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_i5scg")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Follow area" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Follow area"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_gkcui")
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
 target_position = Vector2(17, 0)
 
 [node name="RayCastLeft" type="RayCast2D" parent="."]
 target_position = Vector2(-17, 0)
+
+[connection signal="body_entered" from="Follow area" to="." method="_on_follow_area_body_entered"]
+[connection signal="body_exited" from="Follow area" to="." method="_on_follow_area_body_exited"]
