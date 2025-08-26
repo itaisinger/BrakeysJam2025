@@ -20,8 +20,22 @@ const SPEED := 60
 @onready var ray_cast_left = $RayCastLeft
 @onready var sprite = $Sprite2D
 
-func _ready() -> void:
-	_current_state = _States.Idle
+#func _ready() -> void:
+	#_current_state = _States.Idle
+	#level.connect("emit_sound",hear_sound)
+#
+#func hear_sound(voice, pos) -> void:
+	#if(position.distance_to(pos) > hear_distance):
+		#return
+	#if(voice == Globals.VOICES.meow):
+		##play happy meow sound
+		#_current_state = _States.walk
+		##dir = towards pos
+		#return
+	#if(voice == Globals.VOICES.curse):
+		##play angry meow sound
+		#_current_state = _States.walk
+		##dir = away from pos
 
 
 func _process(delta: float) -> void:
