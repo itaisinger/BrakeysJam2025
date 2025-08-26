@@ -1,3 +1,4 @@
 [gd_scene format=3 uid="uid://lsn760ks2os"]
 
 [node name="Game" type="Node2D"]
+position = Vector2(-11, 28)
