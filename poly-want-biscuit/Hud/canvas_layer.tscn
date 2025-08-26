@@ -1,20 +1,71 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnsw1vitrtw8y"]
+[gd_scene load_steps=3 format=3 uid="uid://bnsw1vitrtw8y"]
 
+[ext_resource type="Script" uid="uid://nkb8vymujgtd" path="res://Hud/canvas_layer.gd" id="1_2jd6a"]
 [ext_resource type="Texture2D" uid="uid://dtjmwhdo4xc01" path="res://key/Skeleton Key - 2.png" id="1_tjwmm"]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_2jd6a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(70, 60)
 scale = Vector2(1.19609, 1.0125)
 texture = ExtResource("1_tjwmm")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(140, 60)
-scale = Vector2(1.19609, 1.0125)
-texture = ExtResource("1_tjwmm")
+[node name="Label" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 97.0
+offset_top = 45.0
+offset_right = -770.0
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.05, 0.05)
+theme_override_font_sizes/font_size = 500
+text = "0"
 
-[node name="Sprite2D3" type="Sprite2D" parent="."]
-position = Vector2(210, 60)
-scale = Vector2(1.19609, 1.0125)
-texture = ExtResource("1_tjwmm")
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label2" type="Label" parent="ColorRect"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 609.0
+offset_top = 420.0
+offset_right = 9240.0
+offset_bottom = 2499.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 1000
+text = "Poly went to heaven
+   (probably not)"
+
+[node name="Label3" type="Label" parent="ColorRect"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 649.0
+offset_top = 664.0
+offset_right = 9540.0
+offset_bottom = 2743.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 1000
+text = "press space"

@@ -13,6 +13,7 @@ var x_spd_min = 2.5
 var x_spd_max = 10
 var xfric = 1.8
 var screech_visible=false
+var dead=false
 signal parrot_flap
 signal parrot_screech(word)
 
@@ -20,6 +21,7 @@ signal parrot_screech(word)
 
 func _ready() -> void:
 	print("I'm ready!")
+	preload("res://Game/main_menu.tscn")
 
 func _physics_process(delta: float) -> void:
 	if(!grounded):
@@ -49,6 +51,9 @@ func _physics_process(delta: float) -> void:
 		else: xspd = -xfric
 	if(grounded):
 		xspd = 0
+	if Input.is_action_just_pressed("Jump") and dead:
+		get_tree().change_scene_to_file("res://Game/main_menu.tscn")
+		queue_free()
 	position.x += xspd
 	position.y+=yspd
 	move_and_slide()
@@ -101,7 +106,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		
 
 func Death():
+	dead=true
 	$AnimatedSprite2D.scale=Vector2(2,2)
+	$Hud.death_screan()
 	$AnimatedSprite2D.play("Death")
-	await $AnimatedSprite2D.animation_finished
-	queue_free()
+	
