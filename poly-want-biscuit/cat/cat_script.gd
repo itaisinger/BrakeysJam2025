@@ -8,9 +8,8 @@ enum CAT_STATES{
 }
 
 var state
-var hear_distance
 var player_pos
-var walk_dir = 1
+var dir = 1
 
 #physics
 var yspd = 0
@@ -18,19 +17,20 @@ var grounded = true
 var grav = 0.2
 
 #bhvr vars
+var hear_distance = 60
 var awake_dis = 20;
 var jumpforce = 5
 var spd = 3
 
 	
 func _ready() -> void:
-	print("cat ready")
 	var state = CAT_STATES.sleep
-	var hear_distance = 50
+	level.connect("emit_sound",hear_sound)
 	
 func _physics_process(delta: float) -> void:
 	
 	grounded = standing_on_wall	#insert smt here !!!!
+	player_pos = player position
 	
 	if(state == CAT_STATES.sleep):
 		state_sleep()
@@ -43,7 +43,7 @@ func _physics_process(delta: float) -> void:
 		
 func state_sleep() -> void:
 	if(player_pos.distance_to(position) < awake_dis):
-		dir = direction to player
+		dir = -sign(position.x - player_pos.x) 
 		jump()
 	
 func state_walk() -> void:
@@ -76,8 +76,10 @@ func jump() -> void:
 func hear_sound(voice, pos) -> void:
 	if(position.distance_to(pos) > hear_distance):
 		return
+		
+	dir = -sign(position.x - player_pos.x) 
 	if(voice == Globals.VOICES.meow):
-		play happy mew sound
+		play happy meow sound
 		state = CAT_STATES.walk
 		dir = towards pos
 		return
