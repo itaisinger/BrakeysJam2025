@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bnsw1vitrtw8y" path="res://Hud/canvas_layer.tscn" id="5_lfgbv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d6rm4"]
+radius = 32.0
+height = 80.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lfgbv"]
 atlas = ExtResource("2_d6rm4")
@@ -197,7 +199,7 @@ script = ExtResource("1_ne668")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 z_index = 10
-position = Vector2(-2.172, 1.92)
+position = Vector2(1, 1)
 scale = Vector2(0.25, 0.25)
 shape = SubResource("CapsuleShape2D_d6rm4")
 debug_color = Color(0.937255, 0.196078, 0.286275, 0.419608)
@@ -207,10 +209,8 @@ z_index = 2
 z_as_relative = false
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_lym6n")
-animation = &"jump"
+animation = &"death"
 autoplay = "flying"
-frame = 1
-frame_progress = 0.890098
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimatedSprite2D")

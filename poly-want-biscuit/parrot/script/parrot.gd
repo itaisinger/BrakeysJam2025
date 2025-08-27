@@ -140,8 +140,12 @@ func collect_state():
 	pass
 		
 func die_state():
+	if Input.is_action_just_pressed("Jump"):
+		get_tree().change_scene_to_file("res://Game/main_menu.tscn")
+		print("reseting!!!!!!!!!!! ")
 	if(state_changed): anim.play("death")
 	#signal die
+	
 	pass
 	
 	
@@ -153,18 +157,19 @@ func die_state():
 
 
 ##check this
-#func _on_area_2d_area_entered(area: Area2D) -> void:
-	#if area.is_in_group("enemies"):
-		#Death()
-		#pass
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemies"):
+		Death()
+		state=STATES.die
+		pass
 
 ##check this
-#func Death():
-	#dead=true
-	##anim.scale=Vector2(2,2)
-	#$Hud.death_screan()
-	#anim.play("death")
-	#print("rip")
+func Death():
+	dead=true
+	#anim.scale=Vector2(2,2)
+	$Hud.death_screan()
+	anim.play("death")
+
 
 func ResetAnim():
 	#if(state == STATES.idle): anim.play("idle")

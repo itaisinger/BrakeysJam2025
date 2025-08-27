@@ -90,8 +90,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ligwx"]
-radius = 22.0
-height = 54.0
+radius = 25.0
+height = 76.0
 
 [node name="Pirate" type="CharacterBody2D" groups=["enemies"]]
 visibility_layer = 2
@@ -131,7 +131,7 @@ frame_progress = 0.697007
 [node name="hurtbox" type="Area2D" parent="." groups=["enemies"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
-position = Vector2(2, 11)
+position = Vector2(3, 7)
 shape = SubResource("CapsuleShape2D_ligwx")
 debug_color = Color(0.952941, 0.176471, 0.0823529, 0.419608)
 
