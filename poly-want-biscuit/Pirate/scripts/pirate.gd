@@ -96,7 +96,6 @@ func _ReactState(delta):
 	pass #not yet implemented
 	
 func _ChaseState(delta):
-	print("chasing")
 	var direction_x =  player_data.player_position.x - position.x
 	var new_velocity = Vector2(direction_x, 0).normalized() * SPEED * delta
 	position.x+=new_velocity.x

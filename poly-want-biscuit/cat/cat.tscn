@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://ika5g2if8um0"]
+[gd_scene load_steps=49 format=3 uid="uid://ika5g2if8um0"]
 
 [ext_resource type="Texture2D" uid="uid://cex4xfeq4ipkl" path="res://cat/textures/sleep.png" id="1_n236n"]
 [ext_resource type="Script" uid="uid://b0v6vrf46aoxl" path="res://cat/cat_script.gd" id="1_vgj48"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://tko0rcfda5av" path="res://cat/Audio/jump3.wav" id="11_sm7ki"]
 [ext_resource type="AudioStream" uid="uid://bl3lykfds5u8k" path="res://cat/Audio/jump4.wav" id="12_ipryf"]
 [ext_resource type="AudioStream" uid="uid://b4eeprmst7w6u" path="res://cat/Audio/sleep1.wav" id="13_nu5hc"]
+[ext_resource type="Texture2D" uid="uid://bqtfpv6o3ylwo" path="res://parrot/spritesheet.png" id="15_wlxi6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vgj48"]
 radius = 17.0294
@@ -24,6 +25,50 @@ size = Vector2(12.5, 4.66667)
 [sub_resource type="AtlasTexture" id="AtlasTexture_sm7ki"]
 atlas = ExtResource("2_vgj48")
 region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipryf"]
+atlas = ExtResource("15_wlxi6")
+region = Rect2(0, 0, 128, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nu5hc"]
+atlas = ExtResource("15_wlxi6")
+region = Rect2(128, 0, 128, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jd25"]
+atlas = ExtResource("15_wlxi6")
+region = Rect2(256, 0, 128, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhf7k"]
+atlas = ExtResource("15_wlxi6")
+region = Rect2(384, 0, 128, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pa4mv"]
+atlas = ExtResource("15_wlxi6")
+region = Rect2(640, 0, 128, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30m4m"]
+atlas = ExtResource("15_wlxi6")
+region = Rect2(768, 0, 128, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpltm"]
+atlas = ExtResource("15_wlxi6")
+region = Rect2(896, 0, 128, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xbpc"]
+atlas = ExtResource("15_wlxi6")
+region = Rect2(1024, 0, 128, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umlvo"]
+atlas = ExtResource("15_wlxi6")
+region = Rect2(1152, 0, 128, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34aqg"]
+atlas = ExtResource("2_vgj48")
+region = Rect2(252, 0, 36, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tx6lp"]
+atlas = ExtResource("2_vgj48")
+region = Rect2(252, 0, 36, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hxtwg"]
 atlas = ExtResource("2_vgj48")
@@ -98,9 +143,47 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_sm7ki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipryf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nu5hc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jd25")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhf7k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pa4mv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30m4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpltm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xbpc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_umlvo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34aqg")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx6lp")
 }],
 "loop": true,
-"name": &"dead",
+"name": &"deadforeal",
 "speed": 5.0
 }, {
 "frames": [{
@@ -170,8 +253,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rai0v"]
+size = Vector2(16.5, 7.5)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 scale = Vector2(2, 2)
+collision_layer = 3
 script = ExtResource("1_vgj48")
 cat_wakeup_voice = Array[AudioStream]([ExtResource("2_rai0v"), ExtResource("3_wlxi6"), ExtResource("4_2phss"), ExtResource("5_kfgcs")])
 cat_cought_react = Array[AudioStream]([ExtResource("2_0wl1y"), ExtResource("3_jakcm")])
@@ -205,6 +292,14 @@ animation = &"walk"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="ground_delection" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ground_delection"]
+position = Vector2(-7.75, 14.25)
+shape = SubResource("RectangleShape2D_rai0v")
+debug_color = Color(0.985382, 0, 0.334326, 0.42)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
