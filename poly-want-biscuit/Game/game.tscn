@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://lsn760ks2os"]
+[gd_scene load_steps=16 format=3 uid="uid://lsn760ks2os"]
 
 [ext_resource type="Texture2D" uid="uid://b6b1y2m4gnynn" path="res://platform/tileSet.png" id="2_1r4le"]
 [ext_resource type="PackedScene" uid="uid://cw77rjseupp2p" path="res://parrot/scene/parrot.tscn" id="2_7raqb"]
 [ext_resource type="PackedScene" uid="uid://dter24rn13aa5" path="res://platform/platform.tscn" id="3_7raqb"]
 [ext_resource type="Texture2D" uid="uid://7rgecrx85ac3" path="res://Game/tileSet.png" id="3_jcm6v"]
+[ext_resource type="PackedScene" uid="uid://dl0bm27a1ycom" path="res://key/key.tscn" id="5_fwxkx"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jcm6v"]
 distance = -1096.0
@@ -325,3 +326,7 @@ scale = Vector2(3, 0.2)
 [node name="Cats" type="Node" parent="."]
 
 [node name="PickUps" type="Node" parent="."]
+
+[node name="Key" parent="." instance=ExtResource("5_fwxkx")]
+z_index = 2
+position = Vector2(6964, 1093)
