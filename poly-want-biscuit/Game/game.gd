@@ -5,7 +5,8 @@ signal key_pickedupa
 func _ready():
 	$Parot.connect("parrot_flap",_parrot_flap)
 	$Parot.connect("parrot_screech",_parrot_screech)
-	$Key.connect("key_pickedup",_key_pickedup)
+	for key in $PickUps.get_children():
+		key.connect("key_pickedup",_key_pickedup)
 
 func _parrot_flap():
 	emit_signal("parrot_flap")
