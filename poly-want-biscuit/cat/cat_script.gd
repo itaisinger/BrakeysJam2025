@@ -85,12 +85,18 @@ func state_sleep() -> void:
 	if(player_pos.distance_to(position) < awake_dis):
 		position.y-=50
 		grounded=false
-		update_dir()
 		state_walk()
 		if (position.x>player_data.player_position.x):
+			moving_left=false
 			dir=-1
 		else:
+			moving_left=true
 			dir=1
+		if dir<0:
+			scale.x = abs(scale.x)
+		else:
+			scale.x = -abs(scale.x)
+		#update_dir()
 		jump()
 
 func is_grounded():
@@ -144,7 +150,6 @@ func jump() -> void:
 	#update_dir()
 
 func update_dir() -> void:
-
 	moving_left=position.x>player_pos.x
 	if moving_left:
 		scale.x = -1 * abs(scale.x)
