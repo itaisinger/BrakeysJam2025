@@ -1,19 +1,8 @@
-[gd_scene load_steps=36 format=3 uid="uid://ika5g2if8um0"]
+[gd_scene load_steps=25 format=3 uid="uid://ika5g2if8um0"]
 
 [ext_resource type="Texture2D" uid="uid://cex4xfeq4ipkl" path="res://cat/textures/sleep.png" id="1_n236n"]
 [ext_resource type="Script" uid="uid://b0v6vrf46aoxl" path="res://cat/cat_script.gd" id="1_vgj48"]
-[ext_resource type="AudioStream" uid="uid://8dub5cfsbice" path="res://cat/Audio/catch1.wav" id="2_0wl1y"]
-[ext_resource type="AudioStream" uid="uid://csyv0bpp1wt77" path="res://cat/Audio/waking up 1.wav" id="2_rai0v"]
 [ext_resource type="Texture2D" uid="uid://dxfssiium5qba" path="res://cat/textures/gatto_sheet.png" id="2_vgj48"]
-[ext_resource type="AudioStream" uid="uid://deuv245nm5o8g" path="res://cat/Audio/catch2.wav" id="3_jakcm"]
-[ext_resource type="AudioStream" uid="uid://ytv6suja4jvs" path="res://cat/Audio/waking up 2.wav" id="3_wlxi6"]
-[ext_resource type="AudioStream" uid="uid://c6ir2r554cjwd" path="res://cat/Audio/waking up 3.wav" id="4_2phss"]
-[ext_resource type="AudioStream" uid="uid://b3idxmw0qx8ge" path="res://cat/Audio/waking up 4.wav" id="5_kfgcs"]
-[ext_resource type="AudioStream" uid="uid://b2ehc8yedpf71" path="res://cat/Audio/jump1.wav" id="9_utgtx"]
-[ext_resource type="AudioStream" uid="uid://bx6vwuf02rrjs" path="res://cat/Audio/jump2.wav" id="10_tojim"]
-[ext_resource type="AudioStream" uid="uid://tko0rcfda5av" path="res://cat/Audio/jump3.wav" id="11_sm7ki"]
-[ext_resource type="AudioStream" uid="uid://bl3lykfds5u8k" path="res://cat/Audio/jump4.wav" id="12_ipryf"]
-[ext_resource type="AudioStream" uid="uid://b4eeprmst7w6u" path="res://cat/Audio/sleep1.wav" id="13_nu5hc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vgj48"]
 radius = 17.0294
@@ -171,14 +160,10 @@ animations = [{
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+visible = false
 script = ExtResource("1_vgj48")
-cat_wakeup_voice = Array[AudioStream]([ExtResource("2_rai0v"), ExtResource("3_wlxi6"), ExtResource("4_2phss"), ExtResource("5_kfgcs")])
-cat_cought_react = Array[AudioStream]([ExtResource("2_0wl1y"), ExtResource("3_jakcm")])
-cat_jump_voice = Array[AudioStream]([ExtResource("9_utgtx"), ExtResource("10_tojim"), ExtResource("11_sm7ki"), ExtResource("12_ipryf")])
-cat_sleep_voice = Array[AudioStream]([ExtResource("13_nu5hc")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 texture_filter = 1
 texture = ExtResource("1_n236n")
 
@@ -202,8 +187,6 @@ sprite_frames = SubResource("SpriteFrames_sm7ki")
 animation = &"walk"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-
-[node name="Timer" type="Timer" parent="."]
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

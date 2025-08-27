@@ -11,11 +11,13 @@ enum CAT_STATES{
 var state
 var player_pos
 var dir = 1
+
 #physics
 var yspd = 0
 var xspd = 0
 var grounded = true
 var grav = 0.03
+
 #bhvr vars
 var hear_distance = 600
 var awake_dis = 100;
@@ -31,8 +33,8 @@ signal parrot_flap
 signal parrot_screech(word)
 
 @onready var sfx_player = $AudioStreamPlayer
-@onready var anim_walk = $animation_walk
-@onready var anim_normal = $animation
+@onready var anim_walk = $anim_walk
+@onready var anim_normal = $anim
 
 @export var cat_wakeup_voice: Array[AudioStream] = []
 @export var cat_cought_react: Array[AudioStream] = []
@@ -44,11 +46,10 @@ signal parrot_screech(word)
 
 func _ready() -> void:
 	state = CAT_STATES.sleep
-	$animation.play("sleep")
+	anim_normal.play("sleep")
 	var root = get_tree().root.get_child(1)
 	root.connect("parrot_screech",hear_sound)
 	root.connect("parrot_flap",_parrot_flap)
-	$"movement col".top_level = false
 	#level.connect("emit_sound",hear_sound)
 
 
@@ -91,7 +92,6 @@ func state_walk() -> void:
 	#walk
 	position.x += dir * spd
 	yspd = 0
-	#grav=0.2
 	position.y += grav*4
 	#jump
 	if(!grounded):
@@ -144,7 +144,6 @@ func hear_sound(voice) -> void:
 	else:
 		screechable=false
 		$Timer.start(6)
-		#grav=0.2
 		dir = -sign(position.x - player_pos.x)
 		var random_sfx = cat_wakeup_voice[randi() % cat_wakeup_voice.size()]
 		sfx_player.stream = random_sfx
