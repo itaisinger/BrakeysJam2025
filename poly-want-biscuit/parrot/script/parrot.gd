@@ -24,6 +24,7 @@ var xfric = .3
 var screech_visible=false
 var dead=false
 signal parrot_screech(word)
+signal key_pickedup
 var size = abs(scale.x)
 var timer = 0
 
@@ -33,10 +34,17 @@ var timer = 0
 
 func _ready() -> void:
 	preload("res://Game/main_menu.tscn")
+	var root = get_tree().root.get_child(1)
+	root.connect("key_pickedup",_key_pickedup)
 	#anim.connect("animation_finished", Callable(self, "_on_animation_finished"))
 	
 
-
+func _key_pickedup():
+	$Hud.add_key()
+	print("key")
+	state = STATES.collect;
+	anim.play("collect")
+	
 func _physics_process(delta: float) -> void:
 	if(Input.is_action_just_pressed("restart")): get_tree().reload_current_scene()
 	player_data.player_position=position
@@ -123,6 +131,12 @@ func shout_state(delta):
 	pass
 
 func collect_state():
+	xspd = 0
+	yspd = 0
+	
+	await anim.animation_finished
+	yspd = -shoutforce
+	state = STATES.air
 	pass
 		
 func die_state():
