@@ -1,17 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://chjlj8gjc5r6f"]
+[gd_scene load_steps=2 format=3 uid="uid://chjlj8gjc5r6f"]
 
 [ext_resource type="Script" uid="uid://c4usft0gwpmri" path="res://Game/main_menu.gd" id="1_yltbk"]
-[ext_resource type="PackedScene" uid="uid://bsfi2tkt8uodm" path="res://Game/background/background.tscn" id="2_gl5pw"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -706.0
-offset_top = -354.0
-offset_right = -1206.0
-offset_bottom = -728.0
+offset_left = -963.0
+offset_top = -542.0
+offset_right = -963.0
+offset_bottom = -542.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yltbk")
@@ -24,30 +23,23 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -48.0
+offset_left = -22.5
 offset_top = -33.0
-offset_right = 48.0
+offset_right = 22.5
 offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
-texture_filter = 1
 layout_mode = 2
-focus_neighbor_top = NodePath("../QuitButton")
-text = "Start Game"
+text = "start"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 4
-focus_neighbor_bottom = NodePath("../StartButton")
-text = "Quit"
+text = "quit"
 
-[node name="Background" parent="." instance=ExtResource("2_gl5pw")]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(709, 216)
-zoom = Vector2(2.5, 2.5)
+[node name="Camera2D" type="Camera2D" parent="VBoxContainer"]
+position = Vector2(23.5, 47)
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

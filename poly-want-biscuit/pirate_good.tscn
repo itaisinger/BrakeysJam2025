@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://de805ksyqvids"]
+
+[ext_resource type="PackedScene" uid="uid://besq32tbr5rgo" path="res://Pirate/pirate.tscn" id="1_e8b0l"]
+[ext_resource type="Script" path="res://pirate_good.gd" id="2_mtugk"]
+
+[node name="Pirate" instance=ExtResource("1_e8b0l")]
+script = ExtResource("2_mtugk")
+bad_pirate_voice = Array[AudioStream]([])
+bad_pirate_react = Array[AudioStream]([])
+good_pirate_voice = Array[AudioStream]([])
+good_pirate_react = Array[AudioStream]([])
+
+[node name="AnimatedSprite2D" parent="." index="4"]
+autoplay = "idle_good"

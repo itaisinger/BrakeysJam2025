@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cwxrpfx7tk3fd"
+path="res://.godot/imported/bad pirate (pluck you clean).wav-4364d1df90db3d584246f5662b6cc321.sample"
+
+[deps]
+
+source_file="res://Pirate/Audio/bad pirate/comes torward you/bad pirate (pluck you clean).wav"
+dest_files=["res://.godot/imported/bad pirate (pluck you clean).wav-4364d1df90db3d584246f5662b6cc321.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

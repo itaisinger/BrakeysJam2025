@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cy5yneet78m3d"
+path="res://.godot/imported/bad pirate (make you stew).wav-27504781e8e5045af2daa53258f0d8cc.sample"
+
+[deps]
+
+source_file="res://Pirate/Audio/bad pirate/comes torward you/bad pirate (make you stew).wav"
+dest_files=["res://.godot/imported/bad pirate (make you stew).wav-27504781e8e5045af2daa53258f0d8cc.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

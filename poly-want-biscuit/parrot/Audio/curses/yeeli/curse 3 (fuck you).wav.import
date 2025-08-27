@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://8f6x4p2f7yne"
+path="res://.godot/imported/curse 3 (fuck you).wav-9db249e19f3c16ac750c02b9e76ce7a7.sample"
+
+[deps]
+
+source_file="res://parrot/Audio/curses/yeeli/curse 3 (fuck you).wav"
+dest_files=["res://.godot/imported/curse 3 (fuck you).wav-9db249e19f3c16ac750c02b9e76ce7a7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

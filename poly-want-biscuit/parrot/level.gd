@@ -7,8 +7,8 @@ func _ready():
 
 func _parrot_flap():
 	emit_signal("parrot_flap")
-	print("flap")
+	#print("flap")
 
 func _parrot_screech(word):
 	emit_signal("parrot_screech",word)
-	print("screech")
+	#print("screech")
