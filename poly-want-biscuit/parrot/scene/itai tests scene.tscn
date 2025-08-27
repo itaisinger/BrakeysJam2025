@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyk0sk5isc0ip"]
+
+[ext_resource type="PackedScene" uid="uid://dter24rn13aa5" path="res://platform/platform.tscn" id="1_s1m3j"]
+[ext_resource type="PackedScene" uid="uid://o0wiu6jx5stv" path="res://parrot/scene/parrot.tscn" id="2_71osc"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="platform5" parent="." instance=ExtResource("1_s1m3j")]
+position = Vector2(703.4, 464)
+scale = Vector2(21.5296, 1)
+
+[node name="Parot" parent="." instance=ExtResource("2_71osc")]
+position = Vector2(365, 322)
+
+[node name="Camera2D" type="Camera2D" parent="Parot"]
+position = Vector2(2, 3)
+zoom = Vector2(3, 3)
+
+[node name="platform" parent="." instance=ExtResource("1_s1m3j")]
+position = Vector2(425, 393)
+scale = Vector2(4.64, 1)
+
+[node name="platform2" parent="." instance=ExtResource("1_s1m3j")]
+position = Vector2(203, 472)
+scale = Vector2(1, 10)
+
+[node name="platform3" parent="." instance=ExtResource("1_s1m3j")]
+position = Vector2(862, 331)
+scale = Vector2(4.64, 1)
+
+[node name="platform4" parent="." instance=ExtResource("1_s1m3j")]
+position = Vector2(984, 330)
+rotation = 1.5708
+scale = Vector2(4.64, 1)
