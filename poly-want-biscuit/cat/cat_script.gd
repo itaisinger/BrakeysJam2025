@@ -72,8 +72,9 @@ func _physics_process(delta: float) -> void:
 		state_hold(delta)
 		
 	print(grounded)
+	if(grounded): yspd = 0
 	
-	position.y+=yspd
+	#position.y+=yspd
 	move_and_collide(Vector2(xspd,yspd))
 	
 	#visuals

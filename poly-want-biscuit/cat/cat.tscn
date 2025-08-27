@@ -171,6 +171,7 @@ animations = [{
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+scale = Vector2(2, 2)
 script = ExtResource("1_vgj48")
 cat_wakeup_voice = Array[AudioStream]([ExtResource("2_rai0v"), ExtResource("3_wlxi6"), ExtResource("4_2phss"), ExtResource("5_kfgcs")])
 cat_cought_react = Array[AudioStream]([ExtResource("2_0wl1y"), ExtResource("3_jakcm")])
