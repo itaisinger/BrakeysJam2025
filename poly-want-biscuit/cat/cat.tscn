@@ -301,8 +301,5 @@ position = Vector2(-7.75, 14.25)
 shape = SubResource("RectangleShape2D_rai0v")
 debug_color = Color(0.985382, 0, 0.334326, 0.42)
 
-[node name="hold_timer" type="Timer" parent="."]
-
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
-[connection signal="timeout" from="hold_timer" to="." method="_on_hold_timer_timeout"]
