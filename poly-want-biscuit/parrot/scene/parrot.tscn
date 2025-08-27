@@ -160,7 +160,7 @@ scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_lym6n")
 animation = &"idle"
 autoplay = "flying"
-frame_progress = 0.489274
+frame_progress = 0.660965
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimatedSprite2D")
