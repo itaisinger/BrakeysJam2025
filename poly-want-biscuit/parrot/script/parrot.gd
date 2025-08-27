@@ -9,14 +9,13 @@ var grav=0.2
 var jumpforce=7
 var xspd = 0
 var xacc = 8
-var x_spd_min = 2.5
-var x_spd_max = 10
 var xfric = 1.8
 var screech_visible=false
 var dead=false
 signal parrot_flap
 signal parrot_screech(word)
 
+@onready var anim = $AnimatedSprite2D
 
 
 func _ready() -> void:
@@ -40,12 +39,12 @@ func _physics_process(delta: float) -> void:
 	if (current_state==State.IDLE):
 		pass
 	elif (current_state==State.RIGHT):
-		$AnimatedSprite2D.flip_h=true
+		anim.flip_h=true
 		if Input.is_action_pressed("Look_Right"):
 			xspd = xacc
 		else: xspd = xfric
 	else :
-		$AnimatedSprite2D.flip_h=false
+		anim.flip_h=false
 		if Input.is_action_pressed("Look_Left"):
 			xspd = -xacc
 		else: xspd = -xfric
@@ -102,9 +101,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 func Death():
 	dead=true
-	$AnimatedSprite2D.scale=Vector2(2,2)
+	anim.scale=Vector2(2,2)
 	$Hud.death_screan()
-	$AnimatedSprite2D.play("Death")
+	anim.play("death")
 	print("rip")
 	
 
