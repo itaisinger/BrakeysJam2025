@@ -11,16 +11,16 @@ enum CAT_STATES{
 var state
 var player_pos
 var dir = 1
-
 #physics
 var yspd = 0
 var xspd = 0
 var grounded = true
 var grav = 0.03
+var just_died=true
 
 #bhvr vars
 var hear_distance = 600
-var awake_dis = 100;
+var awake_dis = 200
 var jumpforce = 1
 var spd = 1
 var moving_left=false
@@ -59,6 +59,7 @@ func _parrot_screech(word):
 func _parrot_flap():
 	pass
 func _physics_process(delta: float) -> void:
+	grounded=is_grounded()
 	player_pos = player_data.player_position
 	if(state == CAT_STATES.sleep):
 		state_sleep()
@@ -70,8 +71,6 @@ func _physics_process(delta: float) -> void:
 		state_dead()
 	if(state == CAT_STATES.hold):
 		state_hold(delta)
-		
-	print(grounded)
 	if(grounded): yspd = 0
 	
 	#position.y+=yspd
@@ -84,10 +83,24 @@ func _physics_process(delta: float) -> void:
 
 func state_sleep() -> void:
 	if(player_pos.distance_to(position) < awake_dis):
-		dir = -sign(position.x - player_pos.x) 
-		jump()
+		state=CAT_STATES.walk
+		grounded=false
+		update_dir()
+		state_walk()
+		#$ground_delection.disable_mode=true
+		#$hold_timer.start(1)
+		#grounded=false
+		#state=CAT_STATES.hold
+		#timer = 2
+		#jump()
 	
 		
+
+func is_grounded():
+	for area in $ground_delection.get_overlapping_areas():
+		if area.is_in_group("platforms"):
+			return true
+	return false
 	
 func state_walk() -> void:
 	#walk
@@ -114,11 +127,17 @@ func state_jump() -> void:
 
 func state_dead() -> void:
 	#make sure the cat doesnt have a hitbox here
+	if just_died:
+		$anim.play("dead")
+		just_died=false
+	else:
+		$anim.play("deadforeal")
 	pass
 
 
 func jump() -> void:
-	 
+	$ground_delection.visible=false
+	$hold_timer.start(1)
 	yspd -= jumpforce*2
 	state = CAT_STATES.jump
 	anim_normal.play("jump")
@@ -129,7 +148,6 @@ func jump() -> void:
 	update_dir()
 
 func update_dir() -> void:
-
 	moving_left=position.x>player_pos.x
 	if moving_left:
 		scale.x = -1 * abs(scale.x)
@@ -167,9 +185,8 @@ func hear_sound(voice) -> void:
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.is_in_group("platforms"):
-		grounded=true
-
+	#if area.is_in_group("platforms"):
+		#	grounded=true
 	if area.is_in_group("parrot"):
 		var random_sfx = cat_cought_react[randi() % cat_cought_react.size()]
 		sfx_player.stream = random_sfx
@@ -177,9 +194,14 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		voice_cooldown = VOICE_COOLDOWN_TIME 
 
 
-func _on_area_2d_area_exited(area: Area2D) -> void:
-	if area.is_in_group("platforms"):
-		grounded=false
+#func _on_area_2d_area_exited(area: Area2D) -> void:
+	#if area.is_in_group("platforms"):
+		#grounded=false
 
 func _on_timer_timeout() -> void:
 	screechable=true
+
+
+func _on_hold_timer_timeout() -> void:
+	$ground_delection.visible=true
+	$ground_delection.disable_mode=false
