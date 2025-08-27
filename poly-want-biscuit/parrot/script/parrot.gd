@@ -39,7 +39,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if(Input.is_action_just_pressed("restart")): get_tree().reload_current_scene()
-	
+	player_data.player_position=position
 	#movement
 	grounded = IsGrounded()
 	if(!grounded): 
@@ -71,8 +71,6 @@ func _physics_process(delta: float) -> void:
 		else:
 			emit_signal("parrot_screech",Globals.VOICES.curse)
 		Shout()
-
-	print(timer)
 	pass
 	
 	

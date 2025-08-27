@@ -1,7 +1,7 @@
 extends Node2D
 signal parrot_screech(word)
 signal parrot_flap
-signal key_pickedup
+signal key_pickedupa 
 func _ready():
 	$Parot.connect("parrot_flap",_parrot_flap)
 	$Parot.connect("parrot_screech",_parrot_screech)
