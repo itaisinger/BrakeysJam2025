@@ -1,200 +1,31 @@
-[gd_scene load_steps=23 format=3 uid="uid://cd3m75bil8uly"]
+[gd_scene load_steps=5 format=3 uid="uid://ika5g2if8um0"]
 
+[ext_resource type="Texture2D" uid="uid://cex4xfeq4ipkl" path="res://cat/textures/sleep.png" id="1_n236n"]
 [ext_resource type="Script" uid="uid://b0v6vrf46aoxl" path="res://cat/cat_script.gd" id="1_vgj48"]
-[ext_resource type="Texture2D" uid="uid://dxfssiium5qba" path="res://cat/textures/gatto_sheet.png" id="2_vgj48"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vgj48"]
 radius = 17.0294
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vgj48"]
-size = Vector2(9.33334, 4.66667)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vgj48"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(256, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hxtwg"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(0, 16, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fpp7t"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(32, 16, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0wl1y"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(64, 16, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jakcm"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(96, 16, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cmrtc"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(128, 16, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gdexx"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(160, 16, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8h51t"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(192, 16, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_acx2f"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(0, 48, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_72teq"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(32, 48, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8okt7"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(64, 48, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t566g"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(96, 48, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rai0v"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(128, 48, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wlxi6"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(160, 48, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2phss"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(192, 48, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kfgcs"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(0, 64, 60, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_utgtx"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(60, 64, 60, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_kfgcs"]
-animations = [{
-"frames": [],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vgj48")
-}],
-"loop": true,
-"name": &"jump",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"new_animation",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hxtwg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fpp7t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0wl1y")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jakcm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cmrtc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gdexx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8h51t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_acx2f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_72teq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8okt7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t566g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rai0v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wlxi6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2phss")
-}],
-"loop": true,
-"name": &"sleep",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kfgcs")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_utgtx")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 5.0
-}]
+size = Vector2(12.5, 4.66667)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
-position = Vector2(-7, -8)
-scale = Vector2(2, 2)
 script = ExtResource("1_vgj48")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_n236n")
 
 [node name="Area2D" type="Area2D" parent="." groups=["enemies"]]
 
-[node name="hitbox" type="CollisionShape2D" parent="Area2D" groups=["enemies"]]
-position = Vector2(-30, 10.5)
-scale = Vector2(1.555, 0.355)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["enemies"]]
+position = Vector2(-19, 10)
 shape = SubResource("CircleShape2D_vgj48")
 
-[node name="movement col" type="CollisionShape2D" parent="." groups=["enemies"]]
-position = Vector2(0.999998, 2)
-scale = Vector2(2.5, 2.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemies"]]
+position = Vector2(1, 3)
+scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_vgj48")
 
-[node name="animation" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1, 3)
-sprite_frames = SubResource("SpriteFrames_kfgcs")
-animation = &"walk"
-frame_progress = 0.634397
-
-[node name="animation_walk" type="AnimatedSprite2D" parent="."]
-position = Vector2(-3, -4.5)
-sprite_frames = SubResource("SpriteFrames_kfgcs")
-animation = &"walk"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-
-<<<<<<< Updated upstream
-=======
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
-
-[node name="Timer" type="Timer" parent="."]
-
->>>>>>> Stashed changes
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
