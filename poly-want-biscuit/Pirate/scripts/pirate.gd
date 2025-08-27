@@ -1,6 +1,8 @@
 extends Node2D
 class_name pirate
 
+
+#prob git mess:
 enum _Pirate_Type {
 	Cat_lover,
 	Cat_hater
@@ -19,6 +21,9 @@ const SPEED := 60
 var dir=0
 var hear_distance= 400
 var screechable=true
+
+#recreated by itai, maybe was lost due to github mess:
+var _pirate_type = _Pirate_Type.Cat_lover
 
 #@onready var parent: CharacterBody2D = get_parent()
 @onready var ray_cast_right = $RayCastRight
@@ -131,24 +136,22 @@ func _on_follow_area_area_entered(area: Area2D) -> void:
 		_current_state = _States.Chase
 		print("found YErr lazy parot")
 		#play_random_voice()
-		
-<<<<<<< Updated upstream
+
 #func play_random_voice():
 	#if _pirate_type == _Pirate_Type.Cat_hater: 
 		#if bad_pirate_voice.size() > 0:
 			#var random_sfx = bad_pirate_voice[randi() % bad_pirate_voice.size()]
 			#sfx_player.stream = random_sfx
 			#sfx_player.play()
-=======
-func play_random_voice():
-	if _pirate_type == _Pirate_Type.Cat_hater:
-		if bad_pirate_voice.size() > 0:
-			var random_sfx = bad_pirate_voice[randi() % bad_pirate_voice.size()]
-			sfx_player.stream = random_sfx
-			sfx_player.play()
+
+#git mess:
+#func play_random_voice():
+	#if _pirate_type == _Pirate_Type.Cat_hater:
+		#if bad_pirate_voice.size() > 0:
+			#var random_sfx = bad_pirate_voice[randi() % bad_pirate_voice.size()]
+			#sfx_player.stream = random_sfx
+			#sfx_player.play()
 
 
 func _on_timer_timeout() -> void:
 	screechable=true
-	
->>>>>>> Stashed changes

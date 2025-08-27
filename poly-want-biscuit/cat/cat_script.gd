@@ -22,12 +22,7 @@ var awake_dis = 100;
 var jumpforce = 1
 var spd = 1
 var moving_left=false
-<<<<<<< Updated upstream
-signal parrot_flap
-signal parrot_screech(word)
 
-	
-=======
 var voice_cooldown := 0.0
 var screechable=true
 var timer=0
@@ -46,7 +41,7 @@ signal parrot_screech(word)
 
 
 
->>>>>>> Stashed changes
+
 func _ready() -> void:
 	state = CAT_STATES.sleep
 	$animation.play("sleep")
@@ -63,13 +58,6 @@ func _parrot_screech(word):
 func _parrot_flap():
 	pass
 func _physics_process(delta: float) -> void:
-<<<<<<< Updated upstream
-=======
-	yspd+=grav
-	
-	if voice_cooldown > 0.0:
-		voice_cooldown -= delta
->>>>>>> Stashed changes
 	player_pos = player_data.player_position
 	if(state == CAT_STATES.sleep):
 		state_sleep()
@@ -132,9 +120,6 @@ func jump() -> void:
 	 
 	yspd -= jumpforce*2
 	state = CAT_STATES.jump
-<<<<<<< Updated upstream
-	$AnimatedSprite2D.play("jump")
-=======
 	anim_normal.play("jump")
 	var random_sfx = cat_jump_voice[randi() % cat_jump_voice.size()]
 	sfx_player.stream = random_sfx
@@ -143,7 +128,7 @@ func jump() -> void:
 	update_dir()
 
 func update_dir() -> void:
->>>>>>> Stashed changes
+
 	moving_left=position.x>player_pos.x
 	if moving_left:
 		scale.x = -1 * abs(scale.x)
@@ -151,26 +136,11 @@ func update_dir() -> void:
 		scale.x = abs(scale.x)
 
 func hear_sound(voice) -> void:
-<<<<<<< Updated upstream
-	grav=0.2
-	dir = -sign(position.x - player_pos.x) 
-	if(voice == Globals.VOICES.meow):
-		#play happy meow sound
-		state = CAT_STATES.walk
-		$AnimatedSprite2D.play("walk")
-		#dir = towards pos
-	if(voice == Globals.VOICES.curse):
-		#play angry meow sound
-		state = CAT_STATES.walk
-		$AnimatedSprite2D.play("walk")
-		dir = -dir
-	if dir<0:
-		$AnimatedSprite2D.flip_h=false
-=======
+
 	update_dir()
 	if position.distance_to(player_data.player_position)>hear_distance or !screechable:
 		pass
->>>>>>> Stashed changes
+
 	else:
 		screechable=false
 		$Timer.start(6)
@@ -199,15 +169,13 @@ func hear_sound(voice) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("platforms"):
 		grounded=true
-<<<<<<< Updated upstream
 
-=======
 	if area.is_in_group("parrot"):
 		var random_sfx = cat_cought_react[randi() % cat_cought_react.size()]
 		sfx_player.stream = random_sfx
 		sfx_player.play()
 		voice_cooldown = VOICE_COOLDOWN_TIME 
->>>>>>> Stashed changes
+
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if area.is_in_group("platforms"):
