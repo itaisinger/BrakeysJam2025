@@ -33,7 +33,7 @@ position = Vector2(1016, 149)
 scale = Vector2(3.92, 1)
 
 [node name="cat" parent="." instance=ExtResource("3_v6rrj")]
-position = Vector2(128, 83)
+position = Vector2(128, 66)
 
 [node name="Pirate" parent="." instance=ExtResource("5_l7hcl")]
 position = Vector2(283, 379)
@@ -49,3 +49,6 @@ scale = Vector2(3.92, 1)
 position = Vector2(403, 370)
 rotation = 1.5708
 scale = Vector2(3.92, 1)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_v6rrj")]
+position = Vector2(634, 324)
