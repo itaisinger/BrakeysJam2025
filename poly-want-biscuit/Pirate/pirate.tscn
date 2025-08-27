@@ -100,6 +100,9 @@ position = Vector2(2, 11)
 shape = SubResource("CapsuleShape2D_ligwx")
 debug_color = Color(0.952941, 0.176471, 0.0823529, 0.419608)
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="Follow area" to="." method="_on_follow_area_area_entered"]
 [connection signal="body_entered" from="Follow area" to="." method="_on_follow_area_body_entered"]
 [connection signal="body_exited" from="Follow area" to="." method="_on_follow_area_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

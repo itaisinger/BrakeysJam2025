@@ -16,29 +16,43 @@ var _current_state = null
 var _timer := 0.5
 var _direction = 1
 const SPEED := 60
+var dir=0
+var hear_distance= 400
+var screechable=true
 
 #@onready var parent: CharacterBody2D = get_parent()
 @onready var ray_cast_right = $RayCastRight
 @onready var ray_cast_left = $RayCastLeft
 @onready var sprite = $AnimatedSprite2D
 
-#func _ready() -> void:
-	#_current_state = _States.Idle
-	#level.connect("emit_sound",hear_sound)
-#
-#func hear_sound(voice, pos) -> void:
-	#if(position.distance_to(pos) > hear_distance):
-		#return
-	#if(voice == Globals.VOICES.meow):
-		##play happy meow sound
-		#_current_state = _States.walk
-		##dir = towards pos
-		#return
-	#if(voice == Globals.VOICES.curse):
-		##play angry meow sound
-		#_current_state = _States.walk
-		##dir = away from pos
+func _ready() -> void:
+	var root = get_tree().root.get_child(1)
+	root.connect("parrot_screech",hear_sound)
 
+
+func hear_sound(voice) -> void:
+	if position.distance_to(player_data.player_position)>hear_distance or !screechable:
+		pass
+	else:
+		screechable=false
+		$Timer.start(6)
+		_direction = sign(position.x - player_data.player_position.x)
+		#var random_sfx = cat_wakeup_voice[randi() % cat_wakeup_voice.size()]
+		#sfx_player.stream = random_sfx
+		#sfx_player.play()
+		#voice_cooldown = VOICE_COOLDOWN_TIME 
+		if(voice == Globals.VOICES.meow):
+			#play happy meow sound
+			_current_state=_States.Roam
+			#dir = towards pos
+		if(voice == Globals.VOICES.curse):
+			#play angry meow sound
+			_current_state=_States.Roam
+			_direction = -_direction
+		if _direction>0:
+			$AnimatedSprite2D.flip_h=false
+		else:
+			$AnimatedSprite2D.flip_h=true
 
 func _process(delta: float) -> void:
 	_timer -= delta
@@ -80,10 +94,18 @@ func _RoamState(delta):
 
 
 func _ReactState(delta):
-	pass #not yet implemented
+	if ray_cast_right.is_colliding():
+		_direction = -1
+		sprite.flip_h = true
+	if ray_cast_left.is_colliding():
+		_direction = 1
+		sprite.flip_h = false
+	position.x += _direction* SPEED * delta
+	if _timer <= 0.0: 
+		_timer = randi_range(3,7)
+		_current_state = _States.Idle
 	
 func _ChaseState(delta):
-	print("chasing")
 	var direction_x =  player_data.player_position.x - position.x
 	var new_velocity = Vector2(direction_x, 0).normalized() * SPEED * delta
 	position.x+=new_velocity.x
@@ -110,9 +132,23 @@ func _on_follow_area_area_entered(area: Area2D) -> void:
 		print("found YErr lazy parot")
 		#play_random_voice()
 		
+<<<<<<< Updated upstream
 #func play_random_voice():
 	#if _pirate_type == _Pirate_Type.Cat_hater: 
 		#if bad_pirate_voice.size() > 0:
 			#var random_sfx = bad_pirate_voice[randi() % bad_pirate_voice.size()]
 			#sfx_player.stream = random_sfx
 			#sfx_player.play()
+=======
+func play_random_voice():
+	if _pirate_type == _Pirate_Type.Cat_hater:
+		if bad_pirate_voice.size() > 0:
+			var random_sfx = bad_pirate_voice[randi() % bad_pirate_voice.size()]
+			sfx_player.stream = random_sfx
+			sfx_player.play()
+
+
+func _on_timer_timeout() -> void:
+	screechable=true
+	
+>>>>>>> Stashed changes

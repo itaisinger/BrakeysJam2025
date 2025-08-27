@@ -242,7 +242,7 @@ radius = 34.0
 height = 84.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2yyhr"]
-size = Vector2(32, 20)
+size = Vector2(22, 20)
 
 [node name="Parot" type="CharacterBody2D"]
 script = ExtResource("1_ne668")
@@ -283,5 +283,8 @@ position = Vector2(0, 48)
 shape = SubResource("RectangleShape2D_2yyhr")
 debug_color = Color(0.987291, 0, 0.3146, 0.42)
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="hitbox" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="land_detection" to="." method="_on_land_detection_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
