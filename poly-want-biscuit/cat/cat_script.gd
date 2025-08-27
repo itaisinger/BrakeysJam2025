@@ -108,7 +108,6 @@ func is_grounded():
 func state_walk() -> void:
 	#walk
 	position.x += dir * spd
-	print("speeed is" ,dir*spd)
 	yspd = 0
 	position.y += grav*4
 	if(!grounded):

@@ -22,10 +22,13 @@ enum _States {
 var _pirate_type = _Pirate_Type.Cat_hater
 var _current_state = null
 var _timer := 0.5
+var hear_distance=400
 var voice_cooldown := 0.0
 const VOICE_COOLDOWN_TIME := 3.0
 var _direction = 1
 const SPEED := 60
+var cat_lover=false
+
 
 #@onready var parent: CharacterBody2D = get_parent()
 @onready var sfx_player = $AudioStreamPlayer
@@ -33,22 +36,38 @@ const SPEED := 60
 @onready var ray_cast_left = $RayCastLeft
 @onready var sprite = $AnimatedSprite2D
 
-#func _ready() -> void:
-	#_current_state = _States.Idle
-	#level.connect("emit_sound",hear_sound)
-#
-#func hear_sound(voice, pos) -> void:
-	#if(position.distance_to(pos) > hear_distance):
-		#return
-	#if(voice == Globals.VOICES.meow):
-		##play happy meow sound
-		#_current_state = _States.walk
-		##dir = towards pos
-		#return
-	#if(voice == Globals.VOICES.curse):
-		##play angry meow sound
-		#_current_state = _States.walk
-		##dir = away from pos
+func _ready() -> void:
+	_current_state = _States.Idle
+	var root = get_tree().root.get_child(1)
+	root.connect("parrot_screech",hear_sound)
+	_ready2()
+
+func _ready2():## thing for good pirate
+	pass
+func hear_sound(voice) -> void:
+	if(position.distance_to(player_data.player_position) > hear_distance):
+		return
+	if(voice == Globals.VOICES.meow):
+		#play happy meow sound
+		_current_state = _States.Roam
+		if position.x>player_data.player_position.x:
+			_direction=1
+		else:
+			_direction=-1
+		if cat_lover:
+			_direction=-_direction
+		print("COME CATTTY CATTY")
+	if(voice == Globals.VOICES.curse):
+		#play angry meow sound
+		_current_state = _States.Roam
+		_direction=-1
+		if position.x<player_data.player_position.x:
+			_direction=1
+		else:
+			_direction=-1
+		
+		print("WHO SAID THAT?")
+		#dir = away from pos
 
 
 func _process(delta: float) -> void:
@@ -64,7 +83,8 @@ func _process(delta: float) -> void:
 			_ReactState(delta)
 		_States.Chase:
 			_ChaseState(delta)
-		
+			
+
 
 
 
