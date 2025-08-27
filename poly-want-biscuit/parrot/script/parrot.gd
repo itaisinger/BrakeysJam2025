@@ -60,6 +60,18 @@ func _physics_process(delta: float) -> void:
 	#visuals
 	anim.scale.x = dir * abs(anim.scale.x)
 	
+	
+	#actions
+	if Input.is_action_just_pressed("Curse") or Input.is_action_just_pressed("Meow") :
+		if Input.is_action_just_pressed("Meow"):
+			emit_signal("parrot_screech",Globals.VOICES.meow)
+		else: emit_signal("parrot_screech",Globals.VOICES.curse)
+		$Sprite2D.visible=true
+		#for i in range(11):
+			#await get_tree().create_timer(0.1).timeout
+			#$Sprite2D.visible=screech_visible
+			#screech_visible=!screech_visible
+		#$Sprite2D.visible=false
 	pass
 	
 	
@@ -109,26 +121,8 @@ func die_state():
 	#########################################
 	#
 	#
-	#if Input.is_action_just_pressed("Jump"):
-		#emit_signal("parrot_flap")
-		#current_status=Status.JUMPING
-		#grounded=false
-		#match current_state:
-			#"LEFT":
-				#xspd=xfric
-			#"RIGHT":
-				#xspd=-xfric
-	#
-	#if Input.is_action_just_pressed("Curse") or Input.is_action_just_pressed("Meow") :
-		#if Input.is_action_just_pressed("Meow"):
-			#emit_signal("parrot_screech",Globals.VOICES.meow)
-		#else: emit_signal("parrot_screech",Globals.VOICES.curse)
-		#$Sprite2D.visible=true
-		#for i in range(11):
-			#await get_tree().create_timer(0.1).timeout
-			#$Sprite2D.visible=screech_visible
-			#screech_visible=!screech_visible
-		#$Sprite2D.visible=false
+
+
 
 
 ##check this

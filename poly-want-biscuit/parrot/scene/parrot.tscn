@@ -167,10 +167,10 @@ frame_progress = 1.0
 root_node = NodePath("../AnimatedSprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 texture_filter = 1
-position = Vector2(-100, 0)
-rotation = 1.5708
+position = Vector2(23.425, -19.94)
+rotation = 0.785398
+scale = Vector2(-0.25, -0.25)
 texture = ExtResource("3_1ym1u")
 
 [node name="Hud" parent="." instance=ExtResource("5_lfgbv")]
