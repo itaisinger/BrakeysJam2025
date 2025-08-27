@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://o0wiu6jx5stv"]
+[gd_scene load_steps=40 format=3 uid="uid://bxapt0xyego20"]
 
 [ext_resource type="Texture2D" uid="uid://xy5kpfb0o4yp" path="res://parrot/Parrot_01.png" id="1_6fc0c"]
 [ext_resource type="Script" uid="uid://cdi7jcasar25f" path="res://parrot/script/parrot.gd" id="1_ne668"]
@@ -242,7 +242,7 @@ radius = 34.0
 height = 84.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2yyhr"]
-size = Vector2(32, 20)
+size = Vector2(22, 20)
 
 [node name="Parot" type="CharacterBody2D"]
 script = ExtResource("1_ne668")
@@ -283,5 +283,8 @@ position = Vector2(0, 48)
 shape = SubResource("RectangleShape2D_2yyhr")
 debug_color = Color(0.987291, 0, 0.3146, 0.42)
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="hitbox" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="land_detection" to="." method="_on_land_detection_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -14,6 +14,7 @@ var x_spd_max = 10
 var xfric = 1.8
 var screech_visible=false
 var dead=false
+var screech_ready=true
 signal parrot_flap
 signal parrot_screech(word)
 
@@ -60,6 +61,11 @@ func _physics_process(delta: float) -> void:
 	player_data.player_position = global_position
 
 func _process(delta):
+	
+	#restart
+	if(Input.is_action_just_pressed("restart")):
+		get_tree().reload_current_scene()
+	
 	if Input.is_action_pressed("Look_Left") and Input.is_action_pressed("Look_Right"):
 		current_state=State.IDLE
 	elif Input.is_action_pressed("Look_Left"):
@@ -81,12 +87,14 @@ func _process(delta):
 			"RIGHT":
 				xspd=-xfric
 	
-	if Input.is_action_just_pressed("Curse") or Input.is_action_just_pressed("Meow") :
+	if Input.is_action_just_pressed("Curse") or Input.is_action_just_pressed("Meow") and screech_ready :
+		screech_ready=false
+		$Timer.start(1)
 		if Input.is_action_just_pressed("Meow"):
 			emit_signal("parrot_screech",Globals.VOICES.meow)
 		else: emit_signal("parrot_screech",Globals.VOICES.curse)
 		$Sprite2D.visible=true
-		for i in range(11):
+		for i in range(8):
 			await get_tree().create_timer(0.1).timeout
 			$Sprite2D.visible=screech_visible
 			screech_visible=!screech_visible
@@ -112,3 +120,7 @@ func _on_land_detection_area_entered(area: Area2D) -> void:
 	if area.is_in_group("platforms"):
 		grounded=true
 		xspd=0
+
+
+func _on_timer_timeout() -> void:
+	screech_ready=true

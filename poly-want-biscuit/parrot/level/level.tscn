@@ -35,12 +35,6 @@ scale = Vector2(3.92, 1)
 [node name="cat" parent="." instance=ExtResource("3_v6rrj")]
 position = Vector2(119, 28)
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("3_v6rrj")]
-position = Vector2(634, 290)
-
-[node name="CharacterBody2D2" parent="." instance=ExtResource("3_v6rrj")]
-position = Vector2(1021, 39)
-
 [node name="Pirate" parent="." instance=ExtResource("5_l7hcl")]
 position = Vector2(283, 379)
 scale = Vector2(2, 2)

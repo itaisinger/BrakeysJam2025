@@ -2,7 +2,7 @@ extends CanvasLayer
 var coins=0
 func _ready():
 	var root = get_tree().root.get_child(1)
-	root.connect("add_coin",_add_coin)
+	#root.connect("add_coin",_add_coin)
 
 func _add_coin():
 	coins+=1
