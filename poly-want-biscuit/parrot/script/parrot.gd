@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 #state machine
-enum STATES { idle, air, collect, die }
+enum STATES { idle, air, collect, die, shout }
 var state = STATES.air
 var state_prev = state
 var state_changed = false
@@ -13,6 +13,7 @@ var yspd=0
 var yspd_max = 2.6
 var grav=0.1
 var jumpforce=2.5
+var shoutforce=1
 var xspd = 0
 var natural_spd = 0.7
 var press_spd = 3.6
@@ -22,11 +23,12 @@ var xfric = .3
 #logic
 var screech_visible=false
 var dead=false
-signal parrot_flap
 signal parrot_screech(word)
 var size = abs(scale.x)
+var timer = 0
 
 @onready var anim = $AnimatedSprite2D
+@onready var anim_shout = $anim_shout
 
 
 func _ready() -> void:
@@ -49,6 +51,7 @@ func _physics_process(delta: float) -> void:
 		STATES.idle: 	idle_state()
 		STATES.air: 	air_state()
 		STATES.collect: collect_state()
+		STATES.shout: shout_state(delta)
 		STATES.die: 	die_state()
 	state_changed = state_prev != state
 	
@@ -59,19 +62,17 @@ func _physics_process(delta: float) -> void:
 	
 	#visuals
 	anim.scale.x = dir * abs(anim.scale.x)
-	
+	anim_shout.scale.x = dir * abs(anim_shout.scale.x)
 	
 	#actions
 	if Input.is_action_just_pressed("Curse") or Input.is_action_just_pressed("Meow") :
 		if Input.is_action_just_pressed("Meow"):
 			emit_signal("parrot_screech",Globals.VOICES.meow)
-		else: emit_signal("parrot_screech",Globals.VOICES.curse)
-		$Sprite2D.visible=true
-		#for i in range(11):
-			#await get_tree().create_timer(0.1).timeout
-			#$Sprite2D.visible=screech_visible
-			#screech_visible=!screech_visible
-		#$Sprite2D.visible=false
+		else:
+			emit_signal("parrot_screech",Globals.VOICES.curse)
+		Shout()
+
+	print(timer)
 	pass
 	
 	
@@ -108,7 +109,21 @@ func air_state():
 	if(yspd > 0 && anim.animation == "jump"):
 		anim.play("flying") 
 	
+
+func shout_state(delta):
+	if(state_changed):
+		$shout_spr.visible = true
+		anim.visible = false
+		timer = 1
 	
+	timer -= delta
+	if(timer <= 0):
+		if(grounded): state = STATES.idle
+		else: 
+			anim.play("flying")
+			state = STATES.air
+	pass
+
 func collect_state():
 	pass
 		
@@ -139,6 +154,16 @@ func die_state():
 	#anim.play("death")
 	#print("rip")
 
+func ResetAnim():
+	#if(state == STATES.idle): anim.play("idle")
+	#if(state == STATES.air): anim.play("air")
+	#match(state):
+		#STATES.idle: 	anim.play("idle")
+		#STATES.air: 	anim.play("air")
+		#STATES.collect: anim.play("collect")
+		#STATES.die: 	anim.play("die")
+	pass
+		
 func IsGrounded() -> bool:
 	for area in $"land hitbox".get_overlapping_areas():
 		if(area.is_in_group("platforms")):
@@ -149,6 +174,14 @@ func Jump():
 	yspd = -jumpforce;
 	state = STATES.air;
 	anim.play("jump")
+	
+func Shout():
+	anim_shout.play("shout")
+	anim.play("shout")
+	yspd = -shoutforce
+	state = STATES.shout
+	timer = 1
+	pass
 
 func approach(val,target,spd) -> float:
 	if(val < target): return min(target,val+spd)
