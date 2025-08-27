@@ -45,6 +45,7 @@ func _ready() -> void:
 func _ready2():## thing for good pirate
 	pass
 func hear_sound(voice) -> void:
+	print("pirate hear screech")
 	if(position.distance_to(player_data.player_position) > hear_distance):
 		return
 	if(voice == Globals.VOICES.meow):

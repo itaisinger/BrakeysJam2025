@@ -159,6 +159,7 @@ func update_dir() -> void:
 		scale.x = abs(scale.x)
 
 func hear_sound(voice) -> void:
+	print(" cat recognise screech")
 	if position.distance_to(player_data.player_position)>hear_distance or !screechable:
 		pass
 

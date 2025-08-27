@@ -335,11 +335,18 @@ scale = Vector2(3, 0.2)
 z_index = 2
 position = Vector2(6964, 1093)
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("7_buohc")]
+[node name="cat" parent="." instance=ExtResource("7_buohc")]
 z_index = 2
-position = Vector2(6519, 1355)
+position = Vector2(6520, 1271)
 
 [node name="Pirate" parent="." instance=ExtResource("8_kul4i")]
 z_index = 2
-position = Vector2(7015, 1312)
+position = Vector2(7014, 1226)
 scale = Vector2(2, 2)
+
+[node name="paltform_spawner" type="Node" parent="."]
+
+[node name="platform" parent="paltform_spawner" instance=ExtResource("3_7raqb")]
+z_index = 1
+position = Vector2(6698, 1315)
+scale = Vector2(20, 1)
