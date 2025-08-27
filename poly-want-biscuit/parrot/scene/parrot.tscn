@@ -148,11 +148,12 @@ animations = [{
 "speed": 0.5
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lfgbv"]
-radius = 34.0
-height = 84.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfgbv"]
+size = Vector2(88.8889, 74.7737)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2yyhr"]
+radius = 3.44828
+height = 9.21659
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_shnd3"]
 atlas = ExtResource("5_2yyhr")
@@ -226,15 +227,15 @@ texture = ExtResource("3_1ym1u")
 [node name="Hud" parent="." instance=ExtResource("5_lfgbv")]
 
 [node name="collision hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3.625)
+position = Vector2(0, 2.67375)
 scale = Vector2(0.09, 0.232)
-shape = SubResource("CapsuleShape2D_lfgbv")
+shape = SubResource("RectangleShape2D_lfgbv")
 
 [node name="land hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="land hitbox"]
-position = Vector2(0, 10.117)
-scale = Vector2(0.29, 0.217)
+position = Vector2(0, 12)
+scale = Vector2(0.1, 0.075)
 shape = SubResource("CapsuleShape2D_2yyhr")
 debug_color = Color(0.0784314, 0.776471, 0.313726, 0.419608)
 
