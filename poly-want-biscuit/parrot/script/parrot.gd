@@ -1,125 +1,174 @@
 extends CharacterBody2D
-enum State { IDLE, LEFT, RIGHT }
-enum Status {JUMPING,FLYING}
-var current_state=State.LEFT
-var current_status=Status.FLYING
+
+#state machine
+enum STATES { idle, air, collect, die }
+var state = STATES.air
+var state_prev = state
+var state_changed = false
+
+#phy
+var dir = 1 #1 for right
 var grounded=false
 var yspd=0
-var grav=0.2
-var jumpforce=7
+var yspd_max = 2.6
+var grav=0.1
+var jumpforce=2.5
 var xspd = 0
-var xacc = 8
-var x_spd_min = 2.5
-var x_spd_max = 10
-var xfric = 1.8
+var natural_spd = 0.7
+var press_spd = 3.6
+var looking_left=true
+var xfric = .3
+
+#logic
 var screech_visible=false
 var dead=false
-var screech_ready=true
 signal parrot_flap
 signal parrot_screech(word)
+var size = abs(scale.x)
 
+@onready var anim = $AnimatedSprite2D
 
 
 func _ready() -> void:
-	print("I'm ready!")
 	preload("res://Game/main_menu.tscn")
+	#anim.connect("animation_finished", Callable(self, "_on_animation_finished"))
+	
+
 
 func _physics_process(delta: float) -> void:
-	if(!grounded):
-		yspd+=grav
-	else:
-		yspd = 0
-	if current_status==Status.JUMPING:
-		yspd = -jumpforce
-		current_status=Status.FLYING
-	if current_status==Status.FLYING:
-		pass
-	else:
-		var tween := create_tween()
-		tween.tween_property(self, "position:y", position.y - 70, 0.4) 
-		current_status=Status.FLYING
-	if (current_state==State.IDLE):
-		pass
-	elif (current_state==State.RIGHT):
-		$AnimatedSprite2D.flip_h=true
-		if Input.is_action_pressed("Look_Right"):
-			xspd = xacc
-		else: xspd = xfric
-	else :
-		$AnimatedSprite2D.flip_h=false
-		if Input.is_action_pressed("Look_Left"):
-			xspd = -xacc
-		else: xspd = -xfric
-	if(grounded):
-		xspd = 0
-	if Input.is_action_just_pressed("Jump") and dead:
-		get_tree().change_scene_to_file("res://Game/main_menu.tscn")
-		queue_free()
-	position.x += xspd
-	position.y+=yspd
+	if(Input.is_action_just_pressed("restart")): get_tree().reload_current_scene()
+	
+	#movement
+	grounded = IsGrounded()
+	if(!grounded): 
+		yspd += grav
+	
+	#states
+	state_prev = state
+	match(state):
+		STATES.idle: 	idle_state()
+		STATES.air: 	air_state()
+		STATES.collect: collect_state()
+		STATES.die: 	die_state()
+	state_changed = state_prev != state
+	
+	#move	
+	yspd = min(yspd,yspd_max)
+	position += Vector2(xspd,yspd)
 	move_and_slide()
-	player_data.player_position = global_position
-
-func _process(delta):
 	
-	#restart
-	if(Input.is_action_just_pressed("restart")):
-		get_tree().reload_current_scene()
+	#visuals
+	anim.scale.x = dir * abs(anim.scale.x)
 	
-	if Input.is_action_pressed("Look_Left") and Input.is_action_pressed("Look_Right"):
-		current_state=State.IDLE
-	elif Input.is_action_pressed("Look_Left"):
-		current_state=State.LEFT
-		$Sprite2D.position=Vector2(-100,0)
-		$Sprite2D.flip_v=false
-	elif  Input.is_action_pressed("Look_Right"):
-		current_state=State.RIGHT
-		$Sprite2D.position=Vector2(100,0)
-		$Sprite2D.flip_v=true
+	pass
 	
-	if Input.is_action_just_pressed("Jump"):
-		emit_signal("parrot_flap")
-		current_status=Status.JUMPING
-		grounded=false
-		match current_state:
-			"LEFT":
-				xspd=xfric
-			"RIGHT":
-				xspd=-xfric
 	
-	if Input.is_action_just_pressed("Curse") or Input.is_action_just_pressed("Meow") and screech_ready :
-		screech_ready=false
-		$Timer.start(1)
-		if Input.is_action_just_pressed("Meow"):
-			emit_signal("parrot_screech",Globals.VOICES.meow)
-		else: emit_signal("parrot_screech",Globals.VOICES.curse)
-		$Sprite2D.visible=true
-		for i in range(8):
-			await get_tree().create_timer(0.1).timeout
-			$Sprite2D.visible=screech_visible
-			screech_visible=!screech_visible
-		$Sprite2D.visible=false
-
-
-
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.is_in_group("enemies"):
-		Death()
-		pass
-
-
-func Death():
-	dead=true
-	$AnimatedSprite2D.scale=Vector2(2,2)
-	$Hud.death_screan()
-	$AnimatedSprite2D.play("Death")
+########### STATES FUNCTIONS ##############
 	
+func idle_state():
+	if(state_changed): anim.play("idle")
+	
+	xspd *= 0.1
+	xspd = approach(xspd,0,xfric/2)
+	yspd = 0
+	
+	if(!grounded): state = STATES.air
+	if(Input.is_action_just_pressed("Jump")): Jump()
+	if(Input.is_action_pressed("Look_Right")): dir = 1
+	if(Input.is_action_pressed("Look_Left")): dir = -1
+	pass
+	
+func air_state():
+	
+	xspd = natural_spd
+	if(Input.is_action_pressed("Look_Left")): 
+		dir = -1
+		xspd = press_spd
+	if(Input.is_action_pressed("Look_Right")): 
+		dir = 1
+		xspd = press_spd
+	
+	xspd = xspd * dir
+	
+	if(Input.is_action_just_pressed("Jump")): Jump()
+	if(grounded): state = STATES.idle
+	
+	if(yspd > 0 && anim.animation == "jump"):
+		anim.play("flying") 
+	
+	
+func collect_state():
+	pass
+		
+func die_state():
+	if(state_changed): anim.play("death")
+	#signal die
+	pass
+	
+	
+	#########################################
+	#
+	#
+	#if Input.is_action_just_pressed("Jump"):
+		#emit_signal("parrot_flap")
+		#current_status=Status.JUMPING
+		#grounded=false
+		#match current_state:
+			#"LEFT":
+				#xspd=xfric
+			#"RIGHT":
+				#xspd=-xfric
+	#
+	#if Input.is_action_just_pressed("Curse") or Input.is_action_just_pressed("Meow") :
+		#if Input.is_action_just_pressed("Meow"):
+			#emit_signal("parrot_screech",Globals.VOICES.meow)
+		#else: emit_signal("parrot_screech",Globals.VOICES.curse)
+		#$Sprite2D.visible=true
+		#for i in range(11):
+			#await get_tree().create_timer(0.1).timeout
+			#$Sprite2D.visible=screech_visible
+			#screech_visible=!screech_visible
+		#$Sprite2D.visible=false
 
-func _on_land_detection_area_entered(area: Area2D) -> void:
-	if area.is_in_group("platforms"):
-		grounded=true
-		xspd=0
 
+##check this
+#func _on_area_2d_area_entered(area: Area2D) -> void:
+	#if area.is_in_group("enemies"):
+		#Death()
+		#pass
 
-func _on_timer_timeout() -> void:
-	screech_ready=true
+##check this
+#func Death():
+	#dead=true
+	##anim.scale=Vector2(2,2)
+	#$Hud.death_screan()
+	#anim.play("death")
+	#print("rip")
+
+func IsGrounded() -> bool:
+	for area in $"land hitbox".get_overlapping_areas():
+		if(area.is_in_group("platforms")):
+			return true
+	return false
+	
+func Jump():
+	yspd = -jumpforce;
+	state = STATES.air;
+	anim.play("jump")
+
+func approach(val,target,spd) -> float:
+	if(val < target): return min(target,val+spd)
+	if(val > target): return max(target,val-spd)
+	return val
+
+func lerp(val,target,spd) -> float:
+	if(val < target): return val + abs(spd*(target-val))
+	if(val > target): return val + abs(spd*(target-val))
+	return val
+
+	
+##check this
+#func _on_land_detection_area_entered(area: Area2D) -> void:
+	#if area.is_in_group("platforms"):
+		#grounded=true
+		#xspd=0

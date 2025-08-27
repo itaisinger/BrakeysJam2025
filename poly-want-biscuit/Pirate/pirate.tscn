@@ -1,7 +1,6 @@
-[gd_scene load_steps=30 format=3 uid="uid://besq32tbr5rgo"]
+[gd_scene load_steps=32 format=3 uid="uid://besq32tbr5rgo"]
 
 [ext_resource type="Script" uid="uid://b3d1yu85n6k3r" path="res://Pirate/scripts/pirate.gd" id="1_enqx7"]
-[ext_resource type="Texture2D" uid="uid://dsorj1cx0e50s" path="res://Pirate/Idle-5frm.png" id="2_gkcui"]
 [ext_resource type="AudioStream" uid="uid://cy5yneet78m3d" path="res://Pirate/Audio/bad pirate/comes torward you/bad pirate (make you stew).wav" id="2_hg1is"]
 [ext_resource type="AudioStream" uid="uid://cwxrpfx7tk3fd" path="res://Pirate/Audio/bad pirate/comes torward you/bad pirate (pluck you clean).wav" id="3_3xyjm"]
 [ext_resource type="AudioStream" uid="uid://u2ew6yvpq3ix" path="res://Pirate/Audio/bad pirate/comes torward you/bad pirate (shitbucket).wav" id="4_f24xa"]
@@ -20,6 +19,8 @@
 [ext_resource type="AudioStream" uid="uid://dtpkd5uhj68tb" path="res://Pirate/Audio/nice pirate/hears cat (comes torward)/nice pirate hears cat (pet you good).wav" id="17_h8jmc"]
 [ext_resource type="AudioStream" uid="uid://dk6isjksvjdjx" path="res://Pirate/Audio/nice pirate/hears cat (comes torward)/nice pirate hears cat (shiver me timbers).wav" id="18_no64l"]
 [ext_resource type="AudioStream" uid="uid://63vuhifjnve7" path="res://Pirate/Audio/nice pirate/hears cat (comes torward)/nice pirate hears cat (treasure enough).wav" id="19_pdjh8"]
+[ext_resource type="Texture2D" uid="uid://drygu2r2egift" path="res://Pirate/bad pirate.png" id="20_0rgn1"]
+[ext_resource type="Texture2D" uid="uid://dwle5g7yr2pua" path="res://Pirate/good pirate.png" id="21_fr3bg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gkcui"]
 radius = 15.0
@@ -28,25 +29,29 @@ height = 50.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gkcui"]
 size = Vector2(81, 179)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ligwx"]
-atlas = ExtResource("2_gkcui")
-region = Rect2(0, 0, 244, 186)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fr3bg"]
+atlas = ExtResource("20_0rgn1")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f3j57"]
-atlas = ExtResource("2_gkcui")
-region = Rect2(244, 0, 244, 186)
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6i7n"]
+atlas = ExtResource("20_0rgn1")
+region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6fddp"]
-atlas = ExtResource("2_gkcui")
-region = Rect2(488, 0, 244, 186)
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmg7c"]
+atlas = ExtResource("20_0rgn1")
+region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0sf31"]
-atlas = ExtResource("2_gkcui")
-region = Rect2(732, 0, 244, 186)
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5hdw"]
+atlas = ExtResource("21_fr3bg")
+region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_004gm"]
-atlas = ExtResource("2_gkcui")
-region = Rect2(976, 0, 244, 186)
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3r0f"]
+atlas = ExtResource("21_fr3bg")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4amm8"]
+atlas = ExtResource("21_fr3bg")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hg1is"]
 animations = [{
@@ -57,22 +62,30 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ligwx")
+"texture": SubResource("AtlasTexture_fr3bg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_f3j57")
+"texture": SubResource("AtlasTexture_m6i7n")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6fddp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0sf31")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_004gm")
+"texture": SubResource("AtlasTexture_bmg7c")
 }],
 "loop": true,
 "name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e5hdw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3r0f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4amm8")
+}],
+"loop": true,
+"name": &"idle_good",
 "speed": 5.0
 }]
 
@@ -109,9 +122,9 @@ target_position = Vector2(-15, 0)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["enemies"]]
 position = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_hg1is")
-animation = &"idle"
+animation = &"idle_good"
 autoplay = "idle"
-frame_progress = 0.160284
+frame_progress = 0.697007
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 

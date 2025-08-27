@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://f21dpay4ctja"]
+
+[ext_resource type="PackedScene" uid="uid://besq32tbr5rgo" path="res://Pirate/pirate.tscn" id="1_el4p8"]
+[ext_resource type="Script" uid="uid://22s6tqec3pfk" path="res://Pirate/pirate_good.gd" id="2_ncaln"]
+
+[node name="Pirate" instance=ExtResource("1_el4p8")]
+script = ExtResource("2_ncaln")
+bad_pirate_voice = Array[AudioStream]([])
+bad_pirate_react = Array[AudioStream]([])
+good_pirate_voice = Array[AudioStream]([])
+good_pirate_react = Array[AudioStream]([])
+
+[node name="AnimatedSprite2D" parent="." index="4"]
+frame_progress = 0.933736
