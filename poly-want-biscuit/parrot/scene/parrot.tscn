@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=40 format=3 uid="uid://o0wiu6jx5stv"]
+=======
+[gd_scene load_steps=19 format=3 uid="uid://cw77rjseupp2p"]
+>>>>>>> Stashed changes
 
 [ext_resource type="Texture2D" uid="uid://xy5kpfb0o4yp" path="res://parrot/Parrot_01.png" id="1_6fc0c"]
 [ext_resource type="Script" uid="uid://cdi7jcasar25f" path="res://parrot/script/parrot.gd" id="1_ne668"]
@@ -8,6 +12,13 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfgbv"]
 size = Vector2(79, 82)
+<<<<<<< Updated upstream
+=======
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfgbv"]
+atlas = ExtResource("2_d6rm4")
+region = Rect2(806, 0, 403, 269)
+>>>>>>> Stashed changes
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2yyhr"]
 atlas = ExtResource("2_lfgbv")
@@ -136,19 +147,79 @@ animations = [{
 "texture": SubResource("AtlasTexture_2yyhr")
 }, {
 "duration": 1.0,
+<<<<<<< Updated upstream
 "texture": SubResource("AtlasTexture_iuqxg")
 }, {
 "duration": 1.0,
+=======
+"texture": SubResource("AtlasTexture_lfgbv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfgbv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfgbv")
+}],
+"loop": true,
+"name": &"collect",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iuqxg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iuqxg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iuqxg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iuqxg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iuqxg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iuqxg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iuqxg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iuqxg")
+}],
+"loop": true,
+"name": &"death",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+>>>>>>> Stashed changes
 "texture": SubResource("AtlasTexture_naad1")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4c8lb")
+<<<<<<< Updated upstream
+=======
+}],
+"loop": true,
+"name": &"flying",
+"speed": 1.0
+>>>>>>> Stashed changes
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_e2h52")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4irm7")
+<<<<<<< Updated upstream
+=======
+}],
+"loop": true,
+"name": &"idle",
+"speed": 20.0
+>>>>>>> Stashed changes
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_73ql6")
@@ -163,6 +234,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_ngvi3")
 }],
 "loop": true,
+<<<<<<< Updated upstream
 "name": &"Death",
 "speed": 5.0
 }, {
@@ -235,6 +307,10 @@ animations = [{
 "loop": true,
 "name": &"flying",
 "speed": 15.0
+=======
+"name": &"jump",
+"speed": 8.0
+>>>>>>> Stashed changes
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lfgbv"]
@@ -256,10 +332,17 @@ shape = SubResource("RectangleShape2D_lfgbv")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2
 z_as_relative = false
-scale = Vector2(0.1, 0.1)
+texture_filter = 1
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_lym6n")
+<<<<<<< Updated upstream
 animation = &"flying"
 autoplay = "flying"
+=======
+animation = &"idle"
+autoplay = "flying"
+frame_progress = 0.660965
+>>>>>>> Stashed changes
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimatedSprite2D")
@@ -282,8 +365,11 @@ shape = SubResource("CapsuleShape2D_lfgbv")
 position = Vector2(0, 48)
 shape = SubResource("RectangleShape2D_2yyhr")
 debug_color = Color(0.987291, 0, 0.3146, 0.42)
+<<<<<<< Updated upstream
 
 [node name="Timer" type="Timer" parent="."]
+=======
+>>>>>>> Stashed changes
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="land_detection" to="." method="_on_land_detection_area_entered"]
