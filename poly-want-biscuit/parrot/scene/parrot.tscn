@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://o0wiu6jx5stv"]
+[gd_scene load_steps=19 format=3 uid="uid://cw77rjseupp2p"]
 
 [ext_resource type="Script" uid="uid://cdi7jcasar25f" path="res://parrot/script/parrot.gd" id="1_ne668"]
 [ext_resource type="Texture2D" uid="uid://768o3i5xe6md" path="res://parrot/final sprite sheet.png" id="2_d6rm4"]
