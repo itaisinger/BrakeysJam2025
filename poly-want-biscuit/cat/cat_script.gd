@@ -83,18 +83,15 @@ func _physics_process(delta: float) -> void:
 
 func state_sleep() -> void:
 	if(player_pos.distance_to(position) < awake_dis):
-		state=CAT_STATES.walk
+		position.y-=50
 		grounded=false
 		update_dir()
 		state_walk()
-		#$ground_delection.disable_mode=true
-		#$hold_timer.start(1)
-		#grounded=false
-		#state=CAT_STATES.hold
-		#timer = 2
-		#jump()
-	
-		
+		if (position.x>player_data.player_position.x):
+			dir=-1
+		else:
+			dir=1
+		jump()
 
 func is_grounded():
 	for area in $ground_delection.get_overlapping_areas():
@@ -105,10 +102,11 @@ func is_grounded():
 func state_walk() -> void:
 	#walk
 	position.x += dir * spd
+	print("speeed is" ,dir*spd)
 	yspd = 0
 	position.y += grav*4
-	#jump
 	if(!grounded):
+		print("ungroundeed")
 		state = CAT_STATES.hold
 		timer = 2
 		
@@ -136,8 +134,6 @@ func state_dead() -> void:
 
 
 func jump() -> void:
-	$ground_delection.visible=false
-	$hold_timer.start(1)
 	yspd -= jumpforce*2
 	state = CAT_STATES.jump
 	anim_normal.play("jump")
@@ -145,9 +141,10 @@ func jump() -> void:
 	sfx_player.stream = random_sfx
 	sfx_player.play()
 	voice_cooldown = VOICE_COOLDOWN_TIME 
-	update_dir()
+	#update_dir()
 
 func update_dir() -> void:
+
 	moving_left=position.x>player_pos.x
 	if moving_left:
 		scale.x = -1 * abs(scale.x)
@@ -155,8 +152,6 @@ func update_dir() -> void:
 		scale.x = abs(scale.x)
 
 func hear_sound(voice) -> void:
-
-	update_dir()
 	if position.distance_to(player_data.player_position)>hear_distance or !screechable:
 		pass
 
@@ -200,8 +195,3 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 func _on_timer_timeout() -> void:
 	screechable=true
-
-
-func _on_hold_timer_timeout() -> void:
-	$ground_delection.visible=true
-	$ground_delection.disable_mode=false
