@@ -1,0 +1,40 @@
+[gd_scene load_steps=29 format=3 uid="uid://by6ipmhar351o"]
+
+[ext_resource type="Script" uid="uid://dyadasrl0ujvf" path="res://parrot_sounds.gd" id="1_whpan"]
+[ext_resource type="AudioStream" uid="uid://cpg5l7hini424" path="res://parrot/Audio/death/parrot death.wav" id="2_rdmps"]
+[ext_resource type="AudioStream" uid="uid://dcogr57g8bkp8" path="res://parrot/Audio/see or get biscuit/get biscuit .wav" id="3_qh6ly"]
+[ext_resource type="AudioStream" uid="uid://d177qve2cclqw" path="res://parrot/Audio/eat biscuit/eat biscuit.wav" id="4_nde56"]
+[ext_resource type="AudioStream" uid="uid://uo32qrlp8ebx" path="res://parrot/Audio/other/speech.wav" id="5_sbks7"]
+[ext_resource type="AudioStream" uid="uid://bq8tnbo441t46" path="res://parrot/Audio/curses/dvir/curse 1.wav" id="6_8m1t2"]
+[ext_resource type="AudioStream" uid="uid://fn4pma3vqptu" path="res://parrot/Audio/curses/dvir/curse 2.wav" id="7_5hvfa"]
+[ext_resource type="AudioStream" uid="uid://bq3rape5gqn4n" path="res://parrot/Audio/curses/dvir/curse 3.wav" id="8_wncxs"]
+[ext_resource type="AudioStream" uid="uid://0x7qkqmohj2w" path="res://parrot/Audio/curses/dvir/curse 4.wav" id="9_gjll6"]
+[ext_resource type="AudioStream" uid="uid://bitp8oj3rkhao" path="res://parrot/Audio/curses/dvir/curse 5 maybe.wav" id="10_uy8u0"]
+[ext_resource type="AudioStream" uid="uid://bg2uxbgu5e84c" path="res://parrot/Audio/curses/yeeli/curse 1 (barnacle head).wav" id="11_e1sxy"]
+[ext_resource type="AudioStream" uid="uid://csvfsawsic58i" path="res://parrot/Audio/curses/yeeli/curse 2 (shove it).wav" id="12_07m6m"]
+[ext_resource type="AudioStream" uid="uid://8f6x4p2f7yne" path="res://parrot/Audio/curses/yeeli/curse 3 (fuck you).wav" id="13_juo6v"]
+[ext_resource type="AudioStream" uid="uid://bkf01jy4b6rlf" path="res://parrot/Audio/curses/yeeli/curse 4 (eat my dick).wav" id="14_iuunk"]
+[ext_resource type="AudioStream" uid="uid://txns61ekcomm" path="res://parrot/Audio/curses/yeeli/curse 5 (fuck off).wav" id="15_fcdyc"]
+[ext_resource type="AudioStream" uid="uid://celdiv3xm8rmq" path="res://parrot/Audio/curses/yeeli/curse 6 (long curse).wav" id="16_pjp0f"]
+[ext_resource type="AudioStream" uid="uid://bkhbiytdwq6oo" path="res://parrot/Audio/curses/yeeli/curse 7 (ben zona).wav" id="17_jr7b3"]
+[ext_resource type="AudioStream" uid="uid://0jlkegw8vtbd" path="res://parrot/Audio/curses/yeeli/curse 8 (lo schnitzel).wav" id="18_omkgg"]
+[ext_resource type="AudioStream" uid="uid://gc3dxvcgb1bg" path="res://parrot/Audio/mew/parrot mew 1.wav" id="19_bw4hy"]
+[ext_resource type="AudioStream" uid="uid://uy50dh1tbwa2" path="res://parrot/Audio/mew/parrot mew 3.wav" id="20_vsrfo"]
+[ext_resource type="AudioStream" uid="uid://b5888co4ro7p5" path="res://parrot/Audio/finds key/finds key 1.wav" id="21_vwlu1"]
+[ext_resource type="AudioStream" uid="uid://dmvtpo54t0cly" path="res://parrot/Audio/finds key/find key 2.wav" id="22_e0i0h"]
+[ext_resource type="AudioStream" uid="uid://eeaoobc0r8sl" path="res://parrot/Audio/finds key/takes key 1.wav" id="23_y17p1"]
+[ext_resource type="AudioStream" uid="uid://dtg2cph0aljp3" path="res://parrot/Audio/finds key/takes key 2.wav" id="24_6b8lb"]
+[ext_resource type="AudioStream" uid="uid://dlwgy4slsk6y4" path="res://parrot/Audio/fly/fly 1.wav" id="25_0xya6"]
+[ext_resource type="AudioStream" uid="uid://b08na63p7tbl0" path="res://parrot/Audio/fly/fly 2.wav" id="26_8lwkl"]
+[ext_resource type="AudioStream" uid="uid://b6kdi86cdyira" path="res://parrot/Audio/fly/fly 3.wav" id="27_v1i4f"]
+[ext_resource type="AudioStream" uid="uid://3meg5qo7ma32" path="res://parrot/Audio/fly/fly combined.wav" id="28_8q2cv"]
+
+[node name="Parrot Sounds" type="Node"]
+script = ExtResource("1_whpan")
+instances_parrot_voice = Array[AudioStream]([ExtResource("2_rdmps"), ExtResource("3_qh6ly"), ExtResource("4_nde56"), ExtResource("5_sbks7")])
+curses_parrot_voice = Array[AudioStream]([ExtResource("6_8m1t2"), ExtResource("7_5hvfa"), ExtResource("8_wncxs"), ExtResource("9_gjll6"), ExtResource("10_uy8u0"), ExtResource("11_e1sxy"), ExtResource("12_07m6m"), ExtResource("13_juo6v"), ExtResource("14_iuunk"), ExtResource("15_fcdyc"), ExtResource("16_pjp0f"), ExtResource("17_jr7b3"), ExtResource("18_omkgg")])
+meow_parrot_voice = Array[AudioStream]([ExtResource("19_bw4hy"), ExtResource("20_vsrfo")])
+get_key_parrot_voice = Array[AudioStream]([ExtResource("21_vwlu1"), ExtResource("22_e0i0h"), ExtResource("23_y17p1"), ExtResource("24_6b8lb")])
+fly_parrot_audio = Array[AudioStream]([ExtResource("25_0xya6"), ExtResource("26_8lwkl"), ExtResource("27_v1i4f"), ExtResource("28_8q2cv")])
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
