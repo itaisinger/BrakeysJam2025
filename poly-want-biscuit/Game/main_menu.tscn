@@ -1,16 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://chjlj8gjc5r6f"]
+[gd_scene load_steps=3 format=3 uid="uid://chjlj8gjc5r6f"]
 
 [ext_resource type="Script" uid="uid://c4usft0gwpmri" path="res://Game/main_menu.gd" id="1_yltbk"]
+[ext_resource type="PackedScene" uid="uid://bsfi2tkt8uodm" path="res://Game/background/background.tscn" id="2_gl5pw"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -963.0
-offset_top = -542.0
-offset_right = -963.0
-offset_bottom = -542.0
+offset_left = -562.0
+offset_top = -92.0
+offset_right = -562.0
+offset_bottom = -92.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yltbk")
@@ -40,6 +41,11 @@ text = "quit"
 
 [node name="Camera2D" type="Camera2D" parent="VBoxContainer"]
 position = Vector2(23.5, 47)
+zoom = Vector2(1.5, 1.5)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="VBoxContainer"]
+
+[node name="Background" parent="." instance=ExtResource("2_gl5pw")]
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

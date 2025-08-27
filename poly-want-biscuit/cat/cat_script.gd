@@ -82,6 +82,9 @@ func _physics_process(delta: float) -> void:
 
 
 func state_sleep() -> void:
+	if position.distance_to(player_data.player_position)>1000:
+		sfx_player.stream = cat_sleep_voice[0]
+		sfx_player.play()
 	if(player_pos.distance_to(position) < awake_dis):
 		position.y-=50
 		grounded=false
