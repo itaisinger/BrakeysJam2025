@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://lsn760ks2os"]
+[gd_scene load_steps=21 format=3 uid="uid://lsn760ks2os"]
 
 [ext_resource type="Script" uid="uid://c4nm71gqtur4a" path="res://Game/game.gd" id="1_qmv3x"]
 [ext_resource type="Texture2D" uid="uid://b6b1y2m4gnynn" path="res://platform/tileSet.png" id="2_1r4le"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cd3m75bil8uly" path="res://cat/cat.tscn" id="7_buohc"]
 [ext_resource type="PackedScene" uid="uid://7mk0h5egqebe" path="res://Biscuit/biscuit scene.tscn" id="7_kul4i"]
 [ext_resource type="PackedScene" uid="uid://dahmtyw0axlap" path="res://GameManager/game_manager.tscn" id="10_7gi1t"]
+[ext_resource type="AudioStream" uid="uid://d177qve2cclqw" path="res://parrot/Audio/eat biscuit/eat biscuit.wav" id="11_fsxsm"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jcm6v"]
 distance = -1096.0
@@ -399,3 +400,12 @@ shape = SubResource("RectangleShape2D_kul4i")
 
 [node name="GameManager" parent="." instance=ExtResource("10_7gi1t")]
 unique_name_in_owner = true
+
+[node name="drawer" parent="GameManager/Hud" index="3" node_paths=PackedStringArray("sound")]
+sound = NodePath("../../../streamer")
+
+[node name="streamer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_fsxsm")
+
+[editable path="GameManager"]
+[editable path="GameManager/Hud"]
