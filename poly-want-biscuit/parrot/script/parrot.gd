@@ -106,7 +106,7 @@ func air_state():
 	xspd = xspd * dir
 	
 	if(Input.is_action_just_pressed("Jump")): Jump()
-	if(grounded): state = STATES.idle
+	if(grounded && yspd > 0): state = STATES.idle
 	
 	if(yspd > 0 && anim.animation == "jump"):
 		anim.play("flying") 
