@@ -12,6 +12,7 @@ var grounded=false
 var yspd=0
 var yspd_max = 2.6
 var grav=0.1
+@export var grav_scale = 0.5 #used to make vertical jumps stronger
 @export var jumpforce : float = 2.5
 var shoutforce=1
 var xspd = 0
@@ -46,7 +47,9 @@ func _physics_process(delta: float) -> void:
 	#movement
 	grounded = IsGrounded()
 	if(!grounded): 
-		yspd += grav
+		var g = grav
+		if(yspd < 0 and abs(xspd) < press_spd): g *= grav_scale
+		yspd += g
 	
 	#states
 	state_prev = state

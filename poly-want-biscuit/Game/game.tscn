@@ -1046,7 +1046,7 @@ drag_top_margin = 0.8
 drag_right_margin = 0.9
 drag_bottom_margin = 0.9
 script = ExtResource("3_4lqr4")
-xoff = 60.0
+xoff = 40.0
 off_spd = 0.05
 
 [node name="Sprite2D" type="Sprite2D" parent="camera_target"]
