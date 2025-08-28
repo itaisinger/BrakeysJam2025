@@ -20,7 +20,7 @@ var just_died=true
 
 #bhvr vars
 var hear_distance = 600
-var awake_dis = 200
+var awake_dis = 80
 var jumpforce = 1
 var spd = 1
 var moving_left=false
