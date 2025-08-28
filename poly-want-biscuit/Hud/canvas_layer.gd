@@ -4,7 +4,7 @@ func _ready():
 	var root = get_tree().root.get_child(1)
 	#root.connect("add_coin",_add_coin)
 
-func _add_coin():
+func add_key():
 	coins+=1
 	$Label.text=str(coins)
 

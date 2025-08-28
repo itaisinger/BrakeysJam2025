@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://csvfsawsic58i"
+path="res://.godot/imported/curse 2 (shove it).wav-08dce38b2622ef10cb6147bc3dbab1dd.sample"
+
+[deps]
+
+source_file="res://parrot/Audio/curses/yeeli/curse 2 (shove it).wav"
+dest_files=["res://.godot/imported/curse 2 (shove it).wav-08dce38b2622ef10cb6147bc3dbab1dd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
