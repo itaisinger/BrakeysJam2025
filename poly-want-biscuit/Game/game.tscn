@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://lsn760ks2os"]
+[gd_scene load_steps=26 format=3 uid="uid://lsn760ks2os"]
 
 [ext_resource type="Script" uid="uid://c4nm71gqtur4a" path="res://Game/game.gd" id="1_qmv3x"]
 [ext_resource type="Texture2D" uid="uid://b6b1y2m4gnynn" path="res://platform/tileSet.png" id="2_1r4le"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dahmtyw0axlap" path="res://GameManager/game_manager.tscn" id="10_7gi1t"]
 [ext_resource type="AudioStream" uid="uid://d177qve2cclqw" path="res://parrot/Audio/eat biscuit/eat biscuit.wav" id="11_fsxsm"]
 [ext_resource type="PackedScene" uid="uid://rjff7nsnxe4a" path="res://plank/pankScene.tscn" id="12_glinl"]
+[ext_resource type="Texture2D" uid="uid://cv4u17mmcggwf" path="res://icon.svg" id="15_qlwvw"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jcm6v"]
 distance = -1096.0
@@ -221,21 +222,7 @@ z_index = 1000
 z_as_relative = false
 position = Vector2(7029, 1122)
 scale = Vector2(2, 2)
-
-[node name="camera" type="Camera2D" parent="Parot"]
-unique_name_in_owner = true
-scale = Vector2(10, 10)
-offset = Vector2(0, 80)
-zoom = Vector2(2, 2)
-position_smoothing_enabled = true
-position_smoothing_speed = 4.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.8
-drag_top_margin = 0.8
-drag_right_margin = 0.9
-drag_bottom_margin = 0.9
-script = ExtResource("3_4lqr4")
+jumpforce = 3.0
 
 [node name="Game Borders" type="Node" parent="."]
 
@@ -1041,6 +1028,32 @@ sound = NodePath("../../AudioStreamPlayer")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GameManager"]
 stream = ExtResource("11_fsxsm")
+
+[node name="camera_target" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(7029, 1122)
+scale = Vector2(2, 2)
+
+[node name="camera" type="Camera2D" parent="camera_target"]
+unique_name_in_owner = true
+scale = Vector2(10, 10)
+offset = Vector2(0, 80)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 4.0
+drag_left_margin = 0.8
+drag_top_margin = 0.8
+drag_right_margin = 0.9
+drag_bottom_margin = 0.9
+script = ExtResource("3_4lqr4")
+xoff = 60.0
+off_spd = 0.05
+
+[node name="Sprite2D" type="Sprite2D" parent="camera_target"]
+visible = false
+z_index = 20
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("15_qlwvw")
 
 [editable path="GameManager"]
 [editable path="GameManager/Hud"]
