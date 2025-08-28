@@ -1,7 +1,7 @@
 extends Node
 
 var keys = 0
-
+var keys_left = 7
 enum STATES{game,death,win}
 @onready var state = STATES.game
 
@@ -11,6 +11,10 @@ enum STATES{game,death,win}
 
 var camera_zoom_base
 var timer = 0
+
+func _ready():
+	hud.set_keys(0,keys_left)
+	
 
 func _process(delta):
 	
@@ -34,12 +38,13 @@ func _process(delta):
 
 func got_key():
 	keys += 1;
-	hud.set_keys(keys)
+	hud.set_keys(keys,keys_left)
 	player.got_key()
 
 func remove_key():
 	keys -= 1
-	hud.set_keys(keys);
+	keys_left -= 1
+	hud.set_keys(keys,keys_left);
 
 func win():
 	print("won")

@@ -215,6 +215,8 @@ script = ExtResource("1_qmv3x")
 
 [node name="Parot" parent="." instance=ExtResource("2_7raqb")]
 unique_name_in_owner = true
+z_index = 1000
+z_as_relative = false
 position = Vector2(7029, 1122)
 scale = Vector2(2, 2)
 
@@ -393,13 +395,6 @@ shape = SubResource("RectangleShape2D_kul4i")
 visible = false
 z_index = 1
 position = Vector2(5974, 1298)
-rotation = 1.5708
-scale = Vector2(3.4, 2.2)
-
-[node name="End Door" parent="MapLayout/paltform_spawner" instance=ExtResource("3_7raqb")]
-visible = false
-z_index = 1
-position = Vector2(7214, 1294)
 rotation = 1.5708
 scale = Vector2(3.4, 2.2)
 

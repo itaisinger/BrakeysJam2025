@@ -15,9 +15,9 @@ func _ready():
 func _process(delta: float) -> void:
 	trans_prec = min(trans_prec+delta,1)
 
-func set_keys(n):
+func set_keys(n,left):
 	coins = n
-	$Label.text=str(coins) + "/" + str(coins_max)
+	$Label.text=str(coins) + "/" + str(left)
 
 func death_screen():
 	var tween = create_tween()
