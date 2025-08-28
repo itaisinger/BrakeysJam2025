@@ -2,8 +2,6 @@ extends CanvasLayer
 var coins=0
 var coins_max = 7
 
-enum STATES{normal,win,death}
-var state = STATES.normal
 @onready var death
 @onready var win
 @onready var drawer = $drawer
@@ -22,19 +20,11 @@ func set_keys(n):
 	$Label.text=str(coins) + "/" + str(coins_max)
 
 func death_screen():
-	state = STATES.death
 	var tween = create_tween()
 	tween.tween_property($deathImage, "modulate:a", 1.0, 3).set_trans(Tween.TRANS_SINE).set_custom_interpolator(inter)
 
 func win_screen():
-	state = STATES.win
 	drawer.draw_win_screen()
-	pass
-	
-func _draw():
-	
-	
-		
 	pass
 	
 func inter(x):

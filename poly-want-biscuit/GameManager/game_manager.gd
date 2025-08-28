@@ -10,22 +10,25 @@ enum STATES{game,death,win}
 @onready var camera = %camera
 
 var camera_zoom_base
+var timer = 0
 
 func _process(delta):
+	
+	timer = max(0,timer-delta)
+	
 	match(state):
 		STATES.game:
 			pass
 		STATES.death:
 			if(Input.is_action_just_pressed("Jump")):
-				print("game step")
 				get_tree().change_scene_to_file("res://Game/main_menu.tscn")
 			pass
 		STATES.win:
 			var z = lerp(camera.zoom.x, camera_zoom_base*2,0.02)
 			camera.zoom = Vector2(z,z)
 			
-			if(Input.is_action_just_pressed("restart")):
-				load("res://Game/main_menu.tscn")
+			if(timer <= 0):
+				get_tree().change_scene_to_file("res://Game/main_menu.tscn")
 			pass
 	pass
 
@@ -44,6 +47,10 @@ func win():
 	camera_zoom_base = camera.zoom.x
 	camera.drag_horizontal_enabled = false;
 	camera.drag_vertical_enabled = false;
+	
+	#hud
+	hud.win_screen()
+	timer = 8;
 	pass
 	
 func player_died():
