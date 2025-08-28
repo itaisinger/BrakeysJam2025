@@ -192,9 +192,12 @@ animations = [{
 }]
 
 [node name="Parot" type="CharacterBody2D"]
+collision_layer = 16
 script = ExtResource("1_ne668")
 
 [node name="hitbox" type="Area2D" parent="." groups=["parrot"]]
+collision_layer = 4
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 z_index = 10
@@ -232,6 +235,7 @@ scale = Vector2(0.09, 0.232)
 shape = SubResource("RectangleShape2D_lfgbv")
 
 [node name="land hitbox" type="Area2D" parent="."]
+collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="land hitbox"]
 position = Vector2(0, 12)

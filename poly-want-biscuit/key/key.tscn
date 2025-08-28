@@ -74,7 +74,8 @@ height = 59.661
 size = Vector2(20, 59)
 
 [node name="Key" type="Area2D"]
-collision_mask = 3
+collision_layer = 0
+collision_mask = 4
 script = ExtResource("1_17rgd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -90,6 +91,8 @@ scale = Vector2(1.02381, 0.921875)
 shape = SubResource("CapsuleShape2D_6jvpb")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -1.5)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://ika5g2if8um0"]
+[gd_scene load_steps=49 format=3 uid="uid://cd3m75bil8uly"]
 
 [ext_resource type="Texture2D" uid="uid://cex4xfeq4ipkl" path="res://cat/textures/sleep.png" id="1_n236n"]
 [ext_resource type="Script" uid="uid://b0v6vrf46aoxl" path="res://cat/cat_script.gd" id="1_vgj48"]
@@ -258,7 +258,8 @@ size = Vector2(16.5, 7.5)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 scale = Vector2(2, 2)
-collision_layer = 3
+collision_layer = 8
+collision_mask = 3
 script = ExtResource("1_vgj48")
 cat_wakeup_voice = Array[AudioStream]([ExtResource("2_rai0v"), ExtResource("3_wlxi6"), ExtResource("4_2phss"), ExtResource("5_kfgcs")])
 cat_cought_react = Array[AudioStream]([ExtResource("2_0wl1y"), ExtResource("3_jakcm")])
@@ -271,6 +272,8 @@ texture_filter = 1
 texture = ExtResource("1_n236n")
 
 [node name="Area2D" type="Area2D" parent="." groups=["enemies"]]
+collision_layer = 8
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["enemies"]]
 position = Vector2(-19, 10)
@@ -295,6 +298,7 @@ animation = &"walk"
 
 [node name="ground_delection" type="Area2D" parent="."]
 collision_layer = 0
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ground_delection"]
 position = Vector2(-7.75, 14.25)
