@@ -297,6 +297,12 @@ position = Vector2(7197, 1084)
 z_index = 20
 position = Vector2(6719, 1074)
 
+[node name="Key2" parent="PickUps" instance=ExtResource("5_fwxkx")]
+position = Vector2(5843, 1243)
+
+[node name="Key3" parent="PickUps" instance=ExtResource("5_fwxkx")]
+position = Vector2(4999, 1233)
+
 [node name="paltform_spawner" type="Node" parent="."]
 
 [node name="ship" type="StaticBody2D" parent="paltform_spawner"]
