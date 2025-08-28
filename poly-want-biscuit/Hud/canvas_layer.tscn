@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnsw1vitrtw8y"]
+[gd_scene load_steps=4 format=3 uid="uid://bnsw1vitrtw8y"]
 
 [ext_resource type="Script" uid="uid://nkb8vymujgtd" path="res://Hud/canvas_layer.gd" id="1_2jd6a"]
 [ext_resource type="Texture2D" uid="uid://dw6wpad4txqdh" path="res://key/key sprite sheet.png" id="2_2jd6a"]
+[ext_resource type="Script" uid="uid://bgsjkl084vy6t" path="res://Hud/drawScript.gd" id="3_vndfu"]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_2jd6a")
@@ -72,8 +73,5 @@ theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 1000
 text = "press space"
 
-[node name="ColorRect" type="ColorRect" parent="."]
-modulate = Color(1, 1, 1, 0)
-offset_right = 1282.0
-offset_bottom = 714.0
-color = Color(1, 1, 0.74902, 1)
+[node name="drawer" type="Node2D" parent="."]
+script = ExtResource("3_vndfu")
