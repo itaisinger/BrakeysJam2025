@@ -66,6 +66,7 @@ func _physics_process(delta: float) -> void:
 	#move	
 	yspd = min(yspd,yspd_max)
 	position += Vector2(xspd,yspd)
+	#print(xspd)
 	move_and_slide()
 	
 	#visuals
@@ -88,7 +89,7 @@ func idle_state():
 	if(state_changed): anim.play("idle")
 	
 	xspd *= 0.1
-	xspd = approach(xspd,0,xfric/2)
+	#xspd = approach(xspd,0,xfric/2)
 	yspd = 0
 	
 	if(!grounded): state = STATES.air
