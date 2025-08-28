@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://rjff7nsnxe4a"]
+[gd_scene load_steps=17 format=3 uid="uid://rjff7nsnxe4a"]
 
 [ext_resource type="Script" uid="uid://buvt0pobetvy7" path="res://plank/pank_script.gd" id="1_hc8t2"]
 [ext_resource type="Texture2D" uid="uid://b6b1y2m4gnynn" path="res://platform/tileSet.png" id="1_oqi1o"]
+[ext_resource type="PackedScene" uid="uid://cn5kyxee7mqyb" path="res://platform/explosion.tscn" id="2_4u1p7"]
 [ext_resource type="Texture2D" uid="uid://dw6wpad4txqdh" path="res://key/key sprite sheet.png" id="3_jissj"]
 [ext_resource type="Script" uid="uid://be45mbu3ntvio" path="res://plank/key_animScript.gd" id="4_ocnvb"]
 
@@ -75,22 +76,27 @@ animations = [{
 "speed": 4.0
 }]
 
-[node name="PankScene" type="Area2D"]
+[node name="PankScene" type="RigidBody2D"]
 scale = Vector2(2, 2)
 collision_layer = 3
 collision_mask = 0
+gravity_scale = 0.0
 script = ExtResource("1_hc8t2")
+explosion = ExtResource("2_4u1p7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 5
+scale = Vector2(3, 3)
 texture = ExtResource("1_oqi1o")
 region_enabled = true
 region_rect = Rect2(8.64485, 160.066, 13.938, 63.8957)
 
 [node name="collision" type="CollisionShape2D" parent="."]
+scale = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_hc8t2")
 
 [node name="interact box" type="Area2D" parent="."]
+scale = Vector2(4, 4)
 collision_layer = 0
 collision_mask = 4
 
@@ -105,5 +111,5 @@ scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_uxggi")
 animation = &"key"
 autoplay = "key"
-frame_progress = 0.3535
+frame_progress = 0.413902
 script = ExtResource("4_ocnvb")

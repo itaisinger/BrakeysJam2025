@@ -280,6 +280,7 @@ scale = Vector2(3, 0.2)
 [node name="paltform_spawner" type="Node" parent="MapLayout"]
 
 [node name="ship" type="StaticBody2D" parent="MapLayout/paltform_spawner"]
+visible = false
 metadata/_edit_lock_ = true
 
 [node name="Area2D" type="Area2D" parent="MapLayout/paltform_spawner/ship" groups=["platforms"]]
@@ -819,48 +820,45 @@ shape = SubResource("RectangleShape2D_7gi1t")
 z_index = 5
 position = Vector2(7275, 1298)
 rotation = 0.0998858
-scale = Vector2(2, 3.125)
+scale = Vector2(1, 1.563)
 
 [node name="PankScene2" parent="MapLayout/doors" instance=ExtResource("12_glinl")]
 z_index = 5
 position = Vector2(7319, 1299)
 rotation = -0.0352265
-scale = Vector2(2, 3.125)
+scale = Vector2(1, 1.563)
 
 [node name="PankScene3" parent="MapLayout/doors" instance=ExtResource("12_glinl")]
 z_index = 5
 position = Vector2(7227, 1302)
 rotation = 0.165801
-scale = Vector2(2.13, 3.615)
+scale = Vector2(1, 1.697)
 
 [node name="PankScene4" parent="MapLayout/doors" instance=ExtResource("12_glinl")]
 z_index = 5
-position = Vector2(7517, 1303)
+position = Vector2(7531, 1284)
 rotation = 0.418874
-scale = Vector2(2, 3.84)
+scale = Vector2(1, 1.92)
 
 [node name="PankScene5" parent="MapLayout/doors" instance=ExtResource("12_glinl")]
 z_index = 5
 position = Vector2(7453, 1297)
 rotation = 0.0998858
-scale = Vector2(2, 3.125)
+scale = Vector2(1, 1.563)
 
 [node name="PankScene6" parent="MapLayout/doors" instance=ExtResource("12_glinl")]
 z_index = 5
 position = Vector2(7374, 1301)
 rotation = 0.0998858
-scale = Vector2(2, 3.125)
+scale = Vector2(1, 1.563)
 
 [node name="PankScene7" parent="MapLayout/doors" instance=ExtResource("12_glinl")]
 z_index = 5
 position = Vector2(7412, 1300)
 rotation = 0.00897129
-scale = Vector2(2, 3.125)
+scale = Vector2(1, 1.563)
 
 [node name="Pirates" type="Node" parent="."]
-
-[node name="Pirate" parent="Pirates" instance=ExtResource("6_kul4i")]
-position = Vector2(6993, 1313)
 
 [node name="Pirate2" parent="Pirates" instance=ExtResource("8_glinl")]
 position = Vector2(4704, 1316)
