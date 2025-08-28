@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://o0wiu6jx5stv"]
+[gd_scene load_steps=27 format=3 uid="uid://o0wiu6jx5stv"]
 
 [ext_resource type="Script" uid="uid://cdi7jcasar25f" path="res://parrot/script/parrot.gd" id="1_ne668"]
 [ext_resource type="Texture2D" uid="uid://768o3i5xe6md" path="res://parrot/final sprite sheet.png" id="2_d6rm4"]
@@ -50,6 +50,14 @@ region = Rect2(0, 807, 403, 269)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ngvi3"]
 atlas = ExtResource("2_d6rm4")
 region = Rect2(1209, 810, 403, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6rm4"]
+atlas = ExtResource("2_d6rm4")
+region = Rect2(806, 0, 403, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j05c5"]
+atlas = ExtResource("2_d6rm4")
+region = Rect2(1209, 0, 403, 270)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lym6n"]
 animations = [{
@@ -145,6 +153,26 @@ animations = [{
 "loop": false,
 "name": &"shout",
 "speed": 0.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6rm4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6rm4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j05c5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6rm4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6rm4")
+}],
+"loop": true,
+"name": &"win",
+"speed": 1.5
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lfgbv"]
@@ -212,8 +240,9 @@ z_index = 2
 z_as_relative = false
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_lym6n")
-animation = &"collect"
+animation = &"win"
 autoplay = "flying"
+frame_progress = 0.0317378
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimatedSprite2D")
