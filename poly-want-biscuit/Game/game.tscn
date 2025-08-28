@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://7rgecrx85ac3" path="res://Game/tileSet.png" id="3_jcm6v"]
 [ext_resource type="PackedScene" uid="uid://dl0bm27a1ycom" path="res://key/key.tscn" id="5_fwxkx"]
 [ext_resource type="PackedScene" uid="uid://besq32tbr5rgo" path="res://Pirate/pirate.tscn" id="6_kul4i"]
-[ext_resource type="PackedScene" uid="uid://cd3m75bil8uly" path="res://cat/cat.tscn" id="7_buohc"]
-[ext_resource type="PackedScene" uid="uid://7mk0h5egqebe" path="res://Biscuit/biscuit scene.tscn" id="7_kul4i"]
+[ext_resource type="PackedScene" uid="uid://ika5g2if8um0" path="res://cat/cat.tscn" id="7_buohc"]
+[ext_resource type="PackedScene" path="res://Pirate/pirate_good.tscn" id="8_glinl"]
 [ext_resource type="PackedScene" uid="uid://dahmtyw0axlap" path="res://GameManager/game_manager.tscn" id="10_7gi1t"]
 [ext_resource type="AudioStream" uid="uid://d177qve2cclqw" path="res://parrot/Audio/eat biscuit/eat biscuit.wav" id="11_fsxsm"]
 [ext_resource type="PackedScene" uid="uid://rjff7nsnxe4a" path="res://plank/pankScene.tscn" id="12_glinl"]
@@ -505,54 +505,63 @@ visible = false
 z_index = 2
 position = Vector2(5090, 1364)
 scale = Vector2(0.8, 2.5)
+collision_mask = 255
 
 [node name="barrel2" parent="MapLayout/paltform_spawner/Barrels" instance=ExtResource("3_7raqb")]
 visible = false
 z_index = 2
 position = Vector2(6431, 1366)
 scale = Vector2(0.8, 2.5)
+collision_mask = 255
 
 [node name="barrel3" parent="MapLayout/paltform_spawner/Barrels" instance=ExtResource("3_7raqb")]
 visible = false
 z_index = 2
 position = Vector2(6624, 1364)
 scale = Vector2(0.8, 2.5)
+collision_mask = 255
 
 [node name="barrel4" parent="MapLayout/paltform_spawner/Barrels" instance=ExtResource("3_7raqb")]
 visible = false
 z_index = 2
 position = Vector2(7455, 598)
 scale = Vector2(0.8, 2.5)
+collision_mask = 255
 
 [node name="barrel5" parent="MapLayout/paltform_spawner/Barrels" instance=ExtResource("3_7raqb")]
 visible = false
 z_index = 2
 position = Vector2(7648, 607)
 scale = Vector2(0.8, 2.5)
+collision_mask = 255
 
 [node name="barrel7" parent="MapLayout/paltform_spawner/Barrels" instance=ExtResource("3_7raqb")]
 visible = false
 z_index = 2
 position = Vector2(7648, 607)
 scale = Vector2(0.8, 2.5)
+collision_mask = 255
 
 [node name="barrel6" parent="MapLayout/paltform_spawner/Barrels" instance=ExtResource("3_7raqb")]
 visible = false
 z_index = 2
 position = Vector2(7584, 597)
 scale = Vector2(0.8, 2.5)
+collision_mask = 255
 
 [node name="barrel8" parent="MapLayout/paltform_spawner/Barrels" instance=ExtResource("3_7raqb")]
 visible = false
 z_index = 2
 position = Vector2(7552, 548)
 scale = Vector2(0.8, 2.5)
+collision_mask = 255
 
 [node name="barrel9" parent="MapLayout/paltform_spawner/Barrels" instance=ExtResource("3_7raqb")]
 visible = false
 z_index = 2
 position = Vector2(7521, 597)
 scale = Vector2(0.8, 2.5)
+collision_mask = 255
 
 [node name="Ledges" type="Node" parent="MapLayout/paltform_spawner"]
 
@@ -746,16 +755,255 @@ z_index = 1
 position = Vector2(2, 0)
 shape = SubResource("RectangleShape2D_7gi1t")
 
+[node name="ledge_11" type="StaticBody2D" parent="MapLayout/paltform_spawner/Ledges"]
+visible = false
+position = Vector2(735, 1480)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapLayout/paltform_spawner/Ledges/ledge_11"]
+z_index = 1
+position = Vector2(2753, 135)
+shape = SubResource("RectangleShape2D_7gi1t")
+one_way_collision = true
+metadata/_edit_group_ = true
+
+[node name="Area2D" type="Area2D" parent="MapLayout/paltform_spawner/Ledges/ledge_11" groups=["platforms"]]
+position = Vector2(2751, 135)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="MapLayout/paltform_spawner/Ledges/ledge_11/Area2D"]
+z_index = 1
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_7gi1t")
+
+[node name="ledge_12" type="StaticBody2D" parent="MapLayout/paltform_spawner/Ledges"]
+visible = false
+position = Vector2(735, 1480)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapLayout/paltform_spawner/Ledges/ledge_12"]
+z_index = 1
+position = Vector2(2689, 135)
+shape = SubResource("RectangleShape2D_7gi1t")
+one_way_collision = true
+
+[node name="Area2D" type="Area2D" parent="MapLayout/paltform_spawner/Ledges/ledge_12" groups=["platforms"]]
+position = Vector2(2687, 135)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="MapLayout/paltform_spawner/Ledges/ledge_12/Area2D"]
+z_index = 1
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_7gi1t")
+
+[node name="ledge_13" type="StaticBody2D" parent="MapLayout/paltform_spawner/Ledges"]
+visible = false
+position = Vector2(735, 1480)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapLayout/paltform_spawner/Ledges/ledge_13"]
+z_index = 1
+position = Vector2(2497, 135)
+shape = SubResource("RectangleShape2D_7gi1t")
+one_way_collision = true
+metadata/_edit_group_ = true
+
+[node name="Area2D" type="Area2D" parent="MapLayout/paltform_spawner/Ledges/ledge_13" groups=["platforms"]]
+position = Vector2(2495, 135)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="MapLayout/paltform_spawner/Ledges/ledge_13/Area2D"]
+z_index = 1
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_7gi1t")
+
+[node name="ledge_14" type="StaticBody2D" parent="MapLayout/paltform_spawner/Ledges"]
+visible = false
+position = Vector2(735, 1480)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapLayout/paltform_spawner/Ledges/ledge_14"]
+z_index = 1
+position = Vector2(2433, 135)
+shape = SubResource("RectangleShape2D_7gi1t")
+one_way_collision = true
+
+[node name="Area2D" type="Area2D" parent="MapLayout/paltform_spawner/Ledges/ledge_14" groups=["platforms"]]
+position = Vector2(2431, 135)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="MapLayout/paltform_spawner/Ledges/ledge_14/Area2D"]
+z_index = 1
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_7gi1t")
+
+[node name="doors" type="Node" parent="MapLayout"]
+
+[node name="PankScene" parent="MapLayout/doors" instance=ExtResource("12_glinl")]
+z_index = 5
+position = Vector2(7275, 1298)
+rotation = 0.0998858
+scale = Vector2(2, 3.125)
+
+[node name="PankScene2" parent="MapLayout/doors" instance=ExtResource("12_glinl")]
+z_index = 5
+position = Vector2(7319, 1299)
+rotation = -0.0352265
+scale = Vector2(2, 3.125)
+
+[node name="PankScene3" parent="MapLayout/doors" instance=ExtResource("12_glinl")]
+z_index = 5
+position = Vector2(7227, 1302)
+rotation = 0.165801
+scale = Vector2(2.13, 3.615)
+
+[node name="PankScene4" parent="MapLayout/doors" instance=ExtResource("12_glinl")]
+z_index = 5
+position = Vector2(7517, 1303)
+rotation = 0.418874
+scale = Vector2(2, 3.84)
+
+[node name="PankScene5" parent="MapLayout/doors" instance=ExtResource("12_glinl")]
+z_index = 5
+position = Vector2(7453, 1297)
+rotation = 0.0998858
+scale = Vector2(2, 3.125)
+
+[node name="PankScene6" parent="MapLayout/doors" instance=ExtResource("12_glinl")]
+z_index = 5
+position = Vector2(7374, 1301)
+rotation = 0.0998858
+scale = Vector2(2, 3.125)
+
+[node name="PankScene7" parent="MapLayout/doors" instance=ExtResource("12_glinl")]
+z_index = 5
+position = Vector2(7412, 1300)
+rotation = 0.00897129
+scale = Vector2(2, 3.125)
+
 [node name="Pirates" type="Node" parent="."]
 
 [node name="Pirate" parent="Pirates" instance=ExtResource("6_kul4i")]
 position = Vector2(6993, 1313)
+
+[node name="Pirate2" parent="Pirates" instance=ExtResource("8_glinl")]
+position = Vector2(4704, 1316)
+
+[node name="Pirate3" parent="Pirates" instance=ExtResource("6_kul4i")]
+position = Vector2(3828, 1315)
+
+[node name="Pirate4" parent="Pirates" instance=ExtResource("8_glinl")]
+position = Vector2(1880, 1324)
+
+[node name="Pirate5" parent="Pirates" instance=ExtResource("6_kul4i")]
+position = Vector2(1719, 863)
+
+[node name="Pirate6" parent="Pirates" instance=ExtResource("6_kul4i")]
+position = Vector2(1231, 864)
+
+[node name="Pirate7" parent="Pirates" instance=ExtResource("6_kul4i")]
+position = Vector2(1663, 1705)
+
+[node name="Pirate8" parent="Pirates" instance=ExtResource("8_glinl")]
+position = Vector2(2449, 2348)
+
+[node name="Pirate9" parent="Pirates" instance=ExtResource("6_kul4i")]
+position = Vector2(2757, 2858)
+
+[node name="Pirate10" parent="Pirates" instance=ExtResource("8_glinl")]
+position = Vector2(3430, 1703)
+
+[node name="Pirate11" parent="Pirates" instance=ExtResource("6_kul4i")]
+position = Vector2(4066, 2923)
+
+[node name="Pirate12" parent="Pirates" instance=ExtResource("8_glinl")]
+position = Vector2(5048, 2920)
+
+[node name="Pirate13" parent="Pirates" instance=ExtResource("6_kul4i")]
+position = Vector2(4989, 2472)
+
+[node name="Pirate14" parent="Pirates" instance=ExtResource("6_kul4i")]
+position = Vector2(5869, 2539)
+
+[node name="Pirate15" parent="Pirates" instance=ExtResource("8_glinl")]
+position = Vector2(5903, 2861)
+
+[node name="Pirate16" parent="Pirates" instance=ExtResource("6_kul4i")]
+position = Vector2(7338, 1643)
+
+[node name="Pirate17" parent="Pirates" instance=ExtResource("8_glinl")]
+position = Vector2(7019, 1648)
+
+[node name="Pirate18" parent="Pirates" instance=ExtResource("8_glinl")]
+position = Vector2(6473, 873)
 
 [node name="Cats" type="Node" parent="."]
 
 [node name="cat" parent="Cats" instance=ExtResource("7_buohc")]
 z_index = 2
 position = Vector2(6295, 1360)
+
+[node name="CharacterBody2D" parent="Cats" instance=ExtResource("7_buohc")]
+position = Vector2(4463, 918)
+
+[node name="CharacterBody2D2" parent="Cats" instance=ExtResource("7_buohc")]
+position = Vector2(4153, 725)
+
+[node name="CharacterBody2D3" parent="Cats" instance=ExtResource("7_buohc")]
+position = Vector2(3427, 722)
+
+[node name="CharacterBody2D4" parent="Cats" instance=ExtResource("7_buohc")]
+position = Vector2(4382, 527)
+
+[node name="CharacterBody2D5" parent="Cats" instance=ExtResource("7_buohc")]
+position = Vector2(3686, 348)
+
+[node name="CharacterBody2D6" parent="Cats" instance=ExtResource("7_buohc")]
+position = Vector2(4063, 81)
+
+[node name="CharacterBody2D7" parent="Cats" instance=ExtResource("7_buohc")]
+z_index = 2
+position = Vector2(5971, 1167)
+
+[node name="CharacterBody2D8" parent="Cats" instance=ExtResource("7_buohc")]
+position = Vector2(7090, 661)
+
+[node name="CharacterBody2D9" parent="Cats" instance=ExtResource("7_buohc")]
+z_index = 2
+position = Vector2(6932, 1941)
+
+[node name="CharacterBody2D10" parent="Cats" instance=ExtResource("7_buohc")]
+z_index = 2
+position = Vector2(3858, 2517)
+
+[node name="CharacterBody2D11" parent="Cats" instance=ExtResource("7_buohc")]
+z_index = 3
+position = Vector2(3954, 1814)
+
+[node name="CharacterBody2D12" parent="Cats" instance=ExtResource("7_buohc")]
+z_index = 2
+position = Vector2(5790, 2068)
+
+[node name="CharacterBody2D13" parent="Cats" instance=ExtResource("7_buohc")]
+z_index = 2
+position = Vector2(2529, 1615)
+
+[node name="CharacterBody2D14" parent="Cats" instance=ExtResource("7_buohc")]
+position = Vector2(2117, 970)
+
+[node name="CharacterBody2D15" parent="Cats" instance=ExtResource("7_buohc")]
+z_index = 2
+position = Vector2(2242, 2003)
+
+[node name="CharacterBody2D16" parent="Cats" instance=ExtResource("7_buohc")]
+z_index = 2
+position = Vector2(1724, 2004)
+
+[node name="CharacterBody2D17" parent="Cats" instance=ExtResource("7_buohc")]
+z_index = 2
+position = Vector2(3154, 2004)
+
+[node name="CharacterBody2D18" parent="Cats" instance=ExtResource("7_buohc")]
+z_index = 2
+position = Vector2(2529, 2579)
+
+[node name="CharacterBody2D19" parent="Cats" instance=ExtResource("7_buohc")]
+z_index = 2
+position = Vector2(3854, 2258)
 
 [node name="PickUps" type="Node" parent="."]
 
@@ -775,8 +1023,18 @@ position = Vector2(6400, 1125)
 z_index = 2
 position = Vector2(6706, 1091)
 
-[node name="Biscuit" parent="PickUps" instance=ExtResource("7_kul4i")]
+[node name="Biscuit" parent="PickUps"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 position = Vector2(7613, 1310)
+script = null
 
 [node name="GameManager" parent="." instance=ExtResource("10_7gi1t")]
 unique_name_in_owner = true
@@ -786,50 +1044,6 @@ sound = NodePath("../../AudioStreamPlayer")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GameManager"]
 stream = ExtResource("11_fsxsm")
-
-[node name="doors" type="Node" parent="."]
-
-[node name="PankScene" parent="doors" instance=ExtResource("12_glinl")]
-z_index = 5
-position = Vector2(7275, 1298)
-rotation = 0.0998858
-scale = Vector2(2, 3.125)
-
-[node name="PankScene2" parent="doors" instance=ExtResource("12_glinl")]
-z_index = 5
-position = Vector2(7319, 1299)
-rotation = -0.0352265
-scale = Vector2(2, 3.125)
-
-[node name="PankScene3" parent="doors" instance=ExtResource("12_glinl")]
-z_index = 5
-position = Vector2(7227, 1302)
-rotation = 0.165801
-scale = Vector2(2.13, 3.615)
-
-[node name="PankScene4" parent="doors" instance=ExtResource("12_glinl")]
-z_index = 5
-position = Vector2(7517, 1303)
-rotation = 0.418874
-scale = Vector2(2, 3.84)
-
-[node name="PankScene5" parent="doors" instance=ExtResource("12_glinl")]
-z_index = 5
-position = Vector2(7453, 1297)
-rotation = 0.0998858
-scale = Vector2(2, 3.125)
-
-[node name="PankScene6" parent="doors" instance=ExtResource("12_glinl")]
-z_index = 5
-position = Vector2(7374, 1301)
-rotation = 0.0998858
-scale = Vector2(2, 3.125)
-
-[node name="PankScene7" parent="doors" instance=ExtResource("12_glinl")]
-z_index = 5
-position = Vector2(7412, 1300)
-rotation = 0.00897129
-scale = Vector2(2, 3.125)
 
 [editable path="GameManager"]
 [editable path="GameManager/Hud"]
