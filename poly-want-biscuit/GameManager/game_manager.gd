@@ -7,6 +7,9 @@ enum STATES{game,death,win}
 
 @onready var hud = $Hud
 @onready var player = %Parot
+@onready var camera = %camera
+
+var camera_zoom_base
 
 func _process(delta):
 	match(state):
@@ -18,6 +21,9 @@ func _process(delta):
 				get_tree().change_scene_to_file("res://Game/main_menu.tscn")
 			pass
 		STATES.win:
+			var z = lerp(camera.zoom.x, camera_zoom_base*2,0.02)
+			camera.zoom = Vector2(z,z)
+			
 			if(Input.is_action_just_pressed("restart")):
 				load("res://Game/main_menu.tscn")
 			pass
@@ -31,6 +37,13 @@ func got_key():
 
 func win():
 	print("won")
+	player.WinAnim()
+	state = STATES.win
+	
+	#camera
+	camera_zoom_base = camera.zoom.x
+	camera.drag_horizontal_enabled = false;
+	camera.drag_vertical_enabled = false;
 	pass
 	
 func player_died():
@@ -38,3 +51,6 @@ func player_died():
 	state = STATES.death
 	print("entered death game state")
 	pass
+
+func lerp(a, b, t):
+	return (1 - t) * a + t * b

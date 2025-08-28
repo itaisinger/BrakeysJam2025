@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 #state machine
-enum STATES { idle, air, collect, die, shout }
+enum STATES { idle, air, collect, die, shout, win }
 var state = STATES.air
 var state_prev = state
 var state_changed = false
@@ -35,22 +35,11 @@ var timer = 0
 func _ready() -> void:
 	preload("res://Game/main_menu.tscn")
 	var root = get_tree().root.get_child(1)
-	root.connect("key_pickedup",_key_pickedup)
+	#root.connect("key_pickedup",_key_pickedup)
 	$hitbox.connect("area_entered",nmeCollided)
 	#anim.connect("animation_finished", Callable(self, "_on_animation_finished"))
 
-func nmeCollided(area):
-	print("nme collided")
-	if area.is_in_group("enemies"):
-		Death()
-	pass
 
-#not in use
-func _key_pickedup():
-	$Hud.add_key()
-	print("key")
-	state = STATES.collect;
-	anim.play("collect")
 	
 func _physics_process(delta: float) -> void:
 	player_data.player_position=position
@@ -67,6 +56,7 @@ func _physics_process(delta: float) -> void:
 		STATES.collect: collect_state()
 		STATES.shout: 	shout_state(delta)
 		STATES.die: 	die_state()
+		STATES.win: 	win_state()
 	state_changed = state_prev != state
 	
 	#move	
@@ -128,7 +118,8 @@ func shout_state(delta):
 	
 	timer -= delta
 	if(timer <= 0):
-		if(grounded): state = STATES.idle
+		if(grounded): 
+			state = STATES.idle
 		else: 
 			anim.play("flying")
 			state = STATES.air
@@ -139,6 +130,7 @@ func collect_state():
 	
 	await anim.animation_finished
 	yspd = -shoutforce
+	anim.play("flying")
 	state = STATES.air
 	pass
 func die_state():
@@ -149,12 +141,17 @@ func die_state():
 	scale = Vector2(lerp(scale.x,6.0,0.2),lerp(scale.x,6.0,0.2))
 	#signal die
 	pass
+func win_state():
+	xspd = 0
+	yspd = 0
+	pass
+#########################################
 	
-	
-	#########################################
-	#
-	#
-
+func nmeCollided(area):
+	print("nme collided")
+	if area.is_in_group("enemies"):
+		Death()
+	pass
 
 func Death():
 	state = STATES.die
@@ -188,6 +185,10 @@ func Shout():
 func got_key():
 	state = STATES.collect;
 	anim.play("collect")
+
+func WinAnim():
+	anim.play("win")
+	state = STATES.win
 
 func approach(val,target,spd) -> float:
 	if(val < target): return min(target,val+spd)

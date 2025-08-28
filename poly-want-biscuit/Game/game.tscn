@@ -213,11 +213,12 @@ unique_name_in_owner = true
 position = Vector2(7029, 1122)
 scale = Vector2(2, 2)
 
-[node name="Camera2D" type="Camera2D" parent="Parot"]
-position = Vector2(-35, 26.9999)
+[node name="camera" type="Camera2D" parent="Parot"]
+unique_name_in_owner = true
 scale = Vector2(10, 10)
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
+position_smoothing_speed = 3.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
