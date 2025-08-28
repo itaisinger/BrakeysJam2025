@@ -22,7 +22,6 @@ var xfric = .3
 
 #logic
 var screech_visible=false
-var dead=false
 signal parrot_screech(word)
 signal key_pickedup
 var size = abs(scale.x)
@@ -36,8 +35,14 @@ func _ready() -> void:
 	preload("res://Game/main_menu.tscn")
 	var root = get_tree().root.get_child(1)
 	root.connect("key_pickedup",_key_pickedup)
+	$hitbox.connect("area_entered",nmeCollided)
 	#anim.connect("animation_finished", Callable(self, "_on_animation_finished"))
-	
+
+func nmeCollided(area):
+	print("nme collided")
+	if area.is_in_group("enemies"):
+		Death()
+	pass
 
 func _key_pickedup():
 	$Hud.add_key()
@@ -59,7 +64,7 @@ func _physics_process(delta: float) -> void:
 		STATES.idle: 	idle_state()
 		STATES.air: 	air_state()
 		STATES.collect: collect_state()
-		STATES.shout: shout_state(delta)
+		STATES.shout: 	shout_state(delta)
 		STATES.die: 	die_state()
 	state_changed = state_prev != state
 	
@@ -141,7 +146,11 @@ func collect_state():
 	pass
 		
 func die_state():
-	if(state_changed): anim.play("death")
+	if(state_changed): 
+		anim.play("death")
+	xspd = 0
+	yspd = 0
+	scale = Vector2(lerp(scale.x,6.0,0.1),lerp(scale.x,6.0,0.1))
 	#signal die
 	pass
 	
@@ -154,29 +163,15 @@ func die_state():
 
 
 ##check this
-#func _on_area_2d_area_entered(area: Area2D) -> void:
-	#if area.is_in_group("enemies"):
-		#Death()
-		#pass
+func Death():
+	state = STATES.die
+	anim.play("death")
+	$Hud.death_screan()
 
-##check this
-#func Death():
-	#dead=true
-	##anim.scale=Vector2(2,2)
-	#$Hud.death_screan()
-	#anim.play("death")
-	#print("rip")
 
-func ResetAnim():
-	#if(state == STATES.idle): anim.play("idle")
-	#if(state == STATES.air): anim.play("air")
-	#match(state):
-		#STATES.idle: 	anim.play("idle")
-		#STATES.air: 	anim.play("air")
-		#STATES.collect: anim.play("collect")
-		#STATES.die: 	anim.play("die")
-	pass
-		
+func lerp(a, b, t):
+	return (1 - t) * a + t * b
+
 func IsGrounded() -> bool:
 	for area in $"land hitbox".get_overlapping_areas():
 		if(area.is_in_group("platforms")):
@@ -200,12 +195,6 @@ func approach(val,target,spd) -> float:
 	if(val < target): return min(target,val+spd)
 	if(val > target): return max(target,val-spd)
 	return val
-
-func lerp(val,target,spd) -> float:
-	if(val < target): return val + abs(spd*(target-val))
-	if(val > target): return val + abs(spd*(target-val))
-	return val
-
 	
 ##check this
 #func _on_land_detection_area_entered(area: Area2D) -> void:
