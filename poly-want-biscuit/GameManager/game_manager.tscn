@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dahmtyw0axlap"]
+[gd_scene load_steps=3 format=3 uid="uid://dahmtyw0axlap"]
 
 [ext_resource type="Script" uid="uid://d17d0wjwwrnbb" path="res://GameManager/game_manager.gd" id="1_5dfvm"]
+[ext_resource type="PackedScene" uid="uid://bnsw1vitrtw8y" path="res://Hud/canvas_layer.tscn" id="2_rt1ce"]
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_5dfvm")
+
+[node name="Hud" parent="." instance=ExtResource("2_rt1ce")]
+unique_name_in_owner = true

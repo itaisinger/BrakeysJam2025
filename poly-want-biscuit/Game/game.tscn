@@ -1,6 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://lsn760ks2os"]
+[gd_scene load_steps=20 format=3 uid="uid://lsn760ks2os"]
 
-[ext_resource type="Script" path="res://Game/game.gd" id="1_qmv3x"]
+[ext_resource type="Script" uid="uid://c4nm71gqtur4a" path="res://Game/game.gd" id="1_qmv3x"]
 [ext_resource type="Texture2D" uid="uid://b6b1y2m4gnynn" path="res://platform/tileSet.png" id="2_1r4le"]
 [ext_resource type="PackedScene" uid="uid://o0wiu6jx5stv" path="res://parrot/scene/parrot.tscn" id="2_7raqb"]
 [ext_resource type="PackedScene" uid="uid://dter24rn13aa5" path="res://platform/platform.tscn" id="3_7raqb"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://besq32tbr5rgo" path="res://Pirate/pirate.tscn" id="6_kul4i"]
 [ext_resource type="PackedScene" uid="uid://cd3m75bil8uly" path="res://cat/cat.tscn" id="7_buohc"]
 [ext_resource type="PackedScene" uid="uid://7mk0h5egqebe" path="res://Biscuit/biscuit scene.tscn" id="7_kul4i"]
+[ext_resource type="PackedScene" uid="uid://dahmtyw0axlap" path="res://GameManager/game_manager.tscn" id="10_7gi1t"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jcm6v"]
 distance = -1096.0
@@ -208,6 +209,7 @@ size = Vector2(559.5, 6)
 script = ExtResource("1_qmv3x")
 
 [node name="Parot" parent="." instance=ExtResource("2_7raqb")]
+unique_name_in_owner = true
 position = Vector2(7029, 1122)
 scale = Vector2(2, 2)
 
@@ -216,6 +218,8 @@ position = Vector2(-35, 26.9999)
 scale = Vector2(10, 10)
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [node name="Game Borders" type="Node" parent="."]
 
@@ -277,6 +281,10 @@ position = Vector2(6993, 1313)
 
 [node name="Cats" type="Node" parent="."]
 
+[node name="cat" parent="Cats" instance=ExtResource("7_buohc")]
+z_index = 2
+position = Vector2(6295, 1360)
+
 [node name="PickUps" type="Node" parent="."]
 
 [node name="Key" parent="PickUps" instance=ExtResource("5_fwxkx")]
@@ -284,7 +292,8 @@ z_index = 2
 position = Vector2(7197, 1084)
 
 [node name="Biscuit" parent="PickUps" instance=ExtResource("7_kul4i")]
-position = Vector2(7373, 1287)
+z_index = 20
+position = Vector2(6719, 1074)
 
 [node name="paltform_spawner" type="Node" parent="."]
 
@@ -387,6 +396,5 @@ z_index = 1
 position = Vector2(-0.75, -7)
 shape = SubResource("RectangleShape2D_kul4i")
 
-[node name="cat" parent="." instance=ExtResource("7_buohc")]
-z_index = 2
-position = Vector2(6295, 1360)
+[node name="GameManager" parent="." instance=ExtResource("10_7gi1t")]
+unique_name_in_owner = true

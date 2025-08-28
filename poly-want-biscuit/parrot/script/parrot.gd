@@ -29,6 +29,7 @@ var timer = 0
 
 @onready var anim = $AnimatedSprite2D
 @onready var anim_shout = $anim_shout
+@onready var game_manager = %GameManager
 
 
 func _ready() -> void:
@@ -44,6 +45,7 @@ func nmeCollided(area):
 		Death()
 	pass
 
+#not in use
 func _key_pickedup():
 	$Hud.add_key()
 	print("key")
@@ -51,7 +53,6 @@ func _key_pickedup():
 	anim.play("collect")
 	
 func _physics_process(delta: float) -> void:
-	if(Input.is_action_just_pressed("restart")): get_tree().reload_current_scene()
 	player_data.player_position=position
 	#movement
 	grounded = IsGrounded()
@@ -102,7 +103,6 @@ func idle_state():
 	if(Input.is_action_pressed("Look_Right")): dir = 1
 	if(Input.is_action_pressed("Look_Left")): dir = -1
 	pass
-	
 func air_state():
 	
 	xspd = natural_spd
@@ -120,8 +120,6 @@ func air_state():
 	
 	if(yspd > 0 && anim.animation == "jump"):
 		anim.play("flying") 
-	
-
 func shout_state(delta):
 	if(state_changed):
 		$shout_spr.visible = true
@@ -135,7 +133,6 @@ func shout_state(delta):
 			anim.play("flying")
 			state = STATES.air
 	pass
-
 func collect_state():
 	xspd = 0
 	yspd = 0
@@ -144,13 +141,12 @@ func collect_state():
 	yspd = -shoutforce
 	state = STATES.air
 	pass
-		
 func die_state():
-	if(state_changed): 
+	if(state_changed):
 		anim.play("death")
 	xspd = 0
 	yspd = 0
-	scale = Vector2(lerp(scale.x,6.0,0.1),lerp(scale.x,6.0,0.1))
+	scale = Vector2(lerp(scale.x,6.0,0.2),lerp(scale.x,6.0,0.2))
 	#signal die
 	pass
 	
@@ -160,14 +156,12 @@ func die_state():
 	#
 
 
-
-
-##check this
 func Death():
 	state = STATES.die
 	anim.play("death")
-	$Hud.death_screan()
-
+	z_index = 1000
+	visibility_layer = 10
+	game_manager.player_died()
 
 func lerp(a, b, t):
 	return (1 - t) * a + t * b
@@ -190,6 +184,10 @@ func Shout():
 	state = STATES.shout
 	timer = 1
 	pass
+
+func got_key():
+	state = STATES.collect;
+	anim.play("collect")
 
 func approach(val,target,spd) -> float:
 	if(val < target): return min(target,val+spd)
