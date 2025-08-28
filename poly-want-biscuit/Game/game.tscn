@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://lsn760ks2os"]
+[gd_scene load_steps=25 format=3 uid="uid://lsn760ks2os"]
 
 [ext_resource type="Script" uid="uid://c4nm71gqtur4a" path="res://Game/game.gd" id="1_qmv3x"]
 [ext_resource type="Texture2D" uid="uid://b6b1y2m4gnynn" path="res://platform/tileSet.png" id="2_1r4le"]
 [ext_resource type="PackedScene" uid="uid://o0wiu6jx5stv" path="res://parrot/scene/parrot.tscn" id="2_7raqb"]
+[ext_resource type="Script" uid="uid://dlso52irtwynr" path="res://Game/cameraScript.gd" id="3_4lqr4"]
 [ext_resource type="PackedScene" uid="uid://dter24rn13aa5" path="res://platform/platform.tscn" id="3_7raqb"]
 [ext_resource type="Texture2D" uid="uid://7rgecrx85ac3" path="res://Game/tileSet.png" id="3_jcm6v"]
 [ext_resource type="PackedScene" uid="uid://dl0bm27a1ycom" path="res://key/key.tscn" id="5_fwxkx"]
@@ -227,13 +228,14 @@ scale = Vector2(10, 10)
 offset = Vector2(0, 80)
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
-position_smoothing_speed = 3.0
+position_smoothing_speed = 4.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
-drag_left_margin = 0.4
-drag_top_margin = 0.4
-drag_right_margin = 0.4
-drag_bottom_margin = 0.4
+drag_left_margin = 0.8
+drag_top_margin = 0.8
+drag_right_margin = 0.9
+drag_bottom_margin = 0.9
+script = ExtResource("3_4lqr4")
 
 [node name="Game Borders" type="Node" parent="."]
 
