@@ -20,7 +20,7 @@ var just_died=true
 
 #bhvr vars
 var hear_distance = 600
-var awake_dis = 80
+var awake_dis = 150
 var jumpforce = 1
 var spd = 1
 var moving_left=false
@@ -120,7 +120,8 @@ func state_walk() -> void:
 		state = CAT_STATES.hold
 		timer = 1
 func state_hold(delta_time) -> void:
-	
+	update_dir()
+	anim_normal.play("hold")
 	timer -= delta_time
 	yspd = 0
 	if(timer <= 0):
@@ -136,11 +137,12 @@ func state_dead() -> void:
 	if just_died:
 		$anim.play("dead")
 		just_died=false
-	else:
-		$anim.play("deadforeal")
+		$Area2D.monitorable = false
 	pass
 
 func jump() -> void:
+	#$ground_delection.monitoring = false;
+	#no_col_cd = 
 	position.y -= 10 #get out of ground
 	yspd -= jumpforce*2
 	state = CAT_STATES.jump
@@ -151,10 +153,13 @@ func jump() -> void:
 	voice_cooldown = VOICE_COOLDOWN_TIME 
 func update_dir() -> void:
 	moving_left=position.x>player_pos.x
+	print("==")
+	print(scale.x)
 	if moving_left:
 		scale.x = -1 * abs(scale.x)
 	else:
 		scale.x = abs(scale.x)
+	print(scale.x)
 
 func hear_sound(voice) -> void:
 	print(" cat recognise screech")
