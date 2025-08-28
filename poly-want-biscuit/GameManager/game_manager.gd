@@ -36,7 +36,10 @@ func got_key():
 	keys += 1;
 	hud.set_keys(keys)
 	player.got_key()
-	print(keys)
+
+func remove_key():
+	keys -= 1
+	hud.set_keys(keys);
 
 func win():
 	print("won")

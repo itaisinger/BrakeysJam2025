@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://lsn760ks2os"]
+[gd_scene load_steps=23 format=3 uid="uid://lsn760ks2os"]
 
 [ext_resource type="Script" uid="uid://c4nm71gqtur4a" path="res://Game/game.gd" id="1_qmv3x"]
 [ext_resource type="Texture2D" uid="uid://b6b1y2m4gnynn" path="res://platform/tileSet.png" id="2_1r4le"]
@@ -7,8 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://7rgecrx85ac3" path="res://Game/tileSet.png" id="3_jcm6v"]
 [ext_resource type="PackedScene" uid="uid://dl0bm27a1ycom" path="res://key/key.tscn" id="5_fwxkx"]
 [ext_resource type="PackedScene" uid="uid://besq32tbr5rgo" path="res://Pirate/pirate.tscn" id="6_kul4i"]
-[ext_resource type="PackedScene" uid="uid://ika5g2if8um0" path="res://cat/cat.tscn" id="7_buohc"]
+[ext_resource type="PackedScene" uid="uid://cd3m75bil8uly" path="res://cat/cat.tscn" id="7_buohc"]
+[ext_resource type="PackedScene" uid="uid://7mk0h5egqebe" path="res://Biscuit/biscuit scene.tscn" id="7_kul4i"]
 [ext_resource type="PackedScene" uid="uid://dahmtyw0axlap" path="res://GameManager/game_manager.tscn" id="10_7gi1t"]
+[ext_resource type="AudioStream" uid="uid://d177qve2cclqw" path="res://parrot/Audio/eat biscuit/eat biscuit.wav" id="11_fsxsm"]
+[ext_resource type="PackedScene" uid="uid://rjff7nsnxe4a" path="res://plank/pankScene.tscn" id="12_glinl"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jcm6v"]
 distance = -1096.0
@@ -763,21 +766,75 @@ position = Vector2(6295, 1360)
 
 [node name="Key" parent="PickUps" instance=ExtResource("5_fwxkx")]
 z_index = 2
-position = Vector2(7197, 1084)
+position = Vector2(7144, 1093)
 
-[node name="Biscuit" parent="PickUps"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-z_index = 20
-position = Vector2(6719, 1074)
-script = null
+[node name="Key2" parent="PickUps" instance=ExtResource("5_fwxkx")]
+z_index = 2
+position = Vector2(6208, 1100)
+
+[node name="Key3" parent="PickUps" instance=ExtResource("5_fwxkx")]
+z_index = 2
+position = Vector2(6400, 1125)
+
+[node name="Key4" parent="PickUps" instance=ExtResource("5_fwxkx")]
+z_index = 2
+position = Vector2(6706, 1091)
+
+[node name="Biscuit" parent="PickUps" instance=ExtResource("7_kul4i")]
+position = Vector2(7613, 1310)
 
 [node name="GameManager" parent="." instance=ExtResource("10_7gi1t")]
 unique_name_in_owner = true
+
+[node name="drawer" parent="GameManager/Hud" index="3" node_paths=PackedStringArray("sound")]
+sound = NodePath("../../AudioStreamPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GameManager"]
+stream = ExtResource("11_fsxsm")
+
+[node name="doors" type="Node" parent="."]
+
+[node name="PankScene" parent="doors" instance=ExtResource("12_glinl")]
+z_index = 5
+position = Vector2(7275, 1298)
+rotation = 0.0998858
+scale = Vector2(2, 3.125)
+
+[node name="PankScene2" parent="doors" instance=ExtResource("12_glinl")]
+z_index = 5
+position = Vector2(7319, 1299)
+rotation = -0.0352265
+scale = Vector2(2, 3.125)
+
+[node name="PankScene3" parent="doors" instance=ExtResource("12_glinl")]
+z_index = 5
+position = Vector2(7227, 1302)
+rotation = 0.165801
+scale = Vector2(2.13, 3.615)
+
+[node name="PankScene4" parent="doors" instance=ExtResource("12_glinl")]
+z_index = 5
+position = Vector2(7517, 1303)
+rotation = 0.418874
+scale = Vector2(2, 3.84)
+
+[node name="PankScene5" parent="doors" instance=ExtResource("12_glinl")]
+z_index = 5
+position = Vector2(7453, 1297)
+rotation = 0.0998858
+scale = Vector2(2, 3.125)
+
+[node name="PankScene6" parent="doors" instance=ExtResource("12_glinl")]
+z_index = 5
+position = Vector2(7374, 1301)
+rotation = 0.0998858
+scale = Vector2(2, 3.125)
+
+[node name="PankScene7" parent="doors" instance=ExtResource("12_glinl")]
+z_index = 5
+position = Vector2(7412, 1300)
+rotation = 0.00897129
+scale = Vector2(2, 3.125)
+
+[editable path="GameManager"]
+[editable path="GameManager/Hud"]

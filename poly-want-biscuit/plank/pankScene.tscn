@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://rjff7nsnxe4a"]
+
+[ext_resource type="Script" uid="uid://buvt0pobetvy7" path="res://plank/pank_script.gd" id="1_hc8t2"]
+[ext_resource type="Texture2D" uid="uid://b6b1y2m4gnynn" path="res://platform/tileSet.png" id="1_oqi1o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hc8t2"]
+size = Vector2(6, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oqi1o"]
+size = Vector2(13, 64)
+
+[node name="PankScene" type="Area2D"]
+scale = Vector2(2, 2)
+collision_layer = 3
+collision_mask = 0
+script = ExtResource("1_hc8t2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 5
+texture = ExtResource("1_oqi1o")
+region_enabled = true
+region_rect = Rect2(8.64485, 160.066, 13.938, 63.8957)
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hc8t2")
+
+[node name="interact box" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interact box"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_oqi1o")
+debug_color = Color(0.00162908, 0.639353, 0.365301, 0.42)
