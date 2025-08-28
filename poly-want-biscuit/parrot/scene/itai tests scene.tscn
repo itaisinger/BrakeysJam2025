@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dyk0sk5isc0ip"]
+[gd_scene load_steps=4 format=3 uid="uid://dyk0sk5isc0ip"]
 
 [ext_resource type="PackedScene" uid="uid://dter24rn13aa5" path="res://platform/platform.tscn" id="1_s1m3j"]
 [ext_resource type="PackedScene" uid="uid://o0wiu6jx5stv" path="res://parrot/scene/parrot.tscn" id="2_71osc"]
+[ext_resource type="PackedScene" uid="uid://cd3m75bil8uly" path="res://cat/cat.tscn" id="3_71osc"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -11,6 +12,7 @@ scale = Vector2(21.5296, 1)
 
 [node name="Parot" parent="." instance=ExtResource("2_71osc")]
 position = Vector2(365, 322)
+scale = Vector2(2, 2)
 
 [node name="Camera2D" type="Camera2D" parent="Parot"]
 position = Vector2(2, 3)
@@ -32,3 +34,6 @@ scale = Vector2(4.64, 1)
 position = Vector2(984, 330)
 rotation = 1.5708
 scale = Vector2(4.64, 1)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_71osc")]
+position = Vector2(775, 271)

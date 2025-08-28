@@ -14,9 +14,12 @@ var timer = 0
 
 func _ready():
 	hud.set_keys(0,keys_left)
+	randomize()
 	
 
 func _process(delta):
+	
+	if(Input.is_action_just_pressed("restart")): get_tree().reload_current_scene()
 	
 	timer = max(0,timer-delta)
 	

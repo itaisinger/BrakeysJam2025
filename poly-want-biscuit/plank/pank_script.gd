@@ -1,7 +1,7 @@
 extends Area2D
 
 @onready var game_manager = %GameManager
-
+@onready var anim = $key_anim
 func _ready():
 	$"interact box".connect("area_entered",interact)
 	pass

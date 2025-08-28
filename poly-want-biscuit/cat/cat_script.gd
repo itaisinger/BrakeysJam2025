@@ -82,25 +82,27 @@ func _physics_process(delta: float) -> void:
 
 
 func state_sleep() -> void:
-	if position.distance_to(player_data.player_position)>1000:
+	if position.distance_to(player_data.player_position)<1000:
 		sfx_player.stream = cat_sleep_voice[0]
 		sfx_player.play()
 	if(player_pos.distance_to(position) < awake_dis):
-		position.y-=50
-		grounded=false
-		state_walk()
-		if (position.x>player_data.player_position.x):
-			moving_left=false
-			dir=-1
-		else:
-			moving_left=true
-			dir=1
-		if dir<0:
-			scale.x = abs(scale.x)
-		else:
-			scale.x = -abs(scale.x)
-		#update_dir()
-		jump()
+		print("waking up")
+		#position.y-=50
+		#grounded=false
+		#state_walk()
+		#if (position.x>player_data.player_position.x):
+			#moving_left=false
+			#dir=-1
+		#else:
+			#moving_left=true
+			#dir=1
+		#if dir<0:
+			#scale.x = abs(scale.x)
+		#else:
+			#scale.x = -abs(scale.x)
+		update_dir()
+		state = CAT_STATES.hold
+		timer = 2
 
 func is_grounded():
 	for area in $ground_delection.get_overlapping_areas():
@@ -116,21 +118,19 @@ func state_walk() -> void:
 	if(!grounded):
 		print("ungroundeed")
 		state = CAT_STATES.hold
-		timer = 2
-		
+		timer = 1
 func state_hold(delta_time) -> void:
+	
 	timer -= delta_time
 	yspd = 0
 	if(timer <= 0):
 		jump()
-
 func state_jump() -> void:
 	#fall
 	position.x += dir * spd*5
 	yspd += grav
 	position.y += yspd
 	if(grounded): state = CAT_STATES.dead
-
 func state_dead() -> void:
 	#make sure the cat doesnt have a hitbox here
 	if just_died:
@@ -140,8 +140,8 @@ func state_dead() -> void:
 		$anim.play("deadforeal")
 	pass
 
-
 func jump() -> void:
+	position.y -= 10 #get out of ground
 	yspd -= jumpforce*2
 	state = CAT_STATES.jump
 	anim_normal.play("jump")
@@ -149,8 +149,6 @@ func jump() -> void:
 	sfx_player.stream = random_sfx
 	sfx_player.play()
 	voice_cooldown = VOICE_COOLDOWN_TIME 
-	#update_dir()
-
 func update_dir() -> void:
 	moving_left=position.x>player_pos.x
 	if moving_left:
@@ -186,7 +184,6 @@ func hear_sound(voice) -> void:
 		else:
 			scale.x = -abs(scale.x)
 
-
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	#if area.is_in_group("platforms"):
 		#	grounded=true
@@ -200,6 +197,5 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 #func _on_area_2d_area_exited(area: Area2D) -> void:
 	#if area.is_in_group("platforms"):
 		#grounded=false
-
 func _on_timer_timeout() -> void:
 	screechable=true
