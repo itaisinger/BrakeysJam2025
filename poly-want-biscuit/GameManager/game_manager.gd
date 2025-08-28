@@ -29,6 +29,7 @@ func _process(delta):
 			pass
 		STATES.win:
 			var z = lerp(camera.zoom.x, camera_zoom_base*2,0.02)
+			camera.offset = Vector2(0, camera.offset.y * 0.1)
 			camera.zoom = Vector2(z,z)
 			
 			if(timer <= 0):
