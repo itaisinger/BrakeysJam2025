@@ -44,6 +44,7 @@ func _ready() -> void:
 
 	
 func _physics_process(delta: float) -> void:
+	sfx_player.pos = position
 	player_data.player_position=position
 	#movement
 	grounded = IsGrounded()
@@ -196,7 +197,6 @@ func got_key():
 
 func WinAnim():
 	anim.play("win")
-	sfx_player.play_eat_biscuit_sound()
 	state = STATES.win
 
 func approach(val,target,spd) -> float:

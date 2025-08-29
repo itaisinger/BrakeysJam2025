@@ -6,8 +6,11 @@ extends Node
 @export var get_key_parrot_voice: Array[AudioStream] = []
 @export var fly_parrot_audio: Array[AudioStream] = []
 
-
+var pos = Vector2(0,0)
 @onready var sfx_player = $AudioStreamPlayer
+
+func _process(delta: float) -> void:
+	sfx_player.position = pos
 
 func play_random_curse():
 	var random_sfx = curses_parrot_voice[randi() % curses_parrot_voice.size()]
