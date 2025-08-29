@@ -8,5 +8,6 @@
 script = ExtResource("1_vsa65")
 menuOst = ExtResource("2_nvgks")
 gameOst = ExtResource("3_lmopn")
+volume = 0.97
 
 [node name="player" type="AudioStreamPlayer" parent="."]
