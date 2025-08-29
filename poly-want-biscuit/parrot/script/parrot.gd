@@ -32,6 +32,7 @@ var timer = 0
 @onready var anim_shout = $anim_shout
 @onready var game_manager = %GameManager
 @onready var sfx_player = $sfx_player
+@onready var black_screen  = %black_screen
 
 
 func _ready() -> void:
@@ -42,7 +43,6 @@ func _ready() -> void:
 	#anim.connect("animation_finished", Callable(self, "_on_animation_finished"))
 
 
-	
 func _physics_process(delta: float) -> void:
 	sfx_player.pos = position
 	player_data.player_position=position
@@ -60,14 +60,13 @@ func _physics_process(delta: float) -> void:
 		STATES.air: 	air_state()
 		STATES.collect: collect_state()
 		STATES.shout: 	shout_state(delta)
-		STATES.die: 	die_state()
+		STATES.die: 	die_state(delta)
 		STATES.win: 	win_state()
 	state_changed = state_prev != state
 	
-	#move	
+	#move
 	yspd = min(yspd,yspd_max)
 	position += Vector2(xspd,yspd)
-	#print(xspd)
 	move_and_slide()
 	
 	#visuals
@@ -78,10 +77,10 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Curse") or Input.is_action_just_pressed("Meow") :
 		if Input.is_action_just_pressed("Meow"):
 			emit_signal("parrot_screech",Globals.VOICES.meow)
-			sfx_player.play_random_curse()
+			sfx_player.play_random_meow()
 		else:
 			emit_signal("parrot_screech",Globals.VOICES.curse)
-			sfx_player.play_random_meow()
+			sfx_player.play_random_curse()
 		Shout()
 	pass
 	
@@ -139,12 +138,25 @@ func collect_state():
 	anim.play("flying")
 	state = STATES.air
 	pass
-func die_state():
-	if(state_changed):
-		anim.play("death")
-	xspd = 0
-	yspd = 0
-	scale = Vector2(lerp(scale.x,6.0,0.2),lerp(scale.x,6.0,0.2))
+func die_state(delta):
+	timer += delta
+	if(timer <= 0.15):
+		xspd = approach(xspd,0,xfric*0.1)
+		yspd += grav/2
+	elif(timer <= 0.7):
+		xspd = approach(xspd,0,xfric*0.2)
+		yspd = 0
+		scale = Vector2(lerp(scale.x,9.0,0.2),lerp(scale.x,9.0,0.2))
+	elif(timer <= 1.9):
+		yspd = 0
+		xspd = 0
+	elif(timer <= 3):
+		yspd = 0.5
+	else:
+		yspd = 0.5
+		black_screen.modulate.a = approach(black_screen.modulate.a,1,0.01)
+		#black_screen.z_index = z_index-1
+		black_screen.position = position
 	#signal die
 	pass
 func win_state():
@@ -152,7 +164,7 @@ func win_state():
 	yspd = 0
 	pass
 #########################################
-	
+
 func nmeCollided(area):
 	print("nme collided")
 	if area.is_in_group("enemies"):
@@ -166,11 +178,18 @@ func Death():
 	sfx_player.play_death_sound()
 	visibility_layer = 10
 	game_manager.player_died()
-
+	yspd -= jumpforce
+	xspd = -dir * jumpforce * 2
+	$hitbox.queue_free()
+	$"land hitbox".queue_free()
+	$"collision hitbox".queue_free()
+	timer = 0
+	
 func lerp(a, b, t):
 	return (1 - t) * a + t * b
 
 func IsGrounded() -> bool:
+	if(state == STATES.die): return false
 	for area in $"land hitbox".get_overlapping_areas():
 		if(area.is_in_group("platforms")):
 			return true
@@ -203,9 +222,3 @@ func approach(val,target,spd) -> float:
 	if(val < target): return min(target,val+spd)
 	if(val > target): return max(target,val-spd)
 	return val
-	
-##check this
-#func _on_land_detection_area_entered(area: Area2D) -> void:
-	#if area.is_in_group("platforms"):
-		#grounded=true
-		#xspd=0

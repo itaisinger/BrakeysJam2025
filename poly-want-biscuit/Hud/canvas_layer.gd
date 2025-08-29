@@ -21,12 +21,12 @@ func set_keys(n,left):
 
 func death_screen():
 	var tween = create_tween()
-	tween.tween_property($deathImage, "modulate:a", 1.0, 3).set_trans(Tween.TRANS_SINE).set_custom_interpolator(inter)
+	tween.tween_property($deathImage, "modulate:a", 1.0, 6).set_trans(Tween.TRANS_SINE).set_custom_interpolator(inter)
 
 func win_screen():
 	drawer.draw_win_screen()
 	pass
 	
 func inter(x):
-	return min(0.8, pow(x,3))
+	return pow(x,3)
 	
