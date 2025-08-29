@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://sk85g4g00rin"]
+
+[ext_resource type="Script" uid="uid://chubtytrofc8h" path="res://ost/ost_manager_script.gd" id="1_vsa65"]
+[ext_resource type="AudioStream" uid="uid://dt18ogerians3" path="res://ost/menu.wav" id="2_nvgks"]
+[ext_resource type="AudioStream" uid="uid://bobgdgx42u0vb" path="res://ost/game ost temp.mp3" id="3_lmopn"]
+
+[node name="OstManager" type="Node2D"]
+script = ExtResource("1_vsa65")
+menuOst = ExtResource("2_nvgks")
+gameOst = ExtResource("3_lmopn")
+
+[node name="player" type="AudioStreamPlayer" parent="."]

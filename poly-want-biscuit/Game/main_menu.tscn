@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://chjlj8gjc5r6f"]
+[gd_scene load_steps=9 format=3 uid="uid://chjlj8gjc5r6f"]
 
 [ext_resource type="Script" uid="uid://c4usft0gwpmri" path="res://Game/main_menu.gd" id="1_yltbk"]
 [ext_resource type="AudioStream" uid="uid://bthx7rxyg3qy0" path="res://Game/Main Menu Audio/starting sound/start 1.wav" id="2_444o2"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://cjt86nv4dfpd5" path="res://Game/Main Menu Audio/starting sound/start 2.wav" id="3_ceu5l"]
 [ext_resource type="AudioStream" uid="uid://cgsnf35wwsbx5" path="res://Game/Main Menu Audio/exit.wav" id="3_y67r4"]
 [ext_resource type="AudioStream" uid="uid://cta8nps2pil1m" path="res://Game/Main Menu Audio/starting sound/start 3.wav" id="4_bjiq0"]
+[ext_resource type="PackedScene" uid="uid://sk85g4g00rin" path="res://ost/ost_manager.tscn" id="8_ceu5l"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -60,6 +61,9 @@ wait_time = 2.3
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(617.5, 327)
+
+[node name="OstManager" parent="." instance=ExtResource("8_ceu5l")]
+isMenu = true
 
 [connection signal="focus_entered" from="VBoxContainer/StartButton" to="." method="_on_start_button_focus_entered"]
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

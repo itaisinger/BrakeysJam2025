@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://lsn760ks2os"]
+[gd_scene load_steps=29 format=3 uid="uid://lsn760ks2os"]
 
 [ext_resource type="Script" uid="uid://c4nm71gqtur4a" path="res://Game/game.gd" id="1_qmv3x"]
 [ext_resource type="Texture2D" uid="uid://b6b1y2m4gnynn" path="res://platform/tileSet.png" id="2_1r4le"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://cv4u17mmcggwf" path="res://icon.svg" id="15_qlwvw"]
 [ext_resource type="PackedScene" uid="uid://bsfi2tkt8uodm" path="res://Game/background/background.tscn" id="16_rpdke"]
 [ext_resource type="Texture2D" uid="uid://cif83meh0xqm" path="res://Game/background/back background.png" id="17_33n3b"]
+[ext_resource type="PackedScene" uid="uid://sk85g4g00rin" path="res://ost/ost_manager.tscn" id="18_rxmp4"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jcm6v"]
 distance = -1096.0
@@ -1098,6 +1099,8 @@ z_index = -10
 position = Vector2(4117, 1948)
 scale = Vector2(4.36875, 3.82593)
 texture = ExtResource("17_33n3b")
+
+[node name="OstManager" parent="." instance=ExtResource("18_rxmp4")]
 
 [editable path="GameManager"]
 [editable path="GameManager/Hud"]
