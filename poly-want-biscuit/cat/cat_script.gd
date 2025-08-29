@@ -111,11 +111,12 @@ func is_grounded():
 	
 func state_walk() -> void:
 	#walk
+	print(dir)
 	position.x += dir * spd
 	yspd = 0
 	position.y += grav*4
 	if(!grounded):
-		print("ungroundeed")
+		print("ungrounded")
 		state = CAT_STATES.hold
 		timer = 1
 func state_hold(delta_time) -> void:
@@ -152,13 +153,11 @@ func jump() -> void:
 	voice_cooldown = VOICE_COOLDOWN_TIME 
 func update_dir() -> void:
 	dir = -sign(position.x-player_pos.x)
-	print("==")
-	print(dir)
+
 	if dir == 1:
 		transform.x = Vector2(abs(scale.x),0)
 	else:
 		transform.x = Vector2(-abs(scale.x),0)
-	print(scale.x)
 
 func hear_sound(voice) -> void:
 	print(" cat recognise screech")
@@ -183,10 +182,10 @@ func hear_sound(voice) -> void:
 			state = CAT_STATES.walk
 			anim_normal.play("walk")
 			dir = -dir
-		if dir<0:
-			scale.x = abs(scale.x)
+		if dir == 1:
+			transform.x = Vector2(abs(scale.x),0)
 		else:
-			scale.x = -abs(scale.x)
+			transform.x = Vector2(-abs(scale.x),0)
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	#if area.is_in_group("platforms"):
