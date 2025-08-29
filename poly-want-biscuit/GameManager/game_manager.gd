@@ -8,6 +8,7 @@ enum STATES{game,death,win}
 @onready var hud = $Hud
 @onready var player = %Parot
 @onready var camera = %camera
+@onready var ost_manager = %OstManager
 
 var camera_zoom_base
 var timer = 0
@@ -20,6 +21,7 @@ func _ready():
 func _process(delta):
 	
 	if(Input.is_action_just_pressed("restart")): get_tree().reload_current_scene()
+	if(Input.is_action_just_pressed("key")): got_key()
 	
 	timer = max(0,timer-delta)
 	
@@ -44,6 +46,8 @@ func got_key():
 	keys += 1;
 	hud.set_keys(keys,keys_left)
 	player.got_key()
+	if(keys == keys_left):
+		ost_manager.win()
 
 func remove_key():
 	keys -= 1
@@ -62,7 +66,9 @@ func win():
 	
 	#hud
 	hud.win_screen()
-	timer = 8;
+	var tween = create_tween()
+	tween.tween_property(ost_manager,"volume",0,6).set_ease(Tween.EASE_IN)
+	timer = 10;
 	pass
 	
 func player_died():

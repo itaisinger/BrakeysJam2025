@@ -7,10 +7,10 @@
 [ext_resource type="Script" uid="uid://be45mbu3ntvio" path="res://plank/key_animScript.gd" id="4_ocnvb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hc8t2"]
-size = Vector2(6, 64)
+size = Vector2(6, 47.375)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oqi1o"]
-size = Vector2(13, 64)
+size = Vector2(13, 48.25)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ocnvb"]
 atlas = ExtResource("3_jissj")
@@ -92,6 +92,7 @@ region_enabled = true
 region_rect = Rect2(8.64485, 160.066, 13.938, 63.8957)
 
 [node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.25)
 scale = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_hc8t2")
 
@@ -101,7 +102,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="interact box"]
-position = Vector2(-0.5, 0)
+position = Vector2(-0.5, -0.125)
 shape = SubResource("RectangleShape2D_oqi1o")
 debug_color = Color(0.00162908, 0.639353, 0.365301, 0.42)
 

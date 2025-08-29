@@ -1166,6 +1166,7 @@ texture = ExtResource("17_33n3b")
 metadata/_edit_lock_ = true
 
 [node name="OstManager" parent="." instance=ExtResource("18_rxmp4")]
+unique_name_in_owner = true
 
 [node name="black_screen" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -1175,6 +1176,7 @@ z_as_relative = false
 position = Vector2(7091, 1099)
 scale = Vector2(50, 50)
 texture = ExtResource("19_qyr8x")
+metadata/_edit_lock_ = true
 
 [editable path="GameManager"]
 [editable path="GameManager/Hud"]
