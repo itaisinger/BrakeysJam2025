@@ -1088,6 +1088,9 @@ position = Vector2(7635, 1313)
 [node name="GameManager" parent="." instance=ExtResource("10_7gi1t")]
 unique_name_in_owner = true
 
+[node name="deathImage" parent="GameManager/Hud" index="2"]
+color = Color(0.172549, 0, 1, 0)
+
 [node name="drawer" parent="GameManager/Hud" index="3" node_paths=PackedStringArray("sound")]
 sound = NodePath("../../AudioStreamPlayer")
 
