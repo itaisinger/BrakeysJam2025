@@ -61,6 +61,7 @@ wait_time = 2.3
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(617.5, 327)
+volume_db = 4.0
 
 [node name="OstManager" parent="." instance=ExtResource("8_ceu5l")]
 isMenu = true

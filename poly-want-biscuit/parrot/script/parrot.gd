@@ -31,6 +31,7 @@ var timer = 0
 @onready var anim = $AnimatedSprite2D
 @onready var anim_shout = $anim_shout
 @onready var game_manager = %GameManager
+@onready var sfx_player = $sfx_player
 
 
 func _ready() -> void:
@@ -76,14 +77,15 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Curse") or Input.is_action_just_pressed("Meow") :
 		if Input.is_action_just_pressed("Meow"):
 			emit_signal("parrot_screech",Globals.VOICES.meow)
+			sfx_player.play_random_curse()
 		else:
 			emit_signal("parrot_screech",Globals.VOICES.curse)
+			sfx_player.play_random_meow()
 		Shout()
 	pass
 	
 	
 ########### STATES FUNCTIONS ##############
-	
 func idle_state():
 	if(state_changed): anim.play("idle")
 	
@@ -160,6 +162,7 @@ func Death():
 	state = STATES.die
 	anim.play("death")
 	z_index = 1000
+	sfx_player.play_death_sound()
 	visibility_layer = 10
 	game_manager.player_died()
 
@@ -175,6 +178,7 @@ func IsGrounded() -> bool:
 func Jump():
 	yspd = -jumpforce;
 	state = STATES.air;
+	sfx_player.play_random_wing_flap()
 	anim.play("jump")
 	
 func Shout():
@@ -187,10 +191,12 @@ func Shout():
 
 func got_key():
 	state = STATES.collect;
+	sfx_player.play_random_get_key_voiceline()
 	anim.play("collect")
 
 func WinAnim():
 	anim.play("win")
+	sfx_player.play_eat_biscuit_sound()
 	state = STATES.win
 
 func approach(val,target,spd) -> float:

@@ -333,7 +333,7 @@ snd1 = ExtResource("2_6frm7")
 snd2 = ExtResource("2_6frm7")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
-z_index = 30
+z_index = 100
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_6xpnk")
 autoplay = "default"

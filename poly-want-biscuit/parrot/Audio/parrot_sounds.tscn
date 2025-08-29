@@ -38,3 +38,4 @@ get_key_parrot_voice = Array[AudioStream]([ExtResource("21_vwlu1"), ExtResource(
 fly_parrot_audio = Array[AudioStream]([ExtResource("25_0xya6"), ExtResource("26_8lwkl"), ExtResource("27_v1i4f"), ExtResource("28_8q2cv")])
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+volume_db = 24.0

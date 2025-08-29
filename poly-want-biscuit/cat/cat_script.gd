@@ -81,33 +81,17 @@ func _physics_process(delta: float) -> void:
 
 
 func state_sleep() -> void:
-	if position.distance_to(player_data.player_position)<1000:
-		sfx_player.stream = cat_sleep_voice[0]
-		sfx_player.play()
-	if(player_pos.distance_to(position) < awake_dis):
-		#position.y-=50
-		#grounded=false
-		#state_walk()
-		#if (position.x>player_data.player_position.x):
-			#moving_left=false
-			#dir=-1
-		#else:
-			#moving_left=true
-			#dir=1
-		#if dir<0:
-			#scale.x = abs(scale.x)
-		#else:
-			#scale.x = -abs(scale.x)
+	sfx_player.stream = cat_sleep_voice[0]
+	sfx_player.playing = true
+	if(player_pos.distance_to(position) < awake_dis && Input.is_action_just_pressed("Jump")):
 		update_dir()
 		state = CAT_STATES.hold
 		timer = 2
-
 func is_grounded():
 	for area in $ground_delection.get_overlapping_areas():
 		if area.is_in_group("platforms"):
 			return true
 	return false
-	
 func state_walk() -> void:
 	#walk
 	position.x += dir * spd
