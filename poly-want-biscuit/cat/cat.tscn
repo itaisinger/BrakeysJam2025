@@ -17,8 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://dpj1ld50gx1r0" path="res://cat/textures/charging cat.png" id="14_2phss"]
 [ext_resource type="Texture2D" uid="uid://chm2gj878yd4e" path="res://cat/textures/dead gatto.png" id="15_kfgcs"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vgj48"]
-radius = 17.0294
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2phss"]
+size = Vector2(23, 9.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vgj48"]
 size = Vector2(7.66667, 3.66667)
@@ -243,8 +243,8 @@ collision_layer = 8
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["enemies"]]
-position = Vector2(27.5, -1)
-shape = SubResource("CircleShape2D_vgj48")
+position = Vector2(0.5, 5.5)
+shape = SubResource("RectangleShape2D_2phss")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemies"]]
 position = Vector2(0, 9)
@@ -257,11 +257,14 @@ sprite_frames = SubResource("SpriteFrames_sm7ki")
 animation = &"dead"
 frame = 4
 frame_progress = 1.0
+metadata/_edit_lock_ = true
 
 [node name="anim_walk" type="AnimatedSprite2D" parent="."]
+position = Vector2(0.5, 0)
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_sm7ki")
 animation = &"walk"
+metadata/_edit_lock_ = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
