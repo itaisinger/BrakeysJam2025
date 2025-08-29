@@ -53,6 +53,7 @@ position = Vector2(23.5, 47)
 zoom = Vector2(1.5, 1.5)
 
 [node name="Background" parent="." instance=ExtResource("2_gl5pw")]
+yoffset = 0
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.3
