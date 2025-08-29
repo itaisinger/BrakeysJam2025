@@ -21,6 +21,8 @@ func _ready() -> void:
 		spds.append((i + 1) * 0.6 * lerp(size,1,1))
 		layers[i].scale = Vector2(size,size)
 		layers[i].position += Vector2(screen_w * offset,yoffset)
+		for x in layers[i].get_children(): x.z_index = -5 + i
+		layers[i].z_index = -5 + i
 		
 	
 

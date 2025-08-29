@@ -85,7 +85,6 @@ func state_sleep() -> void:
 		sfx_player.stream = cat_sleep_voice[0]
 		sfx_player.play()
 	if(player_pos.distance_to(position) < awake_dis):
-		print("waking up")
 		#position.y-=50
 		#grounded=false
 		#state_walk()
@@ -111,12 +110,10 @@ func is_grounded():
 	
 func state_walk() -> void:
 	#walk
-	print(dir)
 	position.x += dir * spd
 	yspd = 0
 	position.y += grav*4
 	if(!grounded):
-		print("ungrounded")
 		state = CAT_STATES.hold
 		timer = 1
 func state_hold(delta_time) -> void:
@@ -160,7 +157,6 @@ func update_dir() -> void:
 		transform.x = Vector2(-abs(scale.x),0)
 
 func hear_sound(voice) -> void:
-	print(" cat recognise screech")
 	if position.distance_to(player_data.player_position)>hear_distance or !screechable:
 		pass
 
