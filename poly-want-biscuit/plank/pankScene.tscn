@@ -111,5 +111,5 @@ scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_uxggi")
 animation = &"key"
 autoplay = "key"
-frame_progress = 0.343329
+frame_progress = 0.0673416
 script = ExtResource("4_ocnvb")

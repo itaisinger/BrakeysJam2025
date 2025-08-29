@@ -252,6 +252,7 @@ scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_vgj48")
 
 [node name="anim" type="AnimatedSprite2D" parent="."]
+scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_sm7ki")
 animation = &"dead"
 frame = 4
@@ -259,6 +260,7 @@ frame_progress = 1.0
 
 [node name="anim_walk" type="AnimatedSprite2D" parent="."]
 visible = false
+scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_sm7ki")
 animation = &"walk"
 

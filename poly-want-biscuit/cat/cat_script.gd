@@ -23,7 +23,6 @@ var hear_distance = 600
 var awake_dis = 150
 var jumpforce = 1
 var spd = 1
-var moving_left=false
 
 var voice_cooldown := 0.0
 var screechable=true
@@ -152,13 +151,13 @@ func jump() -> void:
 	sfx_player.play()
 	voice_cooldown = VOICE_COOLDOWN_TIME 
 func update_dir() -> void:
-	moving_left=position.x>player_pos.x
+	dir = -sign(position.x-player_pos.x)
 	print("==")
-	print(scale.x)
-	if moving_left:
-		scale.x = -1 * abs(scale.x)
+	print(dir)
+	if dir == 1:
+		transform.x = Vector2(abs(scale.x),0)
 	else:
-		scale.x = abs(scale.x)
+		transform.x = Vector2(-abs(scale.x),0)
 	print(scale.x)
 
 func hear_sound(voice) -> void:
