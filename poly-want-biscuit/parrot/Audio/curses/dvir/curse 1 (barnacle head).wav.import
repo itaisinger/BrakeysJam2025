@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dmuxg3l0verol"
+path="res://.godot/imported/curse 1 (barnacle head).wav-ac7fbebdb01b4d9b989988a587781af1.sample"
+
+[deps]
+
+source_file="res://parrot/Audio/curses/dvir/curse 1 (barnacle head).wav"
+dest_files=["res://.godot/imported/curse 1 (barnacle head).wav-ac7fbebdb01b4d9b989988a587781af1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

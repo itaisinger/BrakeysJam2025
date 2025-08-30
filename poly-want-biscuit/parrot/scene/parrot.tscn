@@ -1,14 +1,12 @@
-[gd_scene load_steps=26 format=3 uid="uid://o0wiu6jx5stv"]
+[gd_scene load_steps=28 format=3 uid="uid://o0wiu6jx5stv"]
 
 [ext_resource type="Script" uid="uid://cdi7jcasar25f" path="res://parrot/script/parrot.gd" id="1_ne668"]
 [ext_resource type="Texture2D" uid="uid://768o3i5xe6md" path="res://parrot/final sprite sheet.png" id="2_d6rm4"]
 [ext_resource type="Texture2D" uid="uid://b220el1qe4y7x" path="res://parrot/Lightning04_4.png" id="3_1ym1u"]
 [ext_resource type="Texture2D" uid="uid://dpsvnhn01hafa" path="res://parrot/shout.png" id="5_2yyhr"]
-[ext_resource type="PackedScene" uid="uid://bnsw1vitrtw8y" path="res://Hud/canvas_layer.tscn" id="5_lfgbv"]
+[ext_resource type="PackedScene" uid="uid://by6ipmhar351o" path="res://parrot/Audio/parrot_sounds.tscn" id="5_lfgbv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d6rm4"]
-radius = 32.0
-height = 80.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lfgbv"]
 atlas = ExtResource("2_d6rm4")
@@ -54,6 +52,14 @@ region = Rect2(0, 807, 403, 269)
 atlas = ExtResource("2_d6rm4")
 region = Rect2(1209, 810, 403, 270)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6rm4"]
+atlas = ExtResource("2_d6rm4")
+region = Rect2(806, 0, 403, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j05c5"]
+atlas = ExtResource("2_d6rm4")
+region = Rect2(1209, 0, 403, 270)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_lym6n"]
 animations = [{
 "frames": [{
@@ -74,7 +80,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"collect",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -148,13 +154,34 @@ animations = [{
 "loop": false,
 "name": &"shout",
 "speed": 0.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6rm4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6rm4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j05c5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6rm4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6rm4")
+}],
+"loop": false,
+"name": &"win",
+"speed": 1.5
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lfgbv"]
-radius = 34.0
-height = 84.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfgbv"]
+size = Vector2(88.8889, 74.7737)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2yyhr"]
+radius = 3.44828
+height = 9.21659
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_shnd3"]
 atlas = ExtResource("5_2yyhr")
@@ -193,24 +220,30 @@ animations = [{
 }]
 
 [node name="Parot" type="CharacterBody2D"]
+visibility_layer = 16
+z_index = 100
+collision_layer = 16
 script = ExtResource("1_ne668")
 
 [node name="hitbox" type="Area2D" parent="." groups=["parrot"]]
+collision_layer = 4
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 z_index = 10
-position = Vector2(1, 1)
+position = Vector2(-2.172, 1.92)
 scale = Vector2(0.25, 0.25)
 shape = SubResource("CapsuleShape2D_d6rm4")
 debug_color = Color(0.937255, 0.196078, 0.286275, 0.419608)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-z_index = 2
+z_index = 50
 z_as_relative = false
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_lym6n")
-animation = &"death"
+animation = &"idle"
 autoplay = "flying"
+frame_progress = 0.564924
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimatedSprite2D")
@@ -223,23 +256,22 @@ rotation = 0.785398
 scale = Vector2(-0.25, -0.25)
 texture = ExtResource("3_1ym1u")
 
-[node name="Hud" parent="." instance=ExtResource("5_lfgbv")]
-
 [node name="collision hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3.625)
+position = Vector2(0, 2.67375)
 scale = Vector2(0.09, 0.232)
-shape = SubResource("CapsuleShape2D_lfgbv")
+shape = SubResource("RectangleShape2D_lfgbv")
 
 [node name="land hitbox" type="Area2D" parent="."]
+collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="land hitbox"]
-position = Vector2(0, 10.117)
-scale = Vector2(0.29, 0.217)
+position = Vector2(0, 12)
+scale = Vector2(0.1, 0.075)
 shape = SubResource("CapsuleShape2D_2yyhr")
 debug_color = Color(0.0784314, 0.776471, 0.313726, 0.419608)
 
 [node name="anim_shout" type="AnimatedSprite2D" parent="."]
-z_index = 10
+z_index = 50
 position = Vector2(-2.38419e-07, 4.76837e-07)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_shnd3")
@@ -247,6 +279,8 @@ animation = &"shout"
 frame = 3
 frame_progress = 1.0
 offset = Vector2(63.005, -68.39)
+
+[node name="sfx_player" parent="." instance=ExtResource("5_lfgbv")]
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="land hitbox" to="." method="_on_land_detection_area_entered"]

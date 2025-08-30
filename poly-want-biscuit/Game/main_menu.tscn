@@ -1,19 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://chjlj8gjc5r6f"]
+[gd_scene load_steps=9 format=3 uid="uid://chjlj8gjc5r6f"]
 
 [ext_resource type="Script" uid="uid://c4usft0gwpmri" path="res://Game/main_menu.gd" id="1_yltbk"]
+[ext_resource type="AudioStream" uid="uid://bthx7rxyg3qy0" path="res://Game/Main Menu Audio/starting sound/start 1.wav" id="2_444o2"]
+[ext_resource type="PackedScene" uid="uid://bsfi2tkt8uodm" path="res://Game/background/background.tscn" id="2_gl5pw"]
+[ext_resource type="AudioStream" uid="uid://c73fm7lcyle27" path="res://Game/Main Menu Audio/menu1.wav" id="2_nu65f"]
+[ext_resource type="AudioStream" uid="uid://cjt86nv4dfpd5" path="res://Game/Main Menu Audio/starting sound/start 2.wav" id="3_ceu5l"]
+[ext_resource type="AudioStream" uid="uid://cgsnf35wwsbx5" path="res://Game/Main Menu Audio/exit.wav" id="3_y67r4"]
+[ext_resource type="AudioStream" uid="uid://cta8nps2pil1m" path="res://Game/Main Menu Audio/starting sound/start 3.wav" id="4_bjiq0"]
+[ext_resource type="PackedScene" uid="uid://sk85g4g00rin" path="res://ost/ost_manager.tscn" id="8_ceu5l"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -963.0
-offset_top = -542.0
-offset_right = -963.0
-offset_bottom = -542.0
+offset_left = -562.0
+offset_top = -92.0
+offset_right = -562.0
+offset_bottom = -92.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yltbk")
+start_audio = Array[AudioStream]([ExtResource("2_444o2"), ExtResource("3_ceu5l"), ExtResource("4_bjiq0")])
+buttons_audio = Array[AudioStream]([ExtResource("2_nu65f"), ExtResource("3_y67r4")])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 z_index = 1
@@ -32,14 +41,34 @@ grow_vertical = 2
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../QuitButton")
 text = "start"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../StartButton")
 text = "quit"
 
 [node name="Camera2D" type="Camera2D" parent="VBoxContainer"]
 position = Vector2(23.5, 47)
+zoom = Vector2(1.5, 1.5)
 
+[node name="Background" parent="." instance=ExtResource("2_gl5pw")]
+yoffset = 0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(617.5, 327)
+volume_db = 4.0
+
+[node name="OstManager" parent="." instance=ExtResource("8_ceu5l")]
+isMenu = true
+
+[connection signal="focus_entered" from="VBoxContainer/StartButton" to="." method="_on_start_button_focus_entered"]
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/StartButton" to="VBoxContainer" method="_on_start_button_pressed"]
+[connection signal="focus_entered" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_focus_entered"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

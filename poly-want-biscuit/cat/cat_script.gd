@@ -20,10 +20,9 @@ var just_died=true
 
 #bhvr vars
 var hear_distance = 600
-var awake_dis = 200
+var awake_dis = 150
 var jumpforce = 1
 var spd = 1
-var moving_left=false
 
 var voice_cooldown := 0.0
 var screechable=true
@@ -82,63 +81,50 @@ func _physics_process(delta: float) -> void:
 
 
 func state_sleep() -> void:
-	if(player_pos.distance_to(position) < awake_dis):
-		position.y-=50
-		grounded=false
-		state_walk()
-		if (position.x>player_data.player_position.x):
-			moving_left=false
-			dir=-1
-		else:
-			moving_left=true
-			dir=1
-		if dir<0:
-			scale.x = abs(scale.x)
-		else:
-			scale.x = -abs(scale.x)
-		#update_dir()
-		jump()
-
+	sfx_player.stream = cat_sleep_voice[0]
+	sfx_player.playing = true
+	if(player_pos.distance_to(position) < awake_dis && Input.is_action_just_pressed("Jump")):
+		update_dir()
+		state = CAT_STATES.hold
+		timer = 2
 func is_grounded():
 	for area in $ground_delection.get_overlapping_areas():
 		if area.is_in_group("platforms"):
 			return true
 	return false
-	
 func state_walk() -> void:
 	#walk
 	position.x += dir * spd
 	yspd = 0
 	position.y += grav*4
 	if(!grounded):
-		print("ungroundeed")
 		state = CAT_STATES.hold
-		timer = 2
-		
+		timer = 1
 func state_hold(delta_time) -> void:
+	update_dir()
+	anim_normal.play("hold")
 	timer -= delta_time
 	yspd = 0
 	if(timer <= 0):
 		jump()
-
 func state_jump() -> void:
 	#fall
 	position.x += dir * spd*5
 	yspd += grav
 	position.y += yspd
 	if(grounded): state = CAT_STATES.dead
-
 func state_dead() -> void:
 	#make sure the cat doesnt have a hitbox here
 	if just_died:
 		$anim.play("dead")
 		just_died=false
-	else:
-		$anim.play("deadforeal")
+		$Area2D.monitorable = false
 	pass
 
-
 func jump() -> void:
+	#$ground_delection.monitoring = false;
+	#no_col_cd = 
+	position.y -= 10 #get out of ground
 	yspd -= jumpforce*2
 	state = CAT_STATES.jump
 	anim_normal.play("jump")
@@ -146,17 +132,15 @@ func jump() -> void:
 	sfx_player.stream = random_sfx
 	sfx_player.play()
 	voice_cooldown = VOICE_COOLDOWN_TIME 
-	#update_dir()
-
 func update_dir() -> void:
-	moving_left=position.x>player_pos.x
-	if moving_left:
-		scale.x = -1 * abs(scale.x)
+	dir = -sign(position.x-player_pos.x)
+
+	if dir == 1:
+		transform.x = Vector2(abs(scale.x),0)
 	else:
-		scale.x = abs(scale.x)
+		transform.x = Vector2(-abs(scale.x),0)
 
 func hear_sound(voice) -> void:
-	print(" cat recognise screech")
 	if position.distance_to(player_data.player_position)>hear_distance or !screechable:
 		pass
 
@@ -178,11 +162,10 @@ func hear_sound(voice) -> void:
 			state = CAT_STATES.walk
 			anim_normal.play("walk")
 			dir = -dir
-		if dir<0:
-			scale.x = abs(scale.x)
+		if dir == 1:
+			transform.x = Vector2(abs(scale.x),0)
 		else:
-			scale.x = -abs(scale.x)
-
+			transform.x = Vector2(-abs(scale.x),0)
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	#if area.is_in_group("platforms"):
@@ -197,6 +180,5 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 #func _on_area_2d_area_exited(area: Area2D) -> void:
 	#if area.is_in_group("platforms"):
 		#grounded=false
-
 func _on_timer_timeout() -> void:
 	screechable=true

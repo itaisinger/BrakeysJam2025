@@ -1,13 +1,32 @@
 extends CanvasLayer
 var coins=0
+var coins_max = 7
+
+@onready var death
+@onready var win
+@onready var drawer = $drawer
+
+var trans_prec = 0
+
 func _ready():
 	var root = get_tree().root.get_child(1)
 	#root.connect("add_coin",_add_coin)
 
-func add_key():
-	coins+=1
-	$Label.text=str(coins)
+func _process(delta: float) -> void:
+	trans_prec = min(trans_prec+delta,1)
 
-func death_screan():
+func set_keys(n,left):
+	coins = n
+	$Label.text=str(coins) + "/" + str(left)
+
+func death_screen():
 	var tween = create_tween()
-	tween.tween_property($ColorRect, "modulate:a", 1.0, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property($deathImage, "modulate:a", 1.0, 6).set_trans(Tween.TRANS_SINE).set_custom_interpolator(inter)
+
+func win_screen():
+	drawer.draw_win_screen()
+	pass
+	
+func inter(x):
+	return pow(x,3)
+	

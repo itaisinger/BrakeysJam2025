@@ -1,0 +1,2 @@
+collisions layer in masks table is in the google sheets:
+https://docs.google.com/spreadsheets/d/1ANDjSrAPaIdlc3ux4lnXOl-VGQ9vQ4m_ImessGL9kUs/edit?gid=1938037320#gid=1938037320

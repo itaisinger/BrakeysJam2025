@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://ika5g2if8um0"]
+[gd_scene load_steps=44 format=3 uid="uid://cd3m75bil8uly"]
 
 [ext_resource type="Texture2D" uid="uid://cex4xfeq4ipkl" path="res://cat/textures/sleep.png" id="1_n236n"]
 [ext_resource type="Script" uid="uid://b0v6vrf46aoxl" path="res://cat/cat_script.gd" id="1_vgj48"]
@@ -14,61 +14,38 @@
 [ext_resource type="AudioStream" uid="uid://tko0rcfda5av" path="res://cat/Audio/jump3.wav" id="11_sm7ki"]
 [ext_resource type="AudioStream" uid="uid://bl3lykfds5u8k" path="res://cat/Audio/jump4.wav" id="12_ipryf"]
 [ext_resource type="AudioStream" uid="uid://b4eeprmst7w6u" path="res://cat/Audio/sleep1.wav" id="13_nu5hc"]
-[ext_resource type="Texture2D" uid="uid://bqtfpv6o3ylwo" path="res://parrot/spritesheet.png" id="15_wlxi6"]
+[ext_resource type="Texture2D" uid="uid://dpj1ld50gx1r0" path="res://cat/textures/charging cat.png" id="14_2phss"]
+[ext_resource type="Texture2D" uid="uid://chm2gj878yd4e" path="res://cat/textures/dead gatto.png" id="15_kfgcs"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vgj48"]
-radius = 17.0294
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2phss"]
+size = Vector2(23, 9.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vgj48"]
-size = Vector2(12.5, 4.66667)
+size = Vector2(7.66667, 3.66667)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sm7ki"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(192, 0, 32, 32)
+atlas = ExtResource("15_kfgcs")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ipryf"]
-atlas = ExtResource("15_wlxi6")
-region = Rect2(0, 0, 128, 80)
+atlas = ExtResource("15_kfgcs")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nu5hc"]
-atlas = ExtResource("15_wlxi6")
-region = Rect2(128, 0, 128, 80)
+atlas = ExtResource("15_kfgcs")
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0jd25"]
-atlas = ExtResource("15_wlxi6")
-region = Rect2(256, 0, 128, 80)
+atlas = ExtResource("15_kfgcs")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fhf7k"]
-atlas = ExtResource("15_wlxi6")
-region = Rect2(384, 0, 128, 80)
+atlas = ExtResource("15_kfgcs")
+region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pa4mv"]
-atlas = ExtResource("15_wlxi6")
-region = Rect2(640, 0, 128, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_30m4m"]
-atlas = ExtResource("15_wlxi6")
-region = Rect2(768, 0, 128, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wpltm"]
-atlas = ExtResource("15_wlxi6")
-region = Rect2(896, 0, 128, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5xbpc"]
-atlas = ExtResource("15_wlxi6")
-region = Rect2(1024, 0, 128, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_umlvo"]
-atlas = ExtResource("15_wlxi6")
-region = Rect2(1152, 0, 128, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_34aqg"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(252, 0, 36, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tx6lp"]
-atlas = ExtResource("2_vgj48")
-region = Rect2(252, 0, 36, 32)
+atlas = ExtResource("15_kfgcs")
+region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hxtwg"]
 atlas = ExtResource("2_vgj48")
@@ -150,29 +127,11 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nu5hc")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_0jd25")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fhf7k")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pa4mv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_30m4m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wpltm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5xbpc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_umlvo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_34aqg")
 }],
 "loop": false,
 "name": &"dead",
@@ -180,10 +139,18 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tx6lp")
+"texture": SubResource("AtlasTexture_pa4mv")
 }],
 "loop": true,
 "name": &"deadforeal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_2phss")
+}],
+"loop": true,
+"name": &"hold",
 "speed": 5.0
 }, {
 "frames": [{
@@ -258,7 +225,8 @@ size = Vector2(16.5, 7.5)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 scale = Vector2(2, 2)
-collision_layer = 3
+collision_layer = 8
+collision_mask = 3
 script = ExtResource("1_vgj48")
 cat_wakeup_voice = Array[AudioStream]([ExtResource("2_rai0v"), ExtResource("3_wlxi6"), ExtResource("4_2phss"), ExtResource("5_kfgcs")])
 cat_cought_react = Array[AudioStream]([ExtResource("2_0wl1y"), ExtResource("3_jakcm")])
@@ -271,33 +239,44 @@ texture_filter = 1
 texture = ExtResource("1_n236n")
 
 [node name="Area2D" type="Area2D" parent="." groups=["enemies"]]
+collision_layer = 8
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["enemies"]]
-position = Vector2(-19, 10)
-shape = SubResource("CircleShape2D_vgj48")
+position = Vector2(0.5, 5.5)
+shape = SubResource("RectangleShape2D_2phss")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemies"]]
-position = Vector2(1, 3)
+position = Vector2(0, 9)
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_vgj48")
 
 [node name="anim" type="AnimatedSprite2D" parent="."]
+scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_sm7ki")
 animation = &"dead"
+frame = 4
+frame_progress = 1.0
+metadata/_edit_lock_ = true
 
 [node name="anim_walk" type="AnimatedSprite2D" parent="."]
+position = Vector2(0.5, 0)
+scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_sm7ki")
 animation = &"walk"
+metadata/_edit_lock_ = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+volume_db = 5.0
 
 [node name="Timer" type="Timer" parent="."]
 
 [node name="ground_delection" type="Area2D" parent="."]
 collision_layer = 0
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ground_delection"]
-position = Vector2(-7.75, 14.25)
+position = Vector2(22, 12)
 shape = SubResource("RectangleShape2D_rai0v")
 debug_color = Color(0.985382, 0, 0.334326, 0.42)
 

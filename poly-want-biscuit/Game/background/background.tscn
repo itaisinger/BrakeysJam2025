@@ -10,6 +10,7 @@
 
 [node name="Background" type="Node"]
 script = ExtResource("1_gjjrj")
+yoffset = 1000
 
 [node name="Layer1" type="Sprite2D" parent="."]
 position = Vector2(380, 270)
